@@ -16,6 +16,8 @@ we have the following options:
 | **binary** (yes / no) | odds ratio | $\chi$-square test | logistic regression |
 | ... | ... | ... | ... |
 
-Note: *Continuous outcomes usually need to be only approximately normally distributed.*
+::: {.callout-important}
+Continuous outcomes usually need to be only approximately normally distributed! 
+:::
 
 Selection of statistical methods is however usually more complicated than this! A competent statistician can help you determine the most appropriate methods for your study.
