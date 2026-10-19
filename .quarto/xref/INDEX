@@ -1,0 +1,44 @@
+{
+  "index.qmd": {
+    "index.html": "509af8dc"
+  },
+  "intro.qmd": {
+    "intro.html": "b4fb15d8"
+  },
+  "summary.qmd": {
+    "summary.html": "b5484d03"
+  },
+  "references.qmd": {
+    "references.html": "17337719"
+  },
+  "continuous.qmd": {
+    "continuous.html": "164a2267"
+  },
+  "binary.qmd": {
+    "binary.html": "d0f3c8aa"
+  },
+  "significance.qmd": {
+    "significance.html": "8bdd3f90"
+  },
+  "choice.qmd": {
+    "choice.html": "3e1b5fa1"
+  },
+  "firststepsR.qmd": {
+    "firststepsR.html": "4aee98e5"
+  },
+  "datachecking.qmd": {
+    "datachecking.html": "64af9deb"
+  },
+  "datacleaning.qmd": {
+    "datacleaning.html": "464fd454"
+  },
+  "visualization.qmd": {
+    "visualization.html": "298d7429"
+  },
+  "testing.qmd": {
+    "testing.html": "6cc5a219"
+  },
+  "import.qmd": {
+    "import.html": "9c18410f"
+  }
+}

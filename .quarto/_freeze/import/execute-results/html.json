@@ -1,0 +1,15 @@
+{
+  "hash": "7200d428868c3d3628f3fa46b3b43b37",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Back to the beginning: importing data\n\nMost of the time, datasets will not come already loaded in R, but it can be complicated to get the data in correctly. \n\nFor `csv` files exported from redcap, `read_csv()` from the [`readr`](https://readr.tidyverse.org) package is a good place to start.\n\n::: {.callout-tip}\nThe core packages in the `tidyverse` are: `dplyr` (data cleaning),  `ggplot2` (visualization), `readr` (importing data), `forcats` (factors), `stringr` (strings), `lubridate` (times and dates), `tibble` (alternative to `data.frame`), `tidyr` (pivoting between long and wide formats), and `purrr` (dealing with functions and vectors). \n:::\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n:::\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndat <- read_csv(\"somedata.csv\")\n```\n:::\n\n\nIf you export the dataset with decimal points, `.`, you'll find that `read_csv()` should work just fine. If you exported it with decimal commas, `,`, or if you've saved data in Excel on your computer using, say, a Swiss locale, try `read_csv2()`. Find out more about `read_csv()` in [R4DS](https://r4ds.hadley.nz/data-import.html), and more about locales in [the `readr` documentation](https://readr.tidyverse.org/articles/locales.html).\n\n::: {.callout-tip}\nWhy not `read.csv()`?\n:::\n\nIf you are not exporting data from redcap or another electronic data capture system, consider organizing your data to enable efficient data analysis @broman.\n\nIf you're working with an Excel spreadsheet, `.xlsx`, the [`readxl`](https://readxl.tidyverse.org) package will help. \n\nFor formats from other statistical programs (for example from SPSS, SAS, or STATA), try the [`haven`](https://haven.tidyverse.org) package.",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

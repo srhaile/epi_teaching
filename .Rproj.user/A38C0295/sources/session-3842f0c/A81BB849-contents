@@ -1,0 +1,49 @@
+# A note on setting up R and R studio
+
+The sections on statistical methods and R programming can be done in either order. However, both use R code.
+
+If you want to follow along and run the analysis in R yourself, you'll want to set up R and RStudio on your computer and install some key R packages.
+
+1.  **Install R**: Go to [cran.r-project.org](https://cran.r-project.org) and download and install the R version for your operating system.
+2.  **Install RStudio**: Most people prefer to run R using RStudio. Head over to [posit.co](https://posit.co/downloads) and download and install "RStudio Desktop" for your OS.
+3.  **Open Rstudio**
+4.  **Install packages**: In the console:
+    - Install the [`tidyverse`](https://tidyverse.org) using `install.packages("tidyverse")`. These are several [data cleaning packages](https://tidyverse.org/packages/), like `dplyr`, `tidyr`, and `forcats` that you'll need for many tasks. And it includes `ggplot2` for all your plots.
+    - Install [`gtsummary`](https://www.danieldsjoberg.com/gtsummary/), `install.packages("gtsummary")`, which helps you summarize your datasets, like for a Table 1, and regression models.
+
+```{r}
+#| eval: false
+
+install.packages("tidyverse")
+install.packages("gtsummary")
+```
+
+Usually when you load the `tidyverse` package, it gives you a message about which packages it has loaded. *This message has been suppressed throughout this tutorial.* It can also be helpful to set a `ggplot2` theme for all your plots using `theme_set()`. Here we use the black and white theme, `theme_bw()` with font size `base_size = 12`
+
+```{r}
+library(tidyverse)
+theme_set(theme_bw(base_size = 12))
+library(gtsummary)
+```
+
+It would be a good idea to keep this code in a script. You can make a new one by clicking on the "+" button in the top left, or with `File > New File > R Script`. All code in this online resource can be easily copied one of two ways:
+
+1.  Using the `</>` tag at the top right of a section will give you all the R code for the section.
+2.  In any small section of code, there's a "clipboard" icon on the right side which you can use to copy that bit of text.
+
+In other parts of this tutorial, we use the `patchwork`, `ggbeeswarm`, and `palmerpenguins` R packages.
+
+```{r}
+#| message: false
+library(patchwork)
+library(ggbeeswarm)
+library(palmerpenguins)
+```
+
+
+We also use this space to show version details for R and all loaded packages:
+
+```{r}
+R.version.string
+sessionInfo()
+```

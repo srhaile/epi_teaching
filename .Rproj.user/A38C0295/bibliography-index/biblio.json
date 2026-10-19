@@ -1,0 +1,485 @@
+{
+    "sources": [
+        {
+            "DOI": "10.1093/comjnl/27.2.97",
+            "ISSN": "0010-4620",
+            "URL": "https://doi.org/10.1093/comjnl/27.2.97",
+            "author": [
+                {
+                    "family": "Knuth",
+                    "given": "Donald E."
+                }
+            ],
+            "container-title": "Comput. J.",
+            "id": "knuth84",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1984,
+                        5
+                    ]
+                ]
+            },
+            "page": "97-111",
+            "publisher": "Oxford University Press, Inc.",
+            "publisher-place": "USA",
+            "title": "Literate programming",
+            "type": "article-journal",
+            "volume": "27"
+        },
+        {
+            "DOI": "10.1093/ije/dyae075",
+            "author": [
+                {
+                    "family": "Radtke",
+                    "given": "T"
+                },
+                {
+                    "dropping-particle": "von",
+                    "family": "Wyl",
+                    "given": "V"
+                },
+                {
+                    "family": "Haile",
+                    "given": "SR"
+                },
+                {
+                    "family": "Rohrmann",
+                    "given": "S"
+                },
+                {
+                    "family": "Frei",
+                    "given": "A"
+                },
+                {
+                    "family": "Puhan",
+                    "given": "MA"
+                }
+            ],
+            "container-title": "Int J Epidemiol.",
+            "id": "zurich",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2024
+                    ]
+                ]
+            },
+            "page": "dyae075",
+            "title": "Evidence-based coaching of core competencies in epidemiology, using the framework of randomized controlled trials: The zurich approach",
+            "title-short": "Evidence-based coaching of core competencies in epidemiology, using the framework of randomized controlled trials",
+            "type": "article-journal",
+            "volume": "53"
+        },
+        {
+            "DOI": "10.1136/bmj.38705.470590.55",
+            "author": [
+                {
+                    "family": "Puhan",
+                    "given": "MA"
+                },
+                {
+                    "family": "Suarez",
+                    "given": "C"
+                },
+                {
+                    "family": "Lo Cascio",
+                    "given": "C"
+                },
+                {
+                    "family": "Zahn",
+                    "given": "A"
+                },
+                {
+                    "family": "Heitz",
+                    "given": "M"
+                },
+                {
+                    "family": "Braendli",
+                    "given": "O"
+                }
+            ],
+            "container-title": "BMJ",
+            "id": "didgeridoo",
+            "issue": "7536",
+            "issued": {
+                "date-parts": [
+                    [
+                        2006
+                    ]
+                ]
+            },
+            "page": "7536",
+            "title": "Didgeridoo playing as alternative treatment for obstructive sleep apnoea syndrome: Randomised controlled trial",
+            "title-short": "Didgeridoo playing as alternative treatment for obstructive sleep apnoea syndrome",
+            "type": "article-journal",
+            "volume": "332"
+        },
+        {
+            "author": [
+                {
+                    "family": "Held",
+                    "given": "L"
+                },
+                {
+                    "family": "Rufibach",
+                    "given": "K"
+                },
+                {
+                    "family": "Seifert",
+                    "given": "B"
+                }
+            ],
+            "id": "held",
+            "issued": {
+                "date-parts": [
+                    [
+                        2013
+                    ]
+                ]
+            },
+            "note": "Available online at UZH library",
+            "publisher": "Pearson",
+            "title": "Medizinische statistik : Konzepte, methoden, anwendungen",
+            "title-short": "Medizinische statistik ",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Kirkwood",
+                    "given": "B"
+                },
+                {
+                    "family": "Sterne",
+                    "given": "JAC"
+                }
+            ],
+            "edition": "2nd",
+            "id": "kirkwood",
+            "issued": {
+                "date-parts": [
+                    [
+                        2003
+                    ]
+                ]
+            },
+            "publisher": "Blackwell",
+            "title": "Essential medical statistics",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Senn",
+                    "given": "S"
+                }
+            ],
+            "edition": "3rd",
+            "id": "senn",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "publisher": "Wiley",
+            "title": "Statistical issues in drug development",
+            "type": "book"
+        },
+        {
+            "author": [
+                {
+                    "family": "Senn",
+                    "given": "S"
+                }
+            ],
+            "id": "crossover",
+            "issued": {
+                "date-parts": [
+                    [
+                        2002
+                    ]
+                ]
+            },
+            "publisher": "Wiley",
+            "title": "Cross‐over trials in clinical research",
+            "type": "book"
+        },
+        {
+            "URL": "https://r4ds.hadley.nz",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "H"
+                },
+                {
+                    "family": "Cetinkaya-Rundel",
+                    "given": "M"
+                },
+                {
+                    "family": "Grolemund",
+                    "given": "G"
+                }
+            ],
+            "edition": "2e",
+            "id": "r4ds",
+            "issued": {
+                "date-parts": [
+                    [
+                        2023
+                    ]
+                ]
+            },
+            "publisher": "O’Reilly",
+            "title": "R for data science",
+            "type": "book"
+        },
+        {
+            "URL": "https://rstudio-education.github.io/hopr/",
+            "author": [
+                {
+                    "family": "Grolemund",
+                    "given": "G"
+                }
+            ],
+            "id": "hopr",
+            "issued": {
+                "date-parts": [
+                    [
+                        2014
+                    ]
+                ]
+            },
+            "publisher": "O’Reilly",
+            "title": "Hands-on programming with r",
+            "type": "book"
+        },
+        {
+            "URL": "https://r4ds.hadley.nz",
+            "author": [
+                {
+                    "family": "Wickham",
+                    "given": "H"
+                }
+            ],
+            "edition": "3e",
+            "id": "ggplotbook",
+            "issued": {
+                "date-parts": [
+                    [
+                        2021
+                    ]
+                ]
+            },
+            "publisher": "Springer",
+            "title": "ggplot2: Elegant graphics for data analysis",
+            "title-short": "ggplot2",
+            "type": "book"
+        },
+        {
+            "DOI": "10.1136/bjsports-2024-109357",
+            "author": [
+                {
+                    "family": "Rovettaa",
+                    "given": "A"
+                },
+                {
+                    "family": "Mansournia",
+                    "given": "MA"
+                },
+                {
+                    "family": "Stovitz",
+                    "given": "SD"
+                },
+                {
+                    "family": "Adams",
+                    "given": "WM"
+                },
+                {
+                    "family": "Greenland",
+                    "given": "S"
+                }
+            ],
+            "container-title": "Br J Sports",
+            "id": "rovetta",
+            "issue": "24",
+            "issued": {
+                "date-parts": [
+                    [
+                        2025
+                    ]
+                ]
+            },
+            "page": "bjsports-2024-109357",
+            "title": "Interpreting p values and interval estimates based on practical relevance: Guidance for the sports medicine clinician",
+            "title-short": "Interpreting p values and interval estimates based on practical relevance",
+            "type": "article-journal",
+            "volume": "59"
+        },
+        {
+            "DOI": "10.1080/00031305.2017.1375989",
+            "author": [
+                {
+                    "family": "Broman",
+                    "given": "KW"
+                },
+                {
+                    "family": "Woo",
+                    "given": "KH"
+                }
+            ],
+            "container-title": "The American Statistician",
+            "id": "broman",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2018
+                    ]
+                ]
+            },
+            "page": "2-10",
+            "title": "Data organization in spreadsheets",
+            "type": "article-journal",
+            "volume": "72"
+        },
+        {
+            "DOI": "10.1016/j.tree.2021.10.009",
+            "author": [
+                {
+                    "family": "Muff",
+                    "given": "S"
+                },
+                {
+                    "family": "Nilsen",
+                    "given": "EB"
+                },
+                {
+                    "family": "O’Hara",
+                    "given": "RB"
+                },
+                {
+                    "family": "Nater",
+                    "given": "CR"
+                }
+            ],
+            "container-title": "Trends Ecol Evol",
+            "id": "muff",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022
+                    ]
+                ]
+            },
+            "page": "203-210",
+            "title": "Rewriting results sections in the language of evidence",
+            "type": "article-journal",
+            "volume": "37"
+        },
+        {
+            "DOI": "10.1007/s10654-016-0149-3",
+            "author": [
+                {
+                    "family": "Greenland",
+                    "given": "S"
+                },
+                {
+                    "family": "Senn",
+                    "given": "SJ"
+                },
+                {
+                    "family": "Rothman",
+                    "given": "KJ"
+                },
+                {
+                    "family": "Carlin",
+                    "given": "JB"
+                },
+                {
+                    "family": "Poole",
+                    "given": "C"
+                },
+                {
+                    "family": "Goodman",
+                    "given": "SN"
+                },
+                {
+                    "family": "Altman",
+                    "given": "DG"
+                }
+            ],
+            "container-title": "Eur J Epidemiol",
+            "id": "greenland",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016
+                    ]
+                ]
+            },
+            "page": "337-50",
+            "title": "Statistical tests, p values, confidence intervals, and power: A guide to misinterpretations",
+            "title-short": "Statistical tests, p values, confidence intervals, and power",
+            "type": "article-journal",
+            "volume": "31"
+        },
+        {
+            "DOI": "https://doi.org/10.1348/000711004849222",
+            "author": [
+                {
+                    "family": "Zimmerman",
+                    "given": "DW"
+                }
+            ],
+            "container-title": "British Journal of Mathematical and Statistical Psychology",
+            "id": "zimmerman",
+            "issued": {
+                "date-parts": [
+                    [
+                        2004
+                    ]
+                ]
+            },
+            "page": "173-181",
+            "title": "A note on preliminary tests of equality of variances",
+            "type": "article-journal",
+            "volume": "57"
+        },
+        {
+            "DOI": "10.1136/bmj.320.7247.1468",
+            "author": [
+                {
+                    "family": "Bland",
+                    "given": "JM"
+                },
+                {
+                    "family": "Altman",
+                    "given": "DG"
+                }
+            ],
+            "container-title": "BMJ",
+            "id": "oddsratio",
+            "issue": "7247",
+            "issued": {
+                "date-parts": [
+                    [
+                        2000
+                    ]
+                ]
+            },
+            "title": "Statistics notes. The odds ratio",
+            "type": "article-journal",
+            "volume": "320"
+        }
+    ],
+    "project_biblios": [
+        "references.bib"
+    ]
+}

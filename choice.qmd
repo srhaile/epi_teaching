@@ -1,0 +1,22 @@
+# Choice of statistical test
+
+If you've been in a statistical methods course, you may remember that there were many methods presented. How do we know which one to pick?
+
+For a relatively simple randomized clinical trial with 
+
+- 2 treatment arms
+- Participants are independent
+- Primary endpoint at 1 timepoint, either (approximately) continuous or binary
+
+we have the following options:
+
+**type of outcome** | **effect estimate** | **not adjusted** | **adjusted** 
+--|--|--|--
+**continuous** * | mean difference | $t$-test | linear regression
+**binary** (yes / no) | odds ratio | $\chi$-square test | logistic regression
+... | ... | ... | ...
+
+Note: *Continuous outcomes usually need to be only approximately normally distributed.*
+
+Selection of statistical methods is however usually more complicated than this! A competent statistician can help you determine the most appropriate methods for your study.
+
