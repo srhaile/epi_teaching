@@ -30,6 +30,9 @@ format:
       - cosmo
       - brand
 
+execute:
+  freeze: auto
+  
 editor: source
 code-link: true
 code-fold: show
