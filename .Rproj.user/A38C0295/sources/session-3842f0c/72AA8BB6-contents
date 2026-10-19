@@ -30,7 +30,7 @@ format:
       - cosmo
       - brand
 
-editor: visual
+editor: source
 code-link: true
 code-fold: show
 code-tools:
