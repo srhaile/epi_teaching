@@ -19,46 +19,6 @@ The primary outcome is the reverse digit span test, a computer-based test of mem
 This dataset is not real, just simulated. If you want to use it, unfold the code here.
 :::
 
-```{r}
-#| code-fold: true
-#| eval: false
-
-set.seed(20261019)
-n <- 60
-dat <- tibble(study_id = 1:(2 * n),
-              first = sample(LETTERS, 2 * n, replace = TRUE),
-              last = sample(LETTERS, 2 * n, replace = TRUE),
-              inclusion_over17 = 1,
-              inclusion2 = 1, inclusion3 = 1, inclusion4 = 1,
-              exclusion1 = 0, exclusion2 = 0,
-              screened = 1,
-              informed_consent = rbinom(2 * n, 1, 0.9),
-              endpoints =  rbinom(2 * n, 1, 0.9),
-              age_today = floor(runif(2 * n, 25, 45)),
-              gender = rbinom(2 * n, 2, 0.250),
-              video_games = rbinom(2 * n, 4, 0.2),
-              randomization_group = rep(0:1, n)) |> 
-  mutate(reverse_digit = rnorm(2 * n, 3 + 2 * randomization_group, 1.5),
-         reverse_digit = round(reverse_digit),
-         cold_pressor = rnorm(2 * n, 60 - 10 * randomization_group, 20),
-         cold_pressor = round(cold_pressor),
-         video_challenge = rbinom(2 * n, 1, 0.2 + 0.3 * randomization_group)) |> 
-  mutate(across(age_today:video_challenge, ~ ifelse(informed_consent == 1, .x, NA))) |> 
-  mutate(across(reverse_digit:video_challenge, ~ ifelse(endpoints == 1, .x, NA))) |> 
-  select(-endpoints) 
-
-sm <- dat |> 
-  select(-(inclusion_over17:screened)) |> 
-  rename(id = study_id,
-         trt = randomization_group,
-         age = age_today) |> 
-  mutate(gender = factor(gender, 0:2, c("F", "M", "O")),
-         trt = factor(trt, 0:1, c("control", "intervention")),
-         video_games = factor(video_games, 0:3, 
-                              c("<30 minutes per day", "30-60", "60-120", "120+"))) |> 
-  filter(!is.na(trt), !is.na(reverse_digit))
-```
-
 {{< include _simdata.qmd >}}
 
 ### Take a first look
