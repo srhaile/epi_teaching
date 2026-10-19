@@ -3,7 +3,7 @@
     "path": "~/Desktop/work2025/epi_teaching/choice.qmd",
     "project_path": "choice.qmd",
     "type": "quarto_markdown",
-    "hash": "3094525106",
+    "hash": "843490518",
     "contents": "",
     "dirty": false,
     "created": 1792419875915.0,
@@ -17,16 +17,16 @@
         "Source": "Source",
         "docOutlineVisible": "0",
         "rmdVisualCollapsedChunks": "",
-        "cursorPosition": "17,0",
+        "cursorPosition": "22,135",
         "scrollLine": "0",
         "rmdVisualModeLocation": "2:0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1792420182,
+    "lastKnownWriteTime": 1792422672,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1792420182550,
+    "last_content_update": 1792422672050,
     "read_only": false,
     "read_only_alternatives": []
 }
