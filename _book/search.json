@@ -238,5 +238,15 @@
     "crumbs": [
       "References"
     ]
+  },
+  {
+    "objectID": "datacleaning.html#make-a-demographics-table",
+    "href": "datacleaning.html#make-a-demographics-table",
+    "title": "\n8  Data cleaning and Table 1\n",
+    "section": "",
+    "text": "Important\n\n\n\nAccording to both the CONSORT and STROBE guidelines, “significance testing of baseline differences is not recommended and should not be reported” and “p-values are not an appropriate criterion for selecting which confounders to adjust for in analysis”. Do not be tempted to add p-values, using add_p(), to these kinds of tables if they are used to compare baseline characteristics!",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Data cleaning and Table 1</span>"
+    ]
   }
 ]

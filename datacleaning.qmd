@@ -40,6 +40,11 @@ sm |>
   tbl_summary(by = trt)
 ```
 
+::: {.callout-important}
+According to both the [CONSORT](https://www.consort-spirit.org/item25-baselinedata) and [STROBE](https://www.strobe-statement.org/strobe-publications/) guidelines, "significance testing of baseline differences is not recommended and should not be reported" and "p-values are not an appropriate criterion for selecting which confounders to adjust for in analysis". Do not be tempted to add p-values, using `add_p()`, to these kinds of tables if they are used to compare baseline characteristics! 
+:::
+
+
 To clean up or improve the table, try [customizing](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html#customize-output) it with options like `label`, `value`, `digit` or `statistic`. Use the [`forcats`](https://forcats.tidyverse.org) package gives us more ways to deal with factor variables, in this case, the `fct_recode()` function for change labels on the levels of the factor.
 
 ```{r table1alt, echo = TRUE}
