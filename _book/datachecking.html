@@ -318,48 +318,11 @@ Note
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">trt</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20261019</span><span class="op">)</span></span>
-<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">60</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>,</span>
-<span>              first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">LETTERS</span>, <span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>              last <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">LETTERS</span>, <span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>              inclusion_over17 <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>              inclusion2 <span class="op">=</span> <span class="fl">1</span>, inclusion3 <span class="op">=</span> <span class="fl">1</span>, inclusion4 <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>              exclusion1 <span class="op">=</span> <span class="fl">0</span>, exclusion2 <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>              screened <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>              informed_consent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
-<span>              endpoints <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
-<span>              age_today <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">25</span>, <span class="fl">45</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>              gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">2</span>, <span class="fl">0.250</span><span class="op">)</span>,</span>
-<span>              video_games <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">4</span>, <span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>              randomization_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>reverse_digit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">3</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">randomization_group</span>, <span class="fl">1.5</span><span class="op">)</span>,</span>
-<span>         reverse_digit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">)</span>,</span>
-<span>         cold_pressor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">60</span> <span class="op">-</span> <span class="fl">10</span> <span class="op">*</span> <span class="va">randomization_group</span>, <span class="fl">20</span><span class="op">)</span>,</span>
-<span>         cold_pressor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">cold_pressor</span><span class="op">)</span>,</span>
-<span>         video_challenge <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.2</span> <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> <span class="va">randomization_group</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">age_today</span><span class="op">:</span><span class="va">video_challenge</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">informed_consent</span> <span class="op">==</span> <span class="fl">1</span>, <span class="va">.x</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">:</span><span class="va">video_challenge</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">endpoints</span> <span class="op">==</span> <span class="fl">1</span>, <span class="va">.x</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">endpoints</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="va">sm</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="op">(</span><span class="va">inclusion_over17</span><span class="op">:</span><span class="va">screened</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">study_id</span>,</span>
-<span>         trt <span class="op">=</span> <span class="va">randomization_group</span>,</span>
-<span>         age <span class="op">=</span> <span class="va">age_today</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">gender</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"O"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>         trt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">trt</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="st">"intervention"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>         video_games <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">video_games</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">3</span>, </span>
-<span>                              <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"&lt;30 minutes per day"</span>, <span class="st">"30-60"</span>, <span class="st">"60-120"</span>, <span class="st">"120+"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">trt</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
 <section id="take-a-first-look" class="level3" data-number="7.0.1"><h3 data-number="7.0.1" class="anchored" data-anchor-id="take-a-first-look">
 <span class="header-section-number">7.0.1</span> Take a first look</h3>
 <p>We have exported the study data from redcap, imported it into R, and named it <code>dat</code>. Use the functions <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> or <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> to look at the data structure (or <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code> if you’re coding along in RStudio), <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> to see what variables there are.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>Rows: 120
 Columns: 18
@@ -382,7 +345,7 @@ $ reverse_digit       &lt;dbl&gt; 3, 2, NA, 3, 3, 4, 5, 6, 4, 5, NA, 5, 4, 4, 3,
 $ cold_pressor        &lt;dbl&gt; 75, 31, NA, 47, 46, 43, 78, 52, 54, 83, NA, 35, 76…
 $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0, 1, …</code></pre>
 </div>
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># View(dat)</span></span>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># View(dat)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code> [1] "study_id"            "first"               "last"               
@@ -481,7 +444,7 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 <span class="header-section-number">7.2</span> Q: How many participants are in the data?</h2>
 <p>Use <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> to find out how many participants have been screened.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>[1] 120</code></pre>
 </div>
@@ -490,7 +453,7 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 <span class="header-section-number">7.3</span> Q: How many of them have been randomized?</h2>
 <p>A common thing to check when you’re first looking at a dataset is how many of something there are. How many participants? How many participanted have been randomized? How many are at least 18 years old? For these tasks, we need <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code>. Using <code>dplyr</code> coding style, we write the name of the dataset, <code>dat</code>, write “then” using the so-called “pipe” <code>|&gt;</code> (or <code>%&gt;%</code>, either way it’s ctrl / cmd + M), and finally <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code>.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
@@ -502,7 +465,7 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 <p>This count should be the same as we got above with <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>.</p>
 <p>We want to see how many participants are in each category of <code>randomization_group</code>, or where it is missing. So let’s <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> <code>randomization_group</code>.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">randomization_group</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
@@ -517,7 +480,7 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 <span class="header-section-number">7.4</span> Q: How many have the primary endpoint, the reverse digit span test?</h2>
 <p>The <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> function checks if a value is missing (<code>NA</code>). To check if it’s not missing, use <code>!is.na()</code> (<code>!</code> means “not”).</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
@@ -531,7 +494,7 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 <span class="header-section-number">7.5</span> Q: How does age look?</h2>
 <p>For continuous (or mostly continuous) outcomes, such as age (<code>age_today</code>), it’s helpful to look at all individual reported values, not just mean or median values. We can also use <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> for this.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">age_today</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 21 × 2
@@ -1021,150 +984,110 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data checking</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>Now, imagine we have just completed a randomized clinical trial.</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Population**: students in this course</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Intervention**: watching a concentration video for 5 minutes</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Control**: watching a screensaver-type video for 5 minutes</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Outcome**: reverse digit span test</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>The primary outcome is the reverse digit span test, a computer-based test of memory (high number of digits is better). Secondary outcomes are the cold pressor test (number of seconds you can keep your hand in ice cold water), and a video challenge, that participants either complete or do not.</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>This dataset is not real, just simulated. If you want to use it, unfold the code here.</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20261019</span>)</span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">study_id =</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span> <span class="sc">*</span> n),</span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>              <span class="at">first =</span> <span class="fu">sample</span>(LETTERS, <span class="dv">2</span> <span class="sc">*</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>              <span class="at">last =</span> <span class="fu">sample</span>(LETTERS, <span class="dv">2</span> <span class="sc">*</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>              <span class="at">inclusion_over17 =</span> <span class="dv">1</span>,</span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>              <span class="at">inclusion2 =</span> <span class="dv">1</span>, <span class="at">inclusion3 =</span> <span class="dv">1</span>, <span class="at">inclusion4 =</span> <span class="dv">1</span>,</span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>              <span class="at">exclusion1 =</span> <span class="dv">0</span>, <span class="at">exclusion2 =</span> <span class="dv">0</span>,</span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>              <span class="at">screened =</span> <span class="dv">1</span>,</span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>              <span class="at">informed_consent =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">1</span>, <span class="fl">0.9</span>),</span>
-<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>              <span class="at">endpoints =</span>  <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">1</span>, <span class="fl">0.9</span>),</span>
-<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>              <span class="at">age_today =</span> <span class="fu">floor</span>(<span class="fu">runif</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">25</span>, <span class="dv">45</span>)),</span>
-<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>              <span class="at">gender =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">2</span>, <span class="fl">0.250</span>),</span>
-<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>              <span class="at">video_games =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">4</span>, <span class="fl">0.2</span>),</span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>              <span class="at">randomization_group =</span> <span class="fu">rep</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, n)) <span class="sc">|&gt;</span> </span>
-<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">reverse_digit =</span> <span class="fu">rnorm</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> randomization_group, <span class="fl">1.5</span>),</span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>         <span class="at">reverse_digit =</span> <span class="fu">round</span>(reverse_digit),</span>
-<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>         <span class="at">cold_pressor =</span> <span class="fu">rnorm</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">60</span> <span class="sc">-</span> <span class="dv">10</span> <span class="sc">*</span> randomization_group, <span class="dv">20</span>),</span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>         <span class="at">cold_pressor =</span> <span class="fu">round</span>(cold_pressor),</span>
-<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>         <span class="at">video_challenge =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">1</span>, <span class="fl">0.2</span> <span class="sc">+</span> <span class="fl">0.3</span> <span class="sc">*</span> randomization_group)) <span class="sc">|&gt;</span> </span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(age_today<span class="sc">:</span>video_challenge, <span class="sc">~</span> <span class="fu">ifelse</span>(informed_consent <span class="sc">==</span> <span class="dv">1</span>, .x, <span class="cn">NA</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(reverse_digit<span class="sc">:</span>video_challenge, <span class="sc">~</span> <span class="fu">ifelse</span>(endpoints <span class="sc">==</span> <span class="dv">1</span>, .x, <span class="cn">NA</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>endpoints) </span>
-<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>sm <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> </span>
-<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>(inclusion_over17<span class="sc">:</span>screened)) <span class="sc">|&gt;</span> </span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> study_id,</span>
-<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>         <span class="at">trt =</span> randomization_group,</span>
-<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>         <span class="at">age =</span> age_today) <span class="sc">|&gt;</span> </span>
-<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"O"</span>)),</span>
-<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>         <span class="at">trt =</span> <span class="fu">factor</span>(trt, <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"intervention"</span>)),</span>
-<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>         <span class="at">video_games =</span> <span class="fu">factor</span>(video_games, <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, </span>
-<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">c</span>(<span class="st">"&lt;30 minutes per day"</span>, <span class="st">"30-60"</span>, <span class="st">"60-120"</span>, <span class="st">"120+"</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(trt), <span class="sc">!</span><span class="fu">is.na</span>(reverse_digit))</span>
-<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a>{{&lt; include _simdata.qmd &gt;}}</span>
-<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a><span class="fu">### Take a first look</span></span>
-<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>We have exported the study data from redcap, imported it into R, and named it <span class="in">`dat`</span>. Use the functions <span class="in">`head()`</span> or <span class="in">`glimpse()`</span> to look at the data structure (or <span class="in">`View()`</span> if you're coding along in RStudio), <span class="in">`names()`</span> to see what variables there are.</span>
-<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{r show}</span></span>
-<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dat)</span>
-<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a><span class="co"># View(dat)</span></span>
-<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dat)</span>
-<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a>Here is a simplified version of what you might find in the REDCap codebook for this dataset:</span>
-<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> variable name <span class="pp">|</span> description <span class="pp">|</span> coding <span class="pp">|</span></span>
-<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------------------|-----------------------------|-----------------------|</span></span>
-<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`study_id`</span> <span class="pp">|</span> participant number <span class="pp">|</span>  <span class="pp">|</span></span>
-<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`first`</span> / <span class="in">`last`</span> <span class="pp">|</span> first and last initials <span class="pp">|</span>  <span class="pp">|</span></span>
-<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`inclusion...`</span> <span class="pp">|</span> 4 variables with different inclusion criteria <span class="pp">|</span> should all be 1 <span class="pp">|</span></span>
-<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`exclusion...`</span> <span class="pp">|</span> 2 variables with different exclusion criteria <span class="pp">|</span> should all be 0 <span class="pp">|</span></span>
-<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`screened`</span> <span class="pp">|</span> screening complete? <span class="pp">|</span> 1 = yes, 0 = no <span class="pp">|</span></span>
-<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`informed_consent`</span> <span class="pp">|</span> participant signed informed consent? <span class="pp">|</span> 1 = yes, 0 = no <span class="pp">|</span></span>
-<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`age_today`</span> <span class="pp">|</span> State your age today. <span class="pp">|</span>  <span class="pp">|</span></span>
-<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`gender`</span> <span class="pp">|</span> State your gender. <span class="pp">|</span> 0 = female, 1 = male, 2 = other <span class="pp">|</span></span>
-<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`video_games`</span> <span class="pp">|</span> How long do you play video games on an average day? <span class="pp">|</span> 0 = <span class="sc">\&lt;</span>30 minutes, 1 = 30-60 minutes, 2 = 60-120 minutes, 3 = more than 120 minutes. <span class="pp">|</span></span>
-<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`randomization_group`</span> <span class="pp">|</span> Randomized intervention <span class="pp">|</span> 0 = control, 1 = intervention <span class="pp">|</span></span>
-<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`reverse_digit`</span> <span class="pp">|</span> reverse digit span test <span class="pp">|</span> number of digits remembered <span class="pp">|</span></span>
-<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`cold_pressor`</span> <span class="pp">|</span> cold pressor test <span class="pp">|</span> number of seconds participant kept their hand in the ice water <span class="pp">|</span></span>
-<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`video_challenge`</span> <span class="pp">|</span> could the participant finish the short video challenge? <span class="pp">|</span> 1 = yes, 0 = no <span class="pp">|</span></span>
-<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## Check some basic numbers</span></span>
-<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>Next, we run some basic checks to see how many participants have been included, how many have been randomized, and how many have complete the primary endpoint.</span>
-<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q: How many participants are in the data?</span></span>
-<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a>Use <span class="in">`nrow()`</span> to find out how many participants have been screened.</span>
-<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r screened}</span></span>
-<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(dat)</span>
-<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q: How many of them have been randomized?</span></span>
-<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>A common thing to check when you're first looking at a dataset is how many of something there are. How many participants? How many participanted have been randomized? How many are at least 18 years old? For these tasks, we need <span class="in">`count()`</span>. Using <span class="in">`dplyr`</span> coding style, we write the name of the dataset, <span class="in">`dat`</span>, write "then" using the so-called "pipe" <span class="in">`|&gt;`</span> (or <span class="in">`%&gt;%`</span>, either way it's ctrl / cmd + M), and finally <span class="in">`count()`</span>.</span>
-<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r firstpipe}</span></span>
-<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
-<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span>
-<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a>This count should be the same as we got above with <span class="in">`nrow()`</span>.</span>
-<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>We want to see how many participants are in each category of <span class="in">`randomization_group`</span>, or where it is missing. So let's <span class="in">`count()`</span> <span class="in">`randomization_group`</span>.</span>
-<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r rand}</span></span>
-<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
-<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(randomization_group)</span>
-<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q: How many have the primary endpoint, the reverse digit span test?</span></span>
-<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>The <span class="in">`is.na()`</span> function checks if a value is missing (<span class="in">`NA`</span>). To check if it's not missing, use <span class="in">`!is.na()`</span> (<span class="in">`!`</span> means "not").</span>
-<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{r endpoints}</span></span>
-<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
-<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="sc">!</span><span class="fu">is.na</span>(reverse_digit))</span>
-<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q: How does age look?</span></span>
-<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>For continuous (or mostly continuous) outcomes, such as age (<span class="in">`age_today`</span>), it's helpful to look at all individual reported values, not just mean or median values. We can also use <span class="in">`count()`</span> for this.</span>
-<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r age}</span></span>
-<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
-<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age_today)</span>
-<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a>If any of these values appear to be typos, implausible, or otherwise incorrect, what do we do next? Generally, a good approach is to</span>
-<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Talk to the study coordinator;</span>
-<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>If required, they can correct the data directly in redcap, correctly documenting the change;</span>
-<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Then, the data analyst can re-export the data, and rerun the analysis.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data checking</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>Now, imagine we have just completed a randomized clinical trial.</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Population**: students in this course</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Intervention**: watching a concentration video for 5 minutes</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Control**: watching a screensaver-type video for 5 minutes</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Outcome**: reverse digit span test</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>The primary outcome is the reverse digit span test, a computer-based test of memory (high number of digits is better). Secondary outcomes are the cold pressor test (number of seconds you can keep your hand in ice cold water), and a video challenge, that participants either complete or do not.</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>This dataset is not real, just simulated. If you want to use it, unfold the code here.</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>{{&lt; include _simdata.qmd &gt;}}</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="fu">### Take a first look</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>We have exported the study data from redcap, imported it into R, and named it <span class="in">`dat`</span>. Use the functions <span class="in">`head()`</span> or <span class="in">`glimpse()`</span> to look at the data structure (or <span class="in">`View()`</span> if you're coding along in RStudio), <span class="in">`names()`</span> to see what variables there are.</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r show}</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dat)</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="co"># View(dat)</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dat)</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>Here is a simplified version of what you might find in the REDCap codebook for this dataset:</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> variable name <span class="pp">|</span> description <span class="pp">|</span> coding <span class="pp">|</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="pp">|--------------------|-----------------------------|-----------------------|</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`study_id`</span> <span class="pp">|</span> participant number <span class="pp">|</span>  <span class="pp">|</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`first`</span> / <span class="in">`last`</span> <span class="pp">|</span> first and last initials <span class="pp">|</span>  <span class="pp">|</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`inclusion...`</span> <span class="pp">|</span> 4 variables with different inclusion criteria <span class="pp">|</span> should all be 1 <span class="pp">|</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`exclusion...`</span> <span class="pp">|</span> 2 variables with different exclusion criteria <span class="pp">|</span> should all be 0 <span class="pp">|</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`screened`</span> <span class="pp">|</span> screening complete? <span class="pp">|</span> 1 = yes, 0 = no <span class="pp">|</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`informed_consent`</span> <span class="pp">|</span> participant signed informed consent? <span class="pp">|</span> 1 = yes, 0 = no <span class="pp">|</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`age_today`</span> <span class="pp">|</span> State your age today. <span class="pp">|</span>  <span class="pp">|</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`gender`</span> <span class="pp">|</span> State your gender. <span class="pp">|</span> 0 = female, 1 = male, 2 = other <span class="pp">|</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`video_games`</span> <span class="pp">|</span> How long do you play video games on an average day? <span class="pp">|</span> 0 = <span class="sc">\&lt;</span>30 minutes, 1 = 30-60 minutes, 2 = 60-120 minutes, 3 = more than 120 minutes. <span class="pp">|</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`randomization_group`</span> <span class="pp">|</span> Randomized intervention <span class="pp">|</span> 0 = control, 1 = intervention <span class="pp">|</span></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`reverse_digit`</span> <span class="pp">|</span> reverse digit span test <span class="pp">|</span> number of digits remembered <span class="pp">|</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`cold_pressor`</span> <span class="pp">|</span> cold pressor test <span class="pp">|</span> number of seconds participant kept their hand in the ice water <span class="pp">|</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`video_challenge`</span> <span class="pp">|</span> could the participant finish the short video challenge? <span class="pp">|</span> 1 = yes, 0 = no <span class="pp">|</span></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## Check some basic numbers</span></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>Next, we run some basic checks to see how many participants have been included, how many have been randomized, and how many have complete the primary endpoint.</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q: How many participants are in the data?</span></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>Use <span class="in">`nrow()`</span> to find out how many participants have been screened.</span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r screened}</span></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(dat)</span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q: How many of them have been randomized?</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>A common thing to check when you're first looking at a dataset is how many of something there are. How many participants? How many participanted have been randomized? How many are at least 18 years old? For these tasks, we need <span class="in">`count()`</span>. Using <span class="in">`dplyr`</span> coding style, we write the name of the dataset, <span class="in">`dat`</span>, write "then" using the so-called "pipe" <span class="in">`|&gt;`</span> (or <span class="in">`%&gt;%`</span>, either way it's ctrl / cmd + M), and finally <span class="in">`count()`</span>.</span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r firstpipe}</span></span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>This count should be the same as we got above with <span class="in">`nrow()`</span>.</span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>We want to see how many participants are in each category of <span class="in">`randomization_group`</span>, or where it is missing. So let's <span class="in">`count()`</span> <span class="in">`randomization_group`</span>.</span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r rand}</span></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(randomization_group)</span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q: How many have the primary endpoint, the reverse digit span test?</span></span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>The <span class="in">`is.na()`</span> function checks if a value is missing (<span class="in">`NA`</span>). To check if it's not missing, use <span class="in">`!is.na()`</span> (<span class="in">`!`</span> means "not").</span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r endpoints}</span></span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="sc">!</span><span class="fu">is.na</span>(reverse_digit))</span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a><span class="fu">## Q: How does age look?</span></span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>For continuous (or mostly continuous) outcomes, such as age (<span class="in">`age_today`</span>), it's helpful to look at all individual reported values, not just mean or median values. We can also use <span class="in">`count()`</span> for this.</span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r age}</span></span>
+<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
+<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age_today)</span>
+<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a>If any of these values appear to be typos, implausible, or otherwise incorrect, what do we do next? Generally, a good approach is to</span>
+<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Talk to the study coordinator;</span>
+<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>If required, they can correct the data directly in redcap, correctly documenting the change;</span>
+<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Then, the data analyst can re-export the data, and rerun the analysis.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

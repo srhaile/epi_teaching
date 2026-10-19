@@ -71,3 +71,4 @@
 [1,"\u001B[1mpandoc \u001B[22m\n  to: html\n  output-file: datachecking.html\n  standalone: true\n  toc: true\n  number-sections: true\n  title-prefix: Short Tutorial on R and Biostatistics\n  section-divs: true\n  html-math-method: mathjax\n  wrap: none\n  default-image-extension: png\n  number-offset:\n    - 7\n  \n\u001B[1mmetadata\u001B[22m\n  crossref:\n    chapters: true\n  document-css: false\n  link-citations: true\n  date-format: long\n  lang: en\n  bibliography:\n    - references.bib\n  editor: visual\n  code-copy: true\n  theme:\n    - cosmo\n    - brand\n  hide-description: true\n  title: \"[7]{.chapter-number}\\_ [Data checking]{.chapter-title}\"\n  \n"]
 [1,"Output created: _book/datachecking.html\n\n\u001B[32mWatching files for changes\u001B[39m\n"]
 [1,"\u001B[32mGET: /datachecking.html\u001B[39m\n"]
+[1,"\u001B[32mGET: /datachecking.html\u001B[39m\n"]

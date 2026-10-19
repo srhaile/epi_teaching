@@ -3,7 +3,7 @@
     "path": "~/Desktop/work2025/epi_teaching/.github/workflows/publish.yml",
     "project_path": ".github/workflows/publish.yml",
     "type": "yaml",
-    "hash": "1663175317",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1792418195623.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "39,22",
+        "cursorPosition": "0,6",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1792418670,
+    "lastKnownWriteTime": 1792420992,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1792418670922,
+    "last_content_update": 1792420992485,
     "read_only": false,
     "read_only_alternatives": []
 }

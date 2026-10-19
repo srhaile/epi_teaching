@@ -34,6 +34,8 @@ jobs:
         with:
           extra-packages: |
             any::tidyverse
+            any::broom
+            any::broom.helpers
             any::gtsummary
             any::ggbeeswarm
             any::rmarkdown
