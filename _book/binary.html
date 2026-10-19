@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.18">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>4&nbsp; Statistics Methods for Binary Outcomes – Introduction to R and Biostatistics for Clinical and Epidemiological Studies</title>
+<title>4&nbsp; Statistical Methods for Binary Outcomes – Short Tutorial on R and Biostatistics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -157,7 +157,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./binary.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistics Methods for Binary Outcomes</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./binary.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Methods for Binary Outcomes</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -168,7 +168,7 @@ window.Quarto = {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Introduction to R and Biostatistics for Clinical and Epidemiological Studies</a> 
+      <a href="./">Short Tutorial on R and Biostatistics</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -193,7 +193,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./continuous.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistics Methods for Continuous Outcomes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistical Methods for Continuous Outcomes</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -205,7 +205,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./binary.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistics Methods for Binary Outcomes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Methods for Binary Outcomes</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -286,7 +286,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistics Methods for Binary Outcomes</span>
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Methods for Binary Outcomes</span>
 </h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
 </div>
 
@@ -343,23 +343,23 @@ window.Quarto = {
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">smoke</span>, </span>
 <span>              digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"low"</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
-<div id="wfbiwxajck" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wfbiwxajck table {
+<div id="vzlgbzceql" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vzlgbzceql table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wfbiwxajck thead, #wfbiwxajck tbody, #wfbiwxajck tfoot, #wfbiwxajck tr, #wfbiwxajck td, #wfbiwxajck th {
+#vzlgbzceql thead, #vzlgbzceql tbody, #vzlgbzceql tfoot, #vzlgbzceql tr, #vzlgbzceql td, #vzlgbzceql th {
   border-style: none;
 }
 
-#wfbiwxajck p {
+#vzlgbzceql p {
   margin: 0;
   padding: 0;
 }
 
-#wfbiwxajck .gt_table {
+#vzlgbzceql .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -385,12 +385,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#wfbiwxajck .gt_caption {
+#vzlgbzceql .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wfbiwxajck .gt_title {
+#vzlgbzceql .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -402,7 +402,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#wfbiwxajck .gt_subtitle {
+#vzlgbzceql .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -414,7 +414,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#wfbiwxajck .gt_heading {
+#vzlgbzceql .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -426,13 +426,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#wfbiwxajck .gt_bottom_border {
+#vzlgbzceql .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wfbiwxajck .gt_col_headings {
+#vzlgbzceql .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -447,7 +447,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#wfbiwxajck .gt_col_heading {
+#vzlgbzceql .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -467,7 +467,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#wfbiwxajck .gt_column_spanner_outer {
+#vzlgbzceql .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -479,15 +479,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#wfbiwxajck .gt_column_spanner_outer:first-child {
+#vzlgbzceql .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wfbiwxajck .gt_column_spanner_outer:last-child {
+#vzlgbzceql .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wfbiwxajck .gt_column_spanner {
+#vzlgbzceql .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -499,11 +499,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#wfbiwxajck .gt_spanner_row {
+#vzlgbzceql .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wfbiwxajck .gt_group_heading {
+#vzlgbzceql .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -529,7 +529,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#wfbiwxajck .gt_empty_group_heading {
+#vzlgbzceql .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -544,15 +544,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#wfbiwxajck .gt_from_md > :first-child {
+#vzlgbzceql .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wfbiwxajck .gt_from_md > :last-child {
+#vzlgbzceql .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wfbiwxajck .gt_row {
+#vzlgbzceql .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -571,7 +571,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#wfbiwxajck .gt_stub {
+#vzlgbzceql .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -584,7 +584,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#wfbiwxajck .gt_stub_row_group {
+#vzlgbzceql .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -598,15 +598,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#wfbiwxajck .gt_row_group_first td {
+#vzlgbzceql .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wfbiwxajck .gt_row_group_first th {
+#vzlgbzceql .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wfbiwxajck .gt_summary_row {
+#vzlgbzceql .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -616,16 +616,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#wfbiwxajck .gt_first_summary_row {
+#vzlgbzceql .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wfbiwxajck .gt_first_summary_row.thick {
+#vzlgbzceql .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wfbiwxajck .gt_last_summary_row {
+#vzlgbzceql .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -635,7 +635,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#wfbiwxajck .gt_grand_summary_row {
+#vzlgbzceql .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -645,7 +645,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#wfbiwxajck .gt_first_grand_summary_row {
+#vzlgbzceql .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -655,7 +655,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#wfbiwxajck .gt_last_grand_summary_row_top {
+#vzlgbzceql .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -665,11 +665,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#wfbiwxajck .gt_striped {
+#vzlgbzceql .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wfbiwxajck .gt_table_body {
+#vzlgbzceql .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -678,7 +678,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#wfbiwxajck .gt_footnotes {
+#vzlgbzceql .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -692,7 +692,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#wfbiwxajck .gt_footnote {
+#vzlgbzceql .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -701,7 +701,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#wfbiwxajck .gt_sourcenotes {
+#vzlgbzceql .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -715,7 +715,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#wfbiwxajck .gt_sourcenote {
+#vzlgbzceql .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -723,72 +723,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#wfbiwxajck .gt_left {
+#vzlgbzceql .gt_left {
   text-align: left;
 }
 
-#wfbiwxajck .gt_center {
+#vzlgbzceql .gt_center {
   text-align: center;
 }
 
-#wfbiwxajck .gt_right {
+#vzlgbzceql .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wfbiwxajck .gt_font_normal {
+#vzlgbzceql .gt_font_normal {
   font-weight: normal;
 }
 
-#wfbiwxajck .gt_font_bold {
+#vzlgbzceql .gt_font_bold {
   font-weight: bold;
 }
 
-#wfbiwxajck .gt_font_italic {
+#vzlgbzceql .gt_font_italic {
   font-style: italic;
 }
 
-#wfbiwxajck .gt_super {
+#vzlgbzceql .gt_super {
   font-size: 65%;
 }
 
-#wfbiwxajck .gt_footnote_marks {
+#vzlgbzceql .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wfbiwxajck .gt_asterisk {
+#vzlgbzceql .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wfbiwxajck .gt_indent_1 {
+#vzlgbzceql .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wfbiwxajck .gt_indent_2 {
+#vzlgbzceql .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wfbiwxajck .gt_indent_3 {
+#vzlgbzceql .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wfbiwxajck .gt_indent_4 {
+#vzlgbzceql .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wfbiwxajck .gt_indent_5 {
+#vzlgbzceql .gt_indent_5 {
   text-indent: 25px;
 }
 
-#wfbiwxajck .katex-display {
+#vzlgbzceql .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#wfbiwxajck div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vzlgbzceql div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -996,23 +996,23 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 <span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_cross.html">tbl_cross</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">smoke</span>,  row <span class="op">=</span> <span class="va">low</span>,</span>
 <span>            percent <span class="op">=</span> <span class="st">"column"</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
-<div id="svdrwzefvk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#svdrwzefvk table {
+<div id="mcxrejnmkf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mcxrejnmkf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#svdrwzefvk thead, #svdrwzefvk tbody, #svdrwzefvk tfoot, #svdrwzefvk tr, #svdrwzefvk td, #svdrwzefvk th {
+#mcxrejnmkf thead, #mcxrejnmkf tbody, #mcxrejnmkf tfoot, #mcxrejnmkf tr, #mcxrejnmkf td, #mcxrejnmkf th {
   border-style: none;
 }
 
-#svdrwzefvk p {
+#mcxrejnmkf p {
   margin: 0;
   padding: 0;
 }
 
-#svdrwzefvk .gt_table {
+#mcxrejnmkf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1038,12 +1038,12 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   border-left-color: #D3D3D3;
 }
 
-#svdrwzefvk .gt_caption {
+#mcxrejnmkf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#svdrwzefvk .gt_title {
+#mcxrejnmkf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1055,7 +1055,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   border-bottom-width: 0;
 }
 
-#svdrwzefvk .gt_subtitle {
+#mcxrejnmkf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1067,7 +1067,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   border-top-width: 0;
 }
 
-#svdrwzefvk .gt_heading {
+#mcxrejnmkf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1079,13 +1079,13 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   border-right-color: #D3D3D3;
 }
 
-#svdrwzefvk .gt_bottom_border {
+#mcxrejnmkf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#svdrwzefvk .gt_col_headings {
+#mcxrejnmkf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1100,7 +1100,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   border-right-color: #D3D3D3;
 }
 
-#svdrwzefvk .gt_col_heading {
+#mcxrejnmkf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1120,7 +1120,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   overflow-x: hidden;
 }
 
-#svdrwzefvk .gt_column_spanner_outer {
+#mcxrejnmkf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1132,15 +1132,15 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   padding-right: 4px;
 }
 
-#svdrwzefvk .gt_column_spanner_outer:first-child {
+#mcxrejnmkf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#svdrwzefvk .gt_column_spanner_outer:last-child {
+#mcxrejnmkf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#svdrwzefvk .gt_column_spanner {
+#mcxrejnmkf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1152,11 +1152,11 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   width: 100%;
 }
 
-#svdrwzefvk .gt_spanner_row {
+#mcxrejnmkf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#svdrwzefvk .gt_group_heading {
+#mcxrejnmkf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1182,7 +1182,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   text-align: left;
 }
 
-#svdrwzefvk .gt_empty_group_heading {
+#mcxrejnmkf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1197,15 +1197,15 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   vertical-align: middle;
 }
 
-#svdrwzefvk .gt_from_md > :first-child {
+#mcxrejnmkf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#svdrwzefvk .gt_from_md > :last-child {
+#mcxrejnmkf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#svdrwzefvk .gt_row {
+#mcxrejnmkf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1224,7 +1224,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   overflow-x: hidden;
 }
 
-#svdrwzefvk .gt_stub {
+#mcxrejnmkf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1237,7 +1237,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   padding-right: 5px;
 }
 
-#svdrwzefvk .gt_stub_row_group {
+#mcxrejnmkf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1251,15 +1251,15 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   vertical-align: top;
 }
 
-#svdrwzefvk .gt_row_group_first td {
+#mcxrejnmkf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#svdrwzefvk .gt_row_group_first th {
+#mcxrejnmkf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#svdrwzefvk .gt_summary_row {
+#mcxrejnmkf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1269,16 +1269,16 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   padding-right: 5px;
 }
 
-#svdrwzefvk .gt_first_summary_row {
+#mcxrejnmkf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#svdrwzefvk .gt_first_summary_row.thick {
+#mcxrejnmkf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#svdrwzefvk .gt_last_summary_row {
+#mcxrejnmkf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1288,7 +1288,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   border-bottom-color: #D3D3D3;
 }
 
-#svdrwzefvk .gt_grand_summary_row {
+#mcxrejnmkf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1298,7 +1298,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   padding-right: 5px;
 }
 
-#svdrwzefvk .gt_first_grand_summary_row {
+#mcxrejnmkf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1308,7 +1308,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   border-top-color: #D3D3D3;
 }
 
-#svdrwzefvk .gt_last_grand_summary_row_top {
+#mcxrejnmkf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1318,11 +1318,11 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   border-bottom-color: #D3D3D3;
 }
 
-#svdrwzefvk .gt_striped {
+#mcxrejnmkf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#svdrwzefvk .gt_table_body {
+#mcxrejnmkf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1331,7 +1331,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   border-bottom-color: #D3D3D3;
 }
 
-#svdrwzefvk .gt_footnotes {
+#mcxrejnmkf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1345,7 +1345,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   border-right-color: #D3D3D3;
 }
 
-#svdrwzefvk .gt_footnote {
+#mcxrejnmkf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1354,7 +1354,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   padding-right: 5px;
 }
 
-#svdrwzefvk .gt_sourcenotes {
+#mcxrejnmkf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1368,7 +1368,7 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   border-right-color: #D3D3D3;
 }
 
-#svdrwzefvk .gt_sourcenote {
+#mcxrejnmkf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1376,72 +1376,72 @@ N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
   padding-right: 5px;
 }
 
-#svdrwzefvk .gt_left {
+#mcxrejnmkf .gt_left {
   text-align: left;
 }
 
-#svdrwzefvk .gt_center {
+#mcxrejnmkf .gt_center {
   text-align: center;
 }
 
-#svdrwzefvk .gt_right {
+#mcxrejnmkf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#svdrwzefvk .gt_font_normal {
+#mcxrejnmkf .gt_font_normal {
   font-weight: normal;
 }
 
-#svdrwzefvk .gt_font_bold {
+#mcxrejnmkf .gt_font_bold {
   font-weight: bold;
 }
 
-#svdrwzefvk .gt_font_italic {
+#mcxrejnmkf .gt_font_italic {
   font-style: italic;
 }
 
-#svdrwzefvk .gt_super {
+#mcxrejnmkf .gt_super {
   font-size: 65%;
 }
 
-#svdrwzefvk .gt_footnote_marks {
+#mcxrejnmkf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#svdrwzefvk .gt_asterisk {
+#mcxrejnmkf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#svdrwzefvk .gt_indent_1 {
+#mcxrejnmkf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#svdrwzefvk .gt_indent_2 {
+#mcxrejnmkf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#svdrwzefvk .gt_indent_3 {
+#mcxrejnmkf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#svdrwzefvk .gt_indent_4 {
+#mcxrejnmkf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#svdrwzefvk .gt_indent_5 {
+#mcxrejnmkf .gt_indent_5 {
   text-indent: 25px;
 }
 
-#svdrwzefvk .katex-display {
+#mcxrejnmkf .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#svdrwzefvk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#mcxrejnmkf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1604,23 +1604,23 @@ attr(,"method")
 <span>           family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">mod</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
-<div id="nsjjdzsnof" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nsjjdzsnof table {
+<div id="xyljwzqcym" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xyljwzqcym table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nsjjdzsnof thead, #nsjjdzsnof tbody, #nsjjdzsnof tfoot, #nsjjdzsnof tr, #nsjjdzsnof td, #nsjjdzsnof th {
+#xyljwzqcym thead, #xyljwzqcym tbody, #xyljwzqcym tfoot, #xyljwzqcym tr, #xyljwzqcym td, #xyljwzqcym th {
   border-style: none;
 }
 
-#nsjjdzsnof p {
+#xyljwzqcym p {
   margin: 0;
   padding: 0;
 }
 
-#nsjjdzsnof .gt_table {
+#xyljwzqcym .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1646,12 +1646,12 @@ attr(,"method")
   border-left-color: #D3D3D3;
 }
 
-#nsjjdzsnof .gt_caption {
+#xyljwzqcym .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nsjjdzsnof .gt_title {
+#xyljwzqcym .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1663,7 +1663,7 @@ attr(,"method")
   border-bottom-width: 0;
 }
 
-#nsjjdzsnof .gt_subtitle {
+#xyljwzqcym .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1675,7 +1675,7 @@ attr(,"method")
   border-top-width: 0;
 }
 
-#nsjjdzsnof .gt_heading {
+#xyljwzqcym .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1687,13 +1687,13 @@ attr(,"method")
   border-right-color: #D3D3D3;
 }
 
-#nsjjdzsnof .gt_bottom_border {
+#xyljwzqcym .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nsjjdzsnof .gt_col_headings {
+#xyljwzqcym .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1708,7 +1708,7 @@ attr(,"method")
   border-right-color: #D3D3D3;
 }
 
-#nsjjdzsnof .gt_col_heading {
+#xyljwzqcym .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1728,7 +1728,7 @@ attr(,"method")
   overflow-x: hidden;
 }
 
-#nsjjdzsnof .gt_column_spanner_outer {
+#xyljwzqcym .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1740,15 +1740,15 @@ attr(,"method")
   padding-right: 4px;
 }
 
-#nsjjdzsnof .gt_column_spanner_outer:first-child {
+#xyljwzqcym .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nsjjdzsnof .gt_column_spanner_outer:last-child {
+#xyljwzqcym .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nsjjdzsnof .gt_column_spanner {
+#xyljwzqcym .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1760,11 +1760,11 @@ attr(,"method")
   width: 100%;
 }
 
-#nsjjdzsnof .gt_spanner_row {
+#xyljwzqcym .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nsjjdzsnof .gt_group_heading {
+#xyljwzqcym .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1790,7 +1790,7 @@ attr(,"method")
   text-align: left;
 }
 
-#nsjjdzsnof .gt_empty_group_heading {
+#xyljwzqcym .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1805,15 +1805,15 @@ attr(,"method")
   vertical-align: middle;
 }
 
-#nsjjdzsnof .gt_from_md > :first-child {
+#xyljwzqcym .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nsjjdzsnof .gt_from_md > :last-child {
+#xyljwzqcym .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nsjjdzsnof .gt_row {
+#xyljwzqcym .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1832,7 +1832,7 @@ attr(,"method")
   overflow-x: hidden;
 }
 
-#nsjjdzsnof .gt_stub {
+#xyljwzqcym .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1845,7 +1845,7 @@ attr(,"method")
   padding-right: 5px;
 }
 
-#nsjjdzsnof .gt_stub_row_group {
+#xyljwzqcym .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1859,15 +1859,15 @@ attr(,"method")
   vertical-align: top;
 }
 
-#nsjjdzsnof .gt_row_group_first td {
+#xyljwzqcym .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nsjjdzsnof .gt_row_group_first th {
+#xyljwzqcym .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nsjjdzsnof .gt_summary_row {
+#xyljwzqcym .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1877,16 +1877,16 @@ attr(,"method")
   padding-right: 5px;
 }
 
-#nsjjdzsnof .gt_first_summary_row {
+#xyljwzqcym .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nsjjdzsnof .gt_first_summary_row.thick {
+#xyljwzqcym .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nsjjdzsnof .gt_last_summary_row {
+#xyljwzqcym .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1896,7 +1896,7 @@ attr(,"method")
   border-bottom-color: #D3D3D3;
 }
 
-#nsjjdzsnof .gt_grand_summary_row {
+#xyljwzqcym .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1906,7 +1906,7 @@ attr(,"method")
   padding-right: 5px;
 }
 
-#nsjjdzsnof .gt_first_grand_summary_row {
+#xyljwzqcym .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1916,7 +1916,7 @@ attr(,"method")
   border-top-color: #D3D3D3;
 }
 
-#nsjjdzsnof .gt_last_grand_summary_row_top {
+#xyljwzqcym .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1926,11 +1926,11 @@ attr(,"method")
   border-bottom-color: #D3D3D3;
 }
 
-#nsjjdzsnof .gt_striped {
+#xyljwzqcym .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nsjjdzsnof .gt_table_body {
+#xyljwzqcym .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1939,7 +1939,7 @@ attr(,"method")
   border-bottom-color: #D3D3D3;
 }
 
-#nsjjdzsnof .gt_footnotes {
+#xyljwzqcym .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1953,7 +1953,7 @@ attr(,"method")
   border-right-color: #D3D3D3;
 }
 
-#nsjjdzsnof .gt_footnote {
+#xyljwzqcym .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1962,7 +1962,7 @@ attr(,"method")
   padding-right: 5px;
 }
 
-#nsjjdzsnof .gt_sourcenotes {
+#xyljwzqcym .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1976,7 +1976,7 @@ attr(,"method")
   border-right-color: #D3D3D3;
 }
 
-#nsjjdzsnof .gt_sourcenote {
+#xyljwzqcym .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1984,72 +1984,72 @@ attr(,"method")
   padding-right: 5px;
 }
 
-#nsjjdzsnof .gt_left {
+#xyljwzqcym .gt_left {
   text-align: left;
 }
 
-#nsjjdzsnof .gt_center {
+#xyljwzqcym .gt_center {
   text-align: center;
 }
 
-#nsjjdzsnof .gt_right {
+#xyljwzqcym .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nsjjdzsnof .gt_font_normal {
+#xyljwzqcym .gt_font_normal {
   font-weight: normal;
 }
 
-#nsjjdzsnof .gt_font_bold {
+#xyljwzqcym .gt_font_bold {
   font-weight: bold;
 }
 
-#nsjjdzsnof .gt_font_italic {
+#xyljwzqcym .gt_font_italic {
   font-style: italic;
 }
 
-#nsjjdzsnof .gt_super {
+#xyljwzqcym .gt_super {
   font-size: 65%;
 }
 
-#nsjjdzsnof .gt_footnote_marks {
+#xyljwzqcym .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nsjjdzsnof .gt_asterisk {
+#xyljwzqcym .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nsjjdzsnof .gt_indent_1 {
+#xyljwzqcym .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nsjjdzsnof .gt_indent_2 {
+#xyljwzqcym .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nsjjdzsnof .gt_indent_3 {
+#xyljwzqcym .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nsjjdzsnof .gt_indent_4 {
+#xyljwzqcym .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nsjjdzsnof .gt_indent_5 {
+#xyljwzqcym .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nsjjdzsnof .katex-display {
+#xyljwzqcym .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nsjjdzsnof div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xyljwzqcym div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2098,23 +2098,23 @@ attr(,"method")
 <details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">low</span> <span class="op">~</span> <span class="va">smoke</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">race</span>, data <span class="op">=</span> <span class="va">birthweight</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">mod</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details><div class="cell-output-display">
-<div id="uzbstnufry" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uzbstnufry table {
+<div id="xfnsgaindg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xfnsgaindg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#uzbstnufry thead, #uzbstnufry tbody, #uzbstnufry tfoot, #uzbstnufry tr, #uzbstnufry td, #uzbstnufry th {
+#xfnsgaindg thead, #xfnsgaindg tbody, #xfnsgaindg tfoot, #xfnsgaindg tr, #xfnsgaindg td, #xfnsgaindg th {
   border-style: none;
 }
 
-#uzbstnufry p {
+#xfnsgaindg p {
   margin: 0;
   padding: 0;
 }
 
-#uzbstnufry .gt_table {
+#xfnsgaindg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2140,12 +2140,12 @@ attr(,"method")
   border-left-color: #D3D3D3;
 }
 
-#uzbstnufry .gt_caption {
+#xfnsgaindg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#uzbstnufry .gt_title {
+#xfnsgaindg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2157,7 +2157,7 @@ attr(,"method")
   border-bottom-width: 0;
 }
 
-#uzbstnufry .gt_subtitle {
+#xfnsgaindg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2169,7 +2169,7 @@ attr(,"method")
   border-top-width: 0;
 }
 
-#uzbstnufry .gt_heading {
+#xfnsgaindg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2181,13 +2181,13 @@ attr(,"method")
   border-right-color: #D3D3D3;
 }
 
-#uzbstnufry .gt_bottom_border {
+#xfnsgaindg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#uzbstnufry .gt_col_headings {
+#xfnsgaindg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2202,7 +2202,7 @@ attr(,"method")
   border-right-color: #D3D3D3;
 }
 
-#uzbstnufry .gt_col_heading {
+#xfnsgaindg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2222,7 +2222,7 @@ attr(,"method")
   overflow-x: hidden;
 }
 
-#uzbstnufry .gt_column_spanner_outer {
+#xfnsgaindg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2234,15 +2234,15 @@ attr(,"method")
   padding-right: 4px;
 }
 
-#uzbstnufry .gt_column_spanner_outer:first-child {
+#xfnsgaindg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#uzbstnufry .gt_column_spanner_outer:last-child {
+#xfnsgaindg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#uzbstnufry .gt_column_spanner {
+#xfnsgaindg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2254,11 +2254,11 @@ attr(,"method")
   width: 100%;
 }
 
-#uzbstnufry .gt_spanner_row {
+#xfnsgaindg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#uzbstnufry .gt_group_heading {
+#xfnsgaindg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2284,7 +2284,7 @@ attr(,"method")
   text-align: left;
 }
 
-#uzbstnufry .gt_empty_group_heading {
+#xfnsgaindg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2299,15 +2299,15 @@ attr(,"method")
   vertical-align: middle;
 }
 
-#uzbstnufry .gt_from_md > :first-child {
+#xfnsgaindg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#uzbstnufry .gt_from_md > :last-child {
+#xfnsgaindg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#uzbstnufry .gt_row {
+#xfnsgaindg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2326,7 +2326,7 @@ attr(,"method")
   overflow-x: hidden;
 }
 
-#uzbstnufry .gt_stub {
+#xfnsgaindg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2339,7 +2339,7 @@ attr(,"method")
   padding-right: 5px;
 }
 
-#uzbstnufry .gt_stub_row_group {
+#xfnsgaindg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2353,15 +2353,15 @@ attr(,"method")
   vertical-align: top;
 }
 
-#uzbstnufry .gt_row_group_first td {
+#xfnsgaindg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#uzbstnufry .gt_row_group_first th {
+#xfnsgaindg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#uzbstnufry .gt_summary_row {
+#xfnsgaindg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2371,16 +2371,16 @@ attr(,"method")
   padding-right: 5px;
 }
 
-#uzbstnufry .gt_first_summary_row {
+#xfnsgaindg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#uzbstnufry .gt_first_summary_row.thick {
+#xfnsgaindg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#uzbstnufry .gt_last_summary_row {
+#xfnsgaindg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2390,7 +2390,7 @@ attr(,"method")
   border-bottom-color: #D3D3D3;
 }
 
-#uzbstnufry .gt_grand_summary_row {
+#xfnsgaindg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2400,7 +2400,7 @@ attr(,"method")
   padding-right: 5px;
 }
 
-#uzbstnufry .gt_first_grand_summary_row {
+#xfnsgaindg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2410,7 +2410,7 @@ attr(,"method")
   border-top-color: #D3D3D3;
 }
 
-#uzbstnufry .gt_last_grand_summary_row_top {
+#xfnsgaindg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2420,11 +2420,11 @@ attr(,"method")
   border-bottom-color: #D3D3D3;
 }
 
-#uzbstnufry .gt_striped {
+#xfnsgaindg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#uzbstnufry .gt_table_body {
+#xfnsgaindg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2433,7 +2433,7 @@ attr(,"method")
   border-bottom-color: #D3D3D3;
 }
 
-#uzbstnufry .gt_footnotes {
+#xfnsgaindg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2447,7 +2447,7 @@ attr(,"method")
   border-right-color: #D3D3D3;
 }
 
-#uzbstnufry .gt_footnote {
+#xfnsgaindg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2456,7 +2456,7 @@ attr(,"method")
   padding-right: 5px;
 }
 
-#uzbstnufry .gt_sourcenotes {
+#xfnsgaindg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2470,7 +2470,7 @@ attr(,"method")
   border-right-color: #D3D3D3;
 }
 
-#uzbstnufry .gt_sourcenote {
+#xfnsgaindg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2478,72 +2478,72 @@ attr(,"method")
   padding-right: 5px;
 }
 
-#uzbstnufry .gt_left {
+#xfnsgaindg .gt_left {
   text-align: left;
 }
 
-#uzbstnufry .gt_center {
+#xfnsgaindg .gt_center {
   text-align: center;
 }
 
-#uzbstnufry .gt_right {
+#xfnsgaindg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#uzbstnufry .gt_font_normal {
+#xfnsgaindg .gt_font_normal {
   font-weight: normal;
 }
 
-#uzbstnufry .gt_font_bold {
+#xfnsgaindg .gt_font_bold {
   font-weight: bold;
 }
 
-#uzbstnufry .gt_font_italic {
+#xfnsgaindg .gt_font_italic {
   font-style: italic;
 }
 
-#uzbstnufry .gt_super {
+#xfnsgaindg .gt_super {
   font-size: 65%;
 }
 
-#uzbstnufry .gt_footnote_marks {
+#xfnsgaindg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#uzbstnufry .gt_asterisk {
+#xfnsgaindg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#uzbstnufry .gt_indent_1 {
+#xfnsgaindg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#uzbstnufry .gt_indent_2 {
+#xfnsgaindg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#uzbstnufry .gt_indent_3 {
+#xfnsgaindg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#uzbstnufry .gt_indent_4 {
+#xfnsgaindg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#uzbstnufry .gt_indent_5 {
+#xfnsgaindg .gt_indent_5 {
   text-indent: 25px;
 }
 
-#uzbstnufry .katex-display {
+#xfnsgaindg .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#uzbstnufry div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xfnsgaindg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -3087,9 +3087,9 @@ Bland, JM, and DG Altman. 2000. <span>“Statistics Notes. The Odds Ratio.”</s
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Statistics Methods for Binary Outcomes</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Statistical Methods for Binary Outcomes</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>Now that we've looked at some typical methods for continuous outcomes, we switch to *binary* outcomes. These outcome generally answer some yes/no kind of question: </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>Now that we've looked at some typical methods for continuous outcomes, we switch to *binary* outcomes. These outcome generally answer some yes/no kind of question:</span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Did the participant finish the test?</span>
 <span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Did the patient have a heart attack?</span>
@@ -3191,7 +3191,7 @@ Bland, JM, and DG Altman. 2000. <span>“Statistics Notes. The Odds Ratio.”</s
 <span id="cb33-102"><a href="#cb33-102" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-103"><a href="#cb33-103" aria-hidden="true" tabindex="-1"></a>**risk ratio**: Smoking mothers are 1.6 times more likely to have a low birthweight baby than non-smoking mothers.</span>
 <span id="cb33-104"><a href="#cb33-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-105"><a href="#cb33-105" aria-hidden="true" tabindex="-1"></a><span class="fu">### odds ratio </span></span>
+<span id="cb33-105"><a href="#cb33-105" aria-hidden="true" tabindex="-1"></a><span class="fu">### odds ratio</span></span>
 <span id="cb33-106"><a href="#cb33-106" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-107"><a href="#cb33-107" aria-hidden="true" tabindex="-1"></a>Finally, the **odds ratio** is calculated as <span class="in">`outcome odds in the intervention group`</span> divided by <span class="in">`outcome odds in the control group`</span>. But what is <span class="co">[</span><span class="ot">*odds*</span><span class="co">](https://en.wikipedia.org/wiki/Odds)</span>? Odds compare the probability that an event will happen to the probability that it will not happen. If the probability of an event is 75%, we say the odds of that event are 75%/25%, equal to "3 to 1" or just 3. For some other probabilities we get:</span>
 <span id="cb33-108"><a href="#cb33-108" aria-hidden="true" tabindex="-1"></a></span>
@@ -3208,12 +3208,12 @@ Bland, JM, and DG Altman. 2000. <span>“Statistics Notes. The Odds Ratio.”</s
 <span id="cb33-119"><a href="#cb33-119" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"probabilities and odds"</span>)</span>
 <span id="cb33-120"><a href="#cb33-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb33-121"><a href="#cb33-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-122"><a href="#cb33-122" aria-hidden="true" tabindex="-1"></a>A probability of 40% (as we have for low birthweight babies of smoking mothers) indicates odds of 0.667. Similarly, a probability of 25% (for low birthweight babies of non-smoking mothers) corresponds to odds of 0.333. The odds ratio is therefore about 2. </span>
+<span id="cb33-122"><a href="#cb33-122" aria-hidden="true" tabindex="-1"></a>A probability of 40% (as we have for low birthweight babies of smoking mothers) indicates odds of 0.667. Similarly, a probability of 25% (for low birthweight babies of non-smoking mothers) corresponds to odds of 0.333. The odds ratio is therefore about 2.</span>
 <span id="cb33-123"><a href="#cb33-123" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-126"><a href="#cb33-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb33-127"><a href="#cb33-127" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.4</span> <span class="sc">/</span> <span class="fl">0.6</span>) <span class="sc">/</span> (<span class="fl">0.25</span> <span class="sc">/</span> <span class="fl">0.75</span>)</span>
 <span id="cb33-128"><a href="#cb33-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-129"><a href="#cb33-129" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb33-129"><a href="#cb33-129" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-130"><a href="#cb33-130" aria-hidden="true" tabindex="-1"></a>**odds ratio**: Smoking mothers gave 2 times the odds to have a low birthweight baby than non-smoking mothers.</span>
 <span id="cb33-131"><a href="#cb33-131" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-132"><a href="#cb33-132" aria-hidden="true" tabindex="-1"></a><span class="fu">### Calculating the odds ratio</span></span>
@@ -3232,7 +3232,7 @@ Bland, JM, and DG Altman. 2000. <span>“Statistics Notes. The Odds Ratio.”</s
 <span id="cb33-145"><a href="#cb33-145" aria-hidden="true" tabindex="-1"></a><span class="dv">29</span> <span class="sc">/</span> <span class="dv">86</span></span>
 <span id="cb33-146"><a href="#cb33-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb33-147"><a href="#cb33-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-148"><a href="#cb33-148" aria-hidden="true" tabindex="-1"></a>for non-smoking mothers, and </span>
+<span id="cb33-148"><a href="#cb33-148" aria-hidden="true" tabindex="-1"></a>for non-smoking mothers, and</span>
 <span id="cb33-149"><a href="#cb33-149" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-150"><a href="#cb33-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r odds_smoker, echo = TRUE}</span></span>
 <span id="cb33-151"><a href="#cb33-151" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span> <span class="sc">/</span> <span class="dv">44</span></span>
@@ -3246,43 +3246,42 @@ Bland, JM, and DG Altman. 2000. <span>“Statistics Notes. The Odds Ratio.”</s
 <span id="cb33-159"><a href="#cb33-159" aria-hidden="true" tabindex="-1"></a>(<span class="dv">30</span> <span class="sc">/</span> <span class="dv">44</span>) <span class="sc">/</span> (<span class="dv">29</span> <span class="sc">/</span> <span class="dv">86</span>)</span>
 <span id="cb33-160"><a href="#cb33-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb33-161"><a href="#cb33-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-162"><a href="#cb33-162" aria-hidden="true" tabindex="-1"></a>That's a lot of division signs! But perhaps you remember from school that instead of dividing by the 2nd fraction, <span class="co">[</span><span class="ot">we can multiply by its reciprocal</span><span class="co">](https://en.wikipedia.org/wiki/Fraction#Division)</span>. </span>
+<span id="cb33-162"><a href="#cb33-162" aria-hidden="true" tabindex="-1"></a>That's a lot of division signs! But perhaps you remember from school that instead of dividing by the 2nd fraction, <span class="co">[</span><span class="ot">we can multiply by its reciprocal</span><span class="co">](https://en.wikipedia.org/wiki/Fraction#Division)</span>.</span>
 <span id="cb33-163"><a href="#cb33-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-164"><a href="#cb33-164" aria-hidden="true" tabindex="-1"></a>$$ \frac{30}{44} \Big/ \frac{29}{86}   = \frac{30}{44} \times \frac{86}{29} = \frac{86 \cdot 30}{29 \cdot 44} = 2.02$$</span>
-<span id="cb33-165"><a href="#cb33-165" aria-hidden="true" tabindex="-1"></a>To remember this way of getting the odds ratio, you multiply the numbers on the diagonal, <span class="in">`86 * 30`</span>, and then divide by those not on the diagonal, <span class="in">`44 * 29`</span>.</span>
-<span id="cb33-166"><a href="#cb33-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-167"><a href="#cb33-167" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comparing binary outcomes</span></span>
-<span id="cb33-168"><a href="#cb33-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-169"><a href="#cb33-169" aria-hidden="true" tabindex="-1"></a>To compare these rates with a hypothesis test, we could use a chi-square test, <span class="in">`chisq.test()`</span>. In order to run this test in R, we first need to set up the 2x2 table. Additionally, since <span class="in">`chisq.test()`</span> only reports a p-value, we need to find another way to get the odds ratio, which we can do with the <span class="in">`epitools`</span> package.</span>
-<span id="cb33-170"><a href="#cb33-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-171"><a href="#cb33-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r chisq, echo = TRUE}</span></span>
-<span id="cb33-172"><a href="#cb33-172" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(epitools)</span>
-<span id="cb33-173"><a href="#cb33-173" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">with</span>(birthweight, <span class="fu">table</span>(low, smoke))</span>
-<span id="cb33-174"><a href="#cb33-174" aria-hidden="true" tabindex="-1"></a>tab</span>
-<span id="cb33-175"><a href="#cb33-175" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(tab)</span>
-<span id="cb33-176"><a href="#cb33-176" aria-hidden="true" tabindex="-1"></a><span class="fu">oddsratio</span>(tab)</span>
-<span id="cb33-177"><a href="#cb33-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-178"><a href="#cb33-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-179"><a href="#cb33-179" aria-hidden="true" tabindex="-1"></a>There are small differences between the output of <span class="in">`chisq.test()`</span> and <span class="in">`oddsratio()`</span> here, but that's because one uses a "continuity correction" by default and the other does not.</span>
-<span id="cb33-180"><a href="#cb33-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-181"><a href="#cb33-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{r chisq2, echo = TRUE}</span></span>
-<span id="cb33-182"><a href="#cb33-182" aria-hidden="true" tabindex="-1"></a><span class="fu">oddsratio</span>(tab, <span class="at">correction =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-183"><a href="#cb33-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-184"><a href="#cb33-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-185"><a href="#cb33-185" aria-hidden="true" tabindex="-1"></a>This approach is admittedly a bit tedious. We could also use logistic regression, which can be done with the <span class="in">`glm()`</span> function, and the option <span class="in">`family = binomial`</span>. Also, when we look at the regression coefficients, we need to exponentiate them, $e^{\widehat{\beta}}$, to get odds ratios.</span>
-<span id="cb33-186"><a href="#cb33-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-187"><a href="#cb33-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r logistic, echo = TRUE}</span></span>
-<span id="cb33-188"><a href="#cb33-188" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(low <span class="sc">~</span> smoke, <span class="at">data =</span> birthweight, </span>
-<span id="cb33-189"><a href="#cb33-189" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> binomial)</span>
-<span id="cb33-190"><a href="#cb33-190" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-191"><a href="#cb33-191" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-192"><a href="#cb33-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-193"><a href="#cb33-193" aria-hidden="true" tabindex="-1"></a>Logistic regression also allows us to adjust for other factors, like mother's age or race.</span>
-<span id="cb33-194"><a href="#cb33-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-195"><a href="#cb33-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{r logistic-age, echo = TRUE}</span></span>
-<span id="cb33-196"><a href="#cb33-196" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(low <span class="sc">~</span> smoke <span class="sc">+</span> age <span class="sc">+</span> race, <span class="at">data =</span> birthweight, <span class="at">family =</span> binomial)</span>
-<span id="cb33-197"><a href="#cb33-197" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-198"><a href="#cb33-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-164"><a href="#cb33-164" aria-hidden="true" tabindex="-1"></a>$$ \frac{30}{44} \Big/ \frac{29}{86}   = \frac{30}{44} \times \frac{86}{29} = \frac{86 \cdot 30}{29 \cdot 44} = 2.02$$ To remember this way of getting the odds ratio, you multiply the numbers on the diagonal, <span class="in">`86 * 30`</span>, and then divide by those not on the diagonal, <span class="in">`44 * 29`</span>.</span>
+<span id="cb33-165"><a href="#cb33-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-166"><a href="#cb33-166" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comparing binary outcomes</span></span>
+<span id="cb33-167"><a href="#cb33-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-168"><a href="#cb33-168" aria-hidden="true" tabindex="-1"></a>To compare these rates with a hypothesis test, we could use a chi-square test, <span class="in">`chisq.test()`</span>. In order to run this test in R, we first need to set up the 2x2 table. Additionally, since <span class="in">`chisq.test()`</span> only reports a p-value, we need to find another way to get the odds ratio, which we can do with the <span class="in">`epitools`</span> package.</span>
+<span id="cb33-169"><a href="#cb33-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-170"><a href="#cb33-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r chisq, echo = TRUE}</span></span>
+<span id="cb33-171"><a href="#cb33-171" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(epitools)</span>
+<span id="cb33-172"><a href="#cb33-172" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">with</span>(birthweight, <span class="fu">table</span>(low, smoke))</span>
+<span id="cb33-173"><a href="#cb33-173" aria-hidden="true" tabindex="-1"></a>tab</span>
+<span id="cb33-174"><a href="#cb33-174" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(tab)</span>
+<span id="cb33-175"><a href="#cb33-175" aria-hidden="true" tabindex="-1"></a><span class="fu">oddsratio</span>(tab)</span>
+<span id="cb33-176"><a href="#cb33-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-177"><a href="#cb33-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-178"><a href="#cb33-178" aria-hidden="true" tabindex="-1"></a>There are small differences between the output of <span class="in">`chisq.test()`</span> and <span class="in">`oddsratio()`</span> here, but that's because one uses a "continuity correction" by default and the other does not.</span>
+<span id="cb33-179"><a href="#cb33-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-180"><a href="#cb33-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r chisq2, echo = TRUE}</span></span>
+<span id="cb33-181"><a href="#cb33-181" aria-hidden="true" tabindex="-1"></a><span class="fu">oddsratio</span>(tab, <span class="at">correction =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-182"><a href="#cb33-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-183"><a href="#cb33-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-184"><a href="#cb33-184" aria-hidden="true" tabindex="-1"></a>This approach is admittedly a bit tedious. We could also use logistic regression, which can be done with the <span class="in">`glm()`</span> function, and the option <span class="in">`family = binomial`</span>. Also, when we look at the regression coefficients, we need to exponentiate them, $e^{\widehat{\beta}}$, to get odds ratios.</span>
+<span id="cb33-185"><a href="#cb33-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-186"><a href="#cb33-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r logistic, echo = TRUE}</span></span>
+<span id="cb33-187"><a href="#cb33-187" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(low <span class="sc">~</span> smoke, <span class="at">data =</span> birthweight, </span>
+<span id="cb33-188"><a href="#cb33-188" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> binomial)</span>
+<span id="cb33-189"><a href="#cb33-189" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-190"><a href="#cb33-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-191"><a href="#cb33-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-192"><a href="#cb33-192" aria-hidden="true" tabindex="-1"></a>Logistic regression also allows us to adjust for other factors, like mother's age or race.</span>
+<span id="cb33-193"><a href="#cb33-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-194"><a href="#cb33-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{r logistic-age, echo = TRUE}</span></span>
+<span id="cb33-195"><a href="#cb33-195" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(low <span class="sc">~</span> smoke <span class="sc">+</span> age <span class="sc">+</span> race, <span class="at">data =</span> birthweight, <span class="at">family =</span> binomial)</span>
+<span id="cb33-196"><a href="#cb33-196" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-197"><a href="#cb33-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -36,6 +36,8 @@ jobs:
             any::tidyverse
             any::gtsummary
             any::ggbeeswarm
+            any::rmarkdown
+            any::knitr
             any::patchwork
             any::palmerpenguins
 

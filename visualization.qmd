@@ -83,6 +83,8 @@ Now let's try to make a boxplot for the primary outcome in our RCT, by treatment
 
 ```{r}
 #| code-fold: true
+#| eval: false
+
 set.seed(20261019)
 n <- 60
 dat <- tibble(study_id = 1:(2 * n),
@@ -118,6 +120,8 @@ sm <- dat |>
                               c("<30 minutes per day", "30-60", "60-120", "120+"))) |> 
   filter(!is.na(trt), !is.na(reverse_digit))
 ```
+
+{{< include _simdata.qmd >}}
 
 ```{r plot}
 #| code-fold: true

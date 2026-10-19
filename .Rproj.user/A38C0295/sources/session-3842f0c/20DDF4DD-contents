@@ -11,7 +11,7 @@ For a relatively simple randomized clinical trial with
 we have the following options:
 
 | **type of outcome** | **effect estimate** | **not adjusted** | **adjusted** |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | **continuous** \* | mean difference | $t$-test | linear regression |
 | **binary** (yes / no) | odds ratio | $\chi$-square test | logistic regression |
 | ... | ... | ... | ... |
