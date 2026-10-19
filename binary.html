@@ -1,0 +1,3291 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>4&nbsp; Statistical Methods for Binary Outcomes – Short Tutorial on R and Biostatistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./choice.html" rel="next">
+<link href="./significance.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-36f2db2e0c24a8dfe38894d2c7306603.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./binary.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Methods for Binary Outcomes</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Short Tutorial on R and Biostatistics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">A note on setting up R and R studio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./continuous.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistical Methods for Continuous Outcomes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./significance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clinically / practically relevant or statistical significant?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./binary.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Methods for Binary Outcomes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./choice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choice of statistical test</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./firststepsR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">First steps in R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datachecking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data checking</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datacleaning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data cleaning and Table 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualization using <code>ggplot2</code></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Comparing and testing outcomes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Back to the beginning: importing data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#the-birthweight-data" id="toc-the-birthweight-data" class="nav-link active" data-scroll-target="#the-birthweight-data"><span class="header-section-number">4.1</span> the Birthweight data</a></li>
+  <li>
+<a href="#summarizing-binary-outcomes" id="toc-summarizing-binary-outcomes" class="nav-link" data-scroll-target="#summarizing-binary-outcomes"><span class="header-section-number">4.2</span> Summarizing binary outcomes</a>
+  <ul class="collapse">
+<li><a href="#risk-difference" id="toc-risk-difference" class="nav-link" data-scroll-target="#risk-difference"><span class="header-section-number">4.2.1</span> risk difference</a></li>
+  <li><a href="#risk-ratio" id="toc-risk-ratio" class="nav-link" data-scroll-target="#risk-ratio"><span class="header-section-number">4.2.2</span> risk ratio</a></li>
+  <li><a href="#odds-ratio" id="toc-odds-ratio" class="nav-link" data-scroll-target="#odds-ratio"><span class="header-section-number">4.2.3</span> odds ratio</a></li>
+  <li><a href="#calculating-the-odds-ratio" id="toc-calculating-the-odds-ratio" class="nav-link" data-scroll-target="#calculating-the-odds-ratio"><span class="header-section-number">4.2.4</span> Calculating the odds ratio</a></li>
+  </ul>
+</li>
+  <li><a href="#comparing-binary-outcomes" id="toc-comparing-binary-outcomes" class="nav-link" data-scroll-target="#comparing-binary-outcomes"><span class="header-section-number">4.3</span> Comparing binary outcomes</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">
+<span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Methods for Binary Outcomes</span>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>Now that we’ve looked at some typical methods for continuous outcomes, we switch to <em>binary</em> outcomes. These outcome generally answer some yes/no kind of question:</p>
+<ul>
+<li>Did the participant finish the test?</li>
+<li>Did the patient have a heart attack?</li>
+</ul>
+<section id="the-birthweight-data" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="the-birthweight-data">
+<span class="header-section-number">4.1</span> the Birthweight data</h2>
+<p>In birthweight data, available from the <code>MASS</code> package, we want to examine whether babies of mothers who smoke were more likely to be of low birth weight, than of mothers who did not smoke.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">birthweight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu">MASS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/MASS/man/birthwt.html">birthwt</a></span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>race <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">race</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"black"</span>, <span class="st">"other"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         smoke <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">smoke</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"non-smoker"</span>, <span class="st">"smoker"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">birthweight</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 189 × 10
+     low   age   lwt race  smoke        ptl    ht    ui   ftv   bwt
+   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;fct&gt; &lt;fct&gt;      &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+ 1     0    19   182 black non-smoker     0     0     1     0  2523
+ 2     0    33   155 other non-smoker     0     0     0     3  2551
+ 3     0    20   105 white smoker         0     0     0     1  2557
+ 4     0    21   108 white smoker         0     0     1     2  2594
+ 5     0    18   107 white smoker         0     0     1     0  2600
+ 6     0    21   124 other non-smoker     0     0     0     0  2622
+ 7     0    22   118 white non-smoker     0     0     0     1  2637
+ 8     0    17   103 other non-smoker     0     0     0     1  2637
+ 9     0    29   123 white smoker         0     0     0     1  2663
+10     0    26   113 white smoker         0     0     0     0  2665
+# ℹ 179 more rows</code></pre>
+</div>
+</div>
+<p>First, we summarize the proportion of low birthweight babies by mothers’ smoking status.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">birthweight</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">low</span>, <span class="va">smoke</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">smoke</span>, </span>
+<span>              digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"low"</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="vzlgbzceql" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vzlgbzceql table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vzlgbzceql thead, #vzlgbzceql tbody, #vzlgbzceql tfoot, #vzlgbzceql tr, #vzlgbzceql td, #vzlgbzceql th {
+  border-style: none;
+}
+
+#vzlgbzceql p {
+  margin: 0;
+  padding: 0;
+}
+
+#vzlgbzceql .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vzlgbzceql .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vzlgbzceql .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vzlgbzceql .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vzlgbzceql .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vzlgbzceql .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vzlgbzceql .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vzlgbzceql .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vzlgbzceql .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vzlgbzceql .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vzlgbzceql .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vzlgbzceql .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vzlgbzceql .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vzlgbzceql .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vzlgbzceql .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vzlgbzceql .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vzlgbzceql .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vzlgbzceql .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vzlgbzceql .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vzlgbzceql .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vzlgbzceql .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vzlgbzceql .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vzlgbzceql .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vzlgbzceql .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vzlgbzceql .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vzlgbzceql .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vzlgbzceql .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vzlgbzceql .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vzlgbzceql .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vzlgbzceql .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vzlgbzceql .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vzlgbzceql .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vzlgbzceql .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vzlgbzceql .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vzlgbzceql .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vzlgbzceql .gt_left {
+  text-align: left;
+}
+
+#vzlgbzceql .gt_center {
+  text-align: center;
+}
+
+#vzlgbzceql .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vzlgbzceql .gt_font_normal {
+  font-weight: normal;
+}
+
+#vzlgbzceql .gt_font_bold {
+  font-weight: bold;
+}
+
+#vzlgbzceql .gt_font_italic {
+  font-style: italic;
+}
+
+#vzlgbzceql .gt_super {
+  font-size: 65%;
+}
+
+#vzlgbzceql .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vzlgbzceql .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vzlgbzceql .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vzlgbzceql .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vzlgbzceql .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vzlgbzceql .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vzlgbzceql .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#vzlgbzceql .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vzlgbzceql div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>non-smoker</strong><br>
+N = 115<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>smoker</strong><br>
+N = 74<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+</tr></thead>
+<tbody class="gt_table_body"><tr class="odd">
+<td class="gt_row gt_left" headers="label">low</td>
+<td class="gt_row gt_center" headers="stat_1">29.0 (25.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">30.0 (40.5%)</td>
+</tr></tbody>
+<tfoot><tr class="gt_footnotes odd">
+<td colspan="3" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> n (%)</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>Among the 74 smoking mothers, 41% (n = 30) babies were of low birthweight, compared to 25% (n = 115) from 115 non-smoking mothers.</p>
+<p>A simple graph for binary outcomes might look like this.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="va">birthweight</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">smoke</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>            lowbw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">low</span><span class="op">)</span>,</span>
+<span>            pct <span class="op">=</span> <span class="va">lowbw</span> <span class="op">/</span> <span class="va">n</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tmp</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 4
+  smoke          n lowbw   pct
+  &lt;fct&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+1 non-smoker   115    29 0.252
+2 smoker        74    30 0.405</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">smoke</span>, <span class="va">pct</span>, fill <span class="op">=</span> <span class="va">smoke</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">1</span>,</span>
+<span>                     labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"proportion with low birthweight"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="binary_files/figure-html/binary-bar-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As an alternative that also accounts for variation and sample size, this version with confidence intervals is also nice.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/">purrr</a></span><span class="op">)</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="va">birthweight</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">smoke</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>            lowbw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">low</span><span class="op">)</span>,</span>
+<span>            pct <span class="op">=</span> <span class="va">lowbw</span> <span class="op">/</span> <span class="va">n</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>bt <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span><span class="va">lowbw</span>, <span class="va">n</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span><span class="va">.x</span>, <span class="va">.y</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         lb <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">bt</span>, <span class="op">~</span> <span class="va">.</span><span class="op">$</span><span class="va">conf.int</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>         ub <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">bt</span>, <span class="op">~</span> <span class="va">.</span><span class="op">$</span><span class="va">conf.int</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tmp</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 7
+  smoke          n lowbw   pct bt         lb    ub
+  &lt;fct&gt;      &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;list&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1 non-smoker   115    29 0.252 &lt;htest&gt; 0.176 0.342
+2 smoker        74    30 0.405 &lt;htest&gt; 0.293 0.526</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">smoke</span>, <span class="va">pct</span>, </span>
+<span>           ymin <span class="op">=</span> <span class="va">lb</span>, ymax <span class="op">=</span> <span class="va">ub</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_pointrange</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">1</span>,</span>
+<span>                     labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"proportion with low birthweight"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="binary_files/figure-html/binary-points-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="summarizing-binary-outcomes" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="summarizing-binary-outcomes">
+<span class="header-section-number">4.2</span> Summarizing binary outcomes</h2>
+<p>For binary outcomes, we have a few options.</p>
+<section id="risk-difference" class="level3" data-number="4.2.1"><h3 data-number="4.2.1" class="anchored" data-anchor-id="risk-difference">
+<span class="header-section-number">4.2.1</span> risk difference</h3>
+<p>The <strong>risk difference</strong> is calculated as <code>outcome proportion in the intervention group</code> minus <code>outcome proportion in the control group</code>.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">0.405</span> <span class="op">-</span> <span class="fl">0.252</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.153</code></pre>
+</div>
+</div>
+<p><strong>risk difference</strong>: Smoking mothers are 15% more likely to have a low birthweight baby than non-smoking mothers.</p>
+</section><section id="risk-ratio" class="level3" data-number="4.2.2"><h3 data-number="4.2.2" class="anchored" data-anchor-id="risk-ratio">
+<span class="header-section-number">4.2.2</span> risk ratio</h3>
+<p>The <strong>risk ratio</strong> is calculated as <code>outcome proportion in the intervention group</code> divided by <code>outcome proportion in the control group</code>.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">0.405</span> <span class="op">/</span> <span class="fl">0.252</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.607143</code></pre>
+</div>
+</div>
+<p><strong>risk ratio</strong>: Smoking mothers are 1.6 times more likely to have a low birthweight baby than non-smoking mothers.</p>
+</section><section id="odds-ratio" class="level3" data-number="4.2.3"><h3 data-number="4.2.3" class="anchored" data-anchor-id="odds-ratio">
+<span class="header-section-number">4.2.3</span> odds ratio</h3>
+<p>Finally, the <strong>odds ratio</strong> is calculated as <code>outcome odds in the intervention group</code> divided by <code>outcome odds in the control group</code>. But what is <a href="https://en.wikipedia.org/wiki/Odds"><em>odds</em></a>? Odds compare the probability that an event will happen to the probability that it will not happen. If the probability of an event is 75%, we say the odds of that event are 75%/25%, equal to “3 to 1” or just 3. For some other probabilities we get:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>probabilities and odds</caption>
+<thead><tr class="header">
+<th style="text-align: right;">p</th>
+<th style="text-align: right;">1 - p</th>
+<th style="text-align: right;">odds</th>
+<th style="text-align: left;">odds (alternative)</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">4.000</td>
+<td style="text-align: left;">4 to 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">3.000</td>
+<td style="text-align: left;">3 to 1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.70</td>
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">2.333</td>
+<td style="text-align: left;">7 to 3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.60</td>
+<td style="text-align: right;">0.40</td>
+<td style="text-align: right;">1.500</td>
+<td style="text-align: left;">3 to 2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: left;">1 to 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.40</td>
+<td style="text-align: right;">0.60</td>
+<td style="text-align: right;">0.667</td>
+<td style="text-align: left;">2 to 3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">0.70</td>
+<td style="text-align: right;">0.429</td>
+<td style="text-align: left;">3 to 7</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">0.333</td>
+<td style="text-align: left;">1 to 3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;">0.250</td>
+<td style="text-align: left;">1 to 4</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>A probability of 40% (as we have for low birthweight babies of smoking mothers) indicates odds of 0.667. Similarly, a probability of 25% (for low birthweight babies of non-smoking mothers) corresponds to odds of 0.333. The odds ratio is therefore about 2.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="fl">0.4</span> <span class="op">/</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">0.25</span> <span class="op">/</span> <span class="fl">0.75</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p><strong>odds ratio</strong>: Smoking mothers gave 2 times the odds to have a low birthweight baby than non-smoking mothers.</p>
+</section><section id="calculating-the-odds-ratio" class="level3" data-number="4.2.4"><h3 data-number="4.2.4" class="anchored" data-anchor-id="calculating-the-odds-ratio">
+<span class="header-section-number">4.2.4</span> Calculating the odds ratio</h3>
+<p>You may have noticed we weren’t very precise about calculating the odds ratio just now. In this section, we’ll show some basic calculations to get the correct odds ratio. The simplest way to summarize these kind of yes/no outcomes by group is the so-called 2x2 table (<span class="citation" data-cites="oddsratio">Bland and Altman (<a href="references.html#ref-oddsratio" role="doc-biblioref">2000</a>)</span>).</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">birthweight</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_cross.html">tbl_cross</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">smoke</span>,  row <span class="op">=</span> <span class="va">low</span>,</span>
+<span>            percent <span class="op">=</span> <span class="st">"column"</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="mcxrejnmkf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mcxrejnmkf table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mcxrejnmkf thead, #mcxrejnmkf tbody, #mcxrejnmkf tfoot, #mcxrejnmkf tr, #mcxrejnmkf td, #mcxrejnmkf th {
+  border-style: none;
+}
+
+#mcxrejnmkf p {
+  margin: 0;
+  padding: 0;
+}
+
+#mcxrejnmkf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mcxrejnmkf .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mcxrejnmkf .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mcxrejnmkf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mcxrejnmkf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mcxrejnmkf .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mcxrejnmkf .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mcxrejnmkf .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mcxrejnmkf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mcxrejnmkf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mcxrejnmkf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mcxrejnmkf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mcxrejnmkf .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mcxrejnmkf .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mcxrejnmkf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mcxrejnmkf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mcxrejnmkf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mcxrejnmkf .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mcxrejnmkf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcxrejnmkf .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mcxrejnmkf .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mcxrejnmkf .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mcxrejnmkf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcxrejnmkf .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mcxrejnmkf .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mcxrejnmkf .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mcxrejnmkf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcxrejnmkf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mcxrejnmkf .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mcxrejnmkf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mcxrejnmkf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mcxrejnmkf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mcxrejnmkf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcxrejnmkf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mcxrejnmkf .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcxrejnmkf .gt_left {
+  text-align: left;
+}
+
+#mcxrejnmkf .gt_center {
+  text-align: center;
+}
+
+#mcxrejnmkf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mcxrejnmkf .gt_font_normal {
+  font-weight: normal;
+}
+
+#mcxrejnmkf .gt_font_bold {
+  font-weight: bold;
+}
+
+#mcxrejnmkf .gt_font_italic {
+  font-style: italic;
+}
+
+#mcxrejnmkf .gt_super {
+  font-size: 65%;
+}
+
+#mcxrejnmkf .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mcxrejnmkf .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mcxrejnmkf .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mcxrejnmkf .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mcxrejnmkf .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mcxrejnmkf .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mcxrejnmkf .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mcxrejnmkf .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mcxrejnmkf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings gt_spanner_row header">
+<th rowspan="2" id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"></th>
+<th colspan="2" id="level 1; stat_1" class="gt_center gt_columns_top_border gt_column_spanner_outer" data-quarto-table-cell-role="th" scope="colgroup"><div class="gt_column_spanner">
+smoke
+</div></th>
+<th rowspan="2" id="stat_0" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Total</th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">non-smoker</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">smoker</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">low</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
+<td class="gt_row gt_center" headers="stat_0"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;0</td>
+<td class="gt_row gt_center" headers="stat_1">86.0 (74.8%)</td>
+<td class="gt_row gt_center" headers="stat_2">44.0 (59.5%)</td>
+<td class="gt_row gt_center" headers="stat_0">130.0 (68.8%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;1</td>
+<td class="gt_row gt_center" headers="stat_1">29.0 (25.2%)</td>
+<td class="gt_row gt_center" headers="stat_2">30.0 (40.5%)</td>
+<td class="gt_row gt_center" headers="stat_0">59.0 (31.2%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">Total</td>
+<td class="gt_row gt_center" headers="stat_1">115.0 (100.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">74.0 (100.0%)</td>
+<td class="gt_row gt_center" headers="stat_0">189.0 (100.0%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>For non-smokers, we see that the <code>29/115 = 0.252</code> of non-smoking mothers had low birthweight babies, compared to <code>30/74 = 0.405</code> of smoking mothers. To get odds, we calculate</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">29</span> <span class="op">/</span> <span class="fl">86</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3372093</code></pre>
+</div>
+</div>
+<p>for non-smoking mothers, and</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">30</span> <span class="op">/</span> <span class="fl">44</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6818182</code></pre>
+</div>
+</div>
+<p>for smoking mothers. We do not need the column totals to calculate odds.</p>
+<p>To get the odds ratio, we then calculate:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="fl">30</span> <span class="op">/</span> <span class="fl">44</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">29</span> <span class="op">/</span> <span class="fl">86</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.021944</code></pre>
+</div>
+</div>
+<p>That’s a lot of division signs! But perhaps you remember from school that instead of dividing by the 2nd fraction, <a href="https://en.wikipedia.org/wiki/Fraction#Division">we can multiply by its reciprocal</a>.</p>
+<p><span class="math display">\[ \frac{30}{44} \Big/ \frac{29}{86}   = \frac{30}{44} \times \frac{86}{29} = \frac{86 \cdot 30}{29 \cdot 44} = 2.02\]</span> To remember this way of getting the odds ratio, you multiply the numbers on the diagonal, <code>86 * 30</code>, and then divide by those not on the diagonal, <code>44 * 29</code>.</p>
+</section></section><section id="comparing-binary-outcomes" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="comparing-binary-outcomes">
+<span class="header-section-number">4.3</span> Comparing binary outcomes</h2>
+<p>To compare these rates with a hypothesis test, we could use a chi-square test, <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test()</a></code>. In order to run this test in R, we first need to set up the 2x2 table. Additionally, since <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test()</a></code> only reports a p-value, we need to find another way to get the odds ratio, which we can do with the <code>epitools</code> package.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">epitools</span><span class="op">)</span></span>
+<span><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">birthweight</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">low</span>, <span class="va">smoke</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">tab</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>   smoke
+low non-smoker smoker
+  0         86     44
+  1         29     30</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test with Yates' continuity correction
+
+data:  tab
+X-squared = 4.2359, df = 1, p-value = 0.03958</code></pre>
+</div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/epitools/man/oddsratio.html">oddsratio</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>$data
+       smoke
+low     non-smoker smoker Total
+  0             86     44   130
+  1             29     30    59
+  Total        115     74   189
+
+$measure
+   odds ratio with 95% C.I.
+low estimate    lower    upper
+  0  1.00000       NA       NA
+  1  2.01268 1.073703 3.794579
+
+$p.value
+   two-sided
+low midp.exact fisher.exact chi.square
+  0         NA           NA         NA
+  1 0.02914865    0.0361765 0.02649064
+
+$correction
+[1] FALSE
+
+attr(,"method")
+[1] "median-unbiased estimate &amp; mid-p exact CI"</code></pre>
+</div>
+</div>
+<p>There are small differences between the output of <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test()</a></code> and <code><a href="https://rdrr.io/pkg/epitools/man/oddsratio.html">oddsratio()</a></code> here, but that’s because one uses a “continuity correction” by default and the other does not.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/epitools/man/oddsratio.html">oddsratio</a></span><span class="op">(</span><span class="va">tab</span>, correction <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>$data
+       smoke
+low     non-smoker smoker Total
+  0             86     44   130
+  1             29     30    59
+  Total        115     74   189
+
+$measure
+   odds ratio with 95% C.I.
+low estimate    lower    upper
+  0  1.00000       NA       NA
+  1  2.01268 1.073703 3.794579
+
+$p.value
+   two-sided
+low midp.exact fisher.exact chi.square
+  0         NA           NA         NA
+  1 0.02914865    0.0361765 0.03957697
+
+$correction
+[1] TRUE
+
+attr(,"method")
+[1] "median-unbiased estimate &amp; mid-p exact CI"</code></pre>
+</div>
+</div>
+<p>This approach is admittedly a bit tedious. We could also use logistic regression, which can be done with the <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function, and the option <code>family = binomial</code>. Also, when we look at the regression coefficients, we need to exponentiate them, <span class="math inline">\(e^{\widehat{\beta}}\)</span>, to get odds ratios.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">low</span> <span class="op">~</span> <span class="va">smoke</span>, data <span class="op">=</span> <span class="va">birthweight</span>, </span>
+<span>           family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">mod</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="xyljwzqcym" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xyljwzqcym table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xyljwzqcym thead, #xyljwzqcym tbody, #xyljwzqcym tfoot, #xyljwzqcym tr, #xyljwzqcym td, #xyljwzqcym th {
+  border-style: none;
+}
+
+#xyljwzqcym p {
+  margin: 0;
+  padding: 0;
+}
+
+#xyljwzqcym .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xyljwzqcym .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xyljwzqcym .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xyljwzqcym .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xyljwzqcym .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xyljwzqcym .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xyljwzqcym .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xyljwzqcym .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xyljwzqcym .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xyljwzqcym .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xyljwzqcym .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xyljwzqcym .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xyljwzqcym .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xyljwzqcym .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xyljwzqcym .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xyljwzqcym .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xyljwzqcym .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xyljwzqcym .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xyljwzqcym .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xyljwzqcym .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xyljwzqcym .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xyljwzqcym .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xyljwzqcym .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xyljwzqcym .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xyljwzqcym .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xyljwzqcym .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xyljwzqcym .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xyljwzqcym .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xyljwzqcym .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xyljwzqcym .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xyljwzqcym .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xyljwzqcym .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xyljwzqcym .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xyljwzqcym .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xyljwzqcym .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xyljwzqcym .gt_left {
+  text-align: left;
+}
+
+#xyljwzqcym .gt_center {
+  text-align: center;
+}
+
+#xyljwzqcym .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xyljwzqcym .gt_font_normal {
+  font-weight: normal;
+}
+
+#xyljwzqcym .gt_font_bold {
+  font-weight: bold;
+}
+
+#xyljwzqcym .gt_font_italic {
+  font-style: italic;
+}
+
+#xyljwzqcym .gt_super {
+  font-size: 65%;
+}
+
+#xyljwzqcym .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xyljwzqcym .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xyljwzqcym .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xyljwzqcym .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xyljwzqcym .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xyljwzqcym .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xyljwzqcym .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xyljwzqcym .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xyljwzqcym div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>OR</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">smoke</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;non-smoker</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;smoker</td>
+<td class="gt_row gt_center" headers="estimate">2.02</td>
+<td class="gt_row gt_center" headers="conf.low">1.08, 3.80</td>
+<td class="gt_row gt_center" headers="p.value">0.028</td>
+</tr>
+</tbody>
+<tfoot><tr class="gt_sourcenotes odd">
+<td colspan="4" class="gt_sourcenote">Abbreviations: CI = Confidence Interval, OR = Odds Ratio</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>Logistic regression also allows us to adjust for other factors, like mother’s age or race.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">low</span> <span class="op">~</span> <span class="va">smoke</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">race</span>, data <span class="op">=</span> <span class="va">birthweight</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">mod</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="xfnsgaindg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xfnsgaindg table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xfnsgaindg thead, #xfnsgaindg tbody, #xfnsgaindg tfoot, #xfnsgaindg tr, #xfnsgaindg td, #xfnsgaindg th {
+  border-style: none;
+}
+
+#xfnsgaindg p {
+  margin: 0;
+  padding: 0;
+}
+
+#xfnsgaindg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xfnsgaindg .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xfnsgaindg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xfnsgaindg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xfnsgaindg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xfnsgaindg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xfnsgaindg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xfnsgaindg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xfnsgaindg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xfnsgaindg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xfnsgaindg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xfnsgaindg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xfnsgaindg .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xfnsgaindg .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xfnsgaindg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xfnsgaindg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xfnsgaindg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xfnsgaindg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xfnsgaindg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xfnsgaindg .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xfnsgaindg .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xfnsgaindg .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xfnsgaindg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xfnsgaindg .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xfnsgaindg .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xfnsgaindg .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xfnsgaindg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xfnsgaindg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xfnsgaindg .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xfnsgaindg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xfnsgaindg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xfnsgaindg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xfnsgaindg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xfnsgaindg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xfnsgaindg .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xfnsgaindg .gt_left {
+  text-align: left;
+}
+
+#xfnsgaindg .gt_center {
+  text-align: center;
+}
+
+#xfnsgaindg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xfnsgaindg .gt_font_normal {
+  font-weight: normal;
+}
+
+#xfnsgaindg .gt_font_bold {
+  font-weight: bold;
+}
+
+#xfnsgaindg .gt_font_italic {
+  font-style: italic;
+}
+
+#xfnsgaindg .gt_super {
+  font-size: 65%;
+}
+
+#xfnsgaindg .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xfnsgaindg .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xfnsgaindg .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xfnsgaindg .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xfnsgaindg .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xfnsgaindg .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xfnsgaindg .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xfnsgaindg .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xfnsgaindg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>OR</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">smoke</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;non-smoker</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;smoker</td>
+<td class="gt_row gt_center" headers="estimate">3.01</td>
+<td class="gt_row gt_center" headers="conf.low">1.47, 6.38</td>
+<td class="gt_row gt_center" headers="p.value">0.003</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">age</td>
+<td class="gt_row gt_center" headers="estimate">0.97</td>
+<td class="gt_row gt_center" headers="conf.low">0.90, 1.03</td>
+<td class="gt_row gt_center" headers="p.value">0.3</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">race</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;white</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;black</td>
+<td class="gt_row gt_center" headers="estimate">2.75</td>
+<td class="gt_row gt_center" headers="conf.low">1.04, 7.31</td>
+<td class="gt_row gt_center" headers="p.value">0.040</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;other</td>
+<td class="gt_row gt_center" headers="estimate">2.88</td>
+<td class="gt_row gt_center" headers="conf.low">1.32, 6.53</td>
+<td class="gt_row gt_center" headers="p.value">0.009</td>
+</tr>
+</tbody>
+<tfoot><tr class="gt_sourcenotes odd">
+<td colspan="4" class="gt_sourcenote">Abbreviations: CI = Confidence Interval, OR = Odds Ratio</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+
+
+<!-- -->
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-oddsratio" class="csl-entry" role="listitem">
+Bland, JM, and DG Altman. 2000. <span>“Statistics Notes. The Odds Ratio.”</span> <em>BMJ</em> 320 (7247). <a href="https://doi.org/10.1136/bmj.320.7247.1468">https://doi.org/10.1136/bmj.320.7247.1468</a>.
+</div>
+</div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./significance.html" class="pagination-link" aria-label="Clinically / practically relevant or statistical significant?">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clinically / practically relevant or statistical significant?</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./choice.html" class="pagination-link" aria-label="Choice of statistical test">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choice of statistical test</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Statistical Methods for Binary Outcomes</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>Now that we've looked at some typical methods for continuous outcomes, we switch to *binary* outcomes. These outcome generally answer some yes/no kind of question:</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Did the participant finish the test?</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Did the patient have a heart attack?</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## the Birthweight data</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>In birthweight data, available from the <span class="in">`MASS`</span> package, we want to examine whether babies of mothers who smoke were more likely to be of low birth weight, than of mothers who did not smoke.</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r birthwt}</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>))</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>birthweight <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(MASS<span class="sc">::</span>birthwt) <span class="sc">|&gt;</span> </span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">race =</span> <span class="fu">factor</span>(race, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>, <span class="st">"other"</span>)),</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>         <span class="at">smoke =</span> <span class="fu">factor</span>(smoke, <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="fu">c</span>(<span class="st">"non-smoker"</span>, <span class="st">"smoker"</span>)))</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>birthweight</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>First, we summarize the proportion of low birthweight babies by mothers' smoking status.</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r smokesummary, echo = TRUE}</span></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>birthweight <span class="sc">|&gt;</span> </span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(low, smoke) <span class="sc">|&gt;</span></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> smoke, </span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>              <span class="at">digits =</span> <span class="fu">list</span>(<span class="st">"low"</span> <span class="sc">~</span> <span class="dv">1</span>))</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>Among the 74 smoking mothers, 41% (n = 30) babies were of low birthweight, compared to 25% (n = 115) from 115 non-smoking mothers.</span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>A simple graph for binary outcomes might look like this.</span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r binary-bar, echo = TRUE}</span></span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> birthweight <span class="sc">|&gt;</span> </span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(smoke) <span class="sc">|&gt;</span> </span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>            <span class="at">lowbw =</span> <span class="fu">sum</span>(low),</span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>            <span class="at">pct =</span> lowbw <span class="sc">/</span> n)</span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>tmp</span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(smoke, pct, <span class="at">fill =</span> smoke), <span class="at">data =</span> tmp) <span class="sc">+</span></span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,</span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"proportion with low birthweight"</span>)</span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a>As an alternative that also accounts for variation and sample size, this version with confidence intervals is also nice.</span>
+<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{r binary-points, echo = TRUE}</span></span>
+<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">&lt;-</span> birthweight <span class="sc">|&gt;</span> </span>
+<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(smoke) <span class="sc">|&gt;</span> </span>
+<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a>            <span class="at">lowbw =</span> <span class="fu">sum</span>(low),</span>
+<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a>            <span class="at">pct =</span> lowbw <span class="sc">/</span> n) <span class="sc">|&gt;</span> </span>
+<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bt =</span> <span class="fu">map2</span>(lowbw, n, <span class="sc">~</span> <span class="fu">binom.test</span>(.x, .y)),</span>
+<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a>         <span class="at">lb =</span> <span class="fu">map_dbl</span>(bt, <span class="sc">~</span> .<span class="sc">$</span>conf.int[<span class="dv">1</span>]),</span>
+<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a>         <span class="at">ub =</span> <span class="fu">map_dbl</span>(bt, <span class="sc">~</span> .<span class="sc">$</span>conf.int[<span class="dv">2</span>]))</span>
+<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a>tmp</span>
+<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(smoke, pct, </span>
+<span id="cb33-74"><a href="#cb33-74" aria-hidden="true" tabindex="-1"></a>           <span class="at">ymin =</span> lb, <span class="at">ymax =</span> ub), <span class="at">data =</span> tmp) <span class="sc">+</span></span>
+<span id="cb33-75"><a href="#cb33-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>() <span class="sc">+</span></span>
+<span id="cb33-76"><a href="#cb33-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,</span>
+<span id="cb33-77"><a href="#cb33-77" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb33-78"><a href="#cb33-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"proportion with low birthweight"</span>)</span>
+<span id="cb33-79"><a href="#cb33-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-80"><a href="#cb33-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-81"><a href="#cb33-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summarizing binary outcomes</span></span>
+<span id="cb33-82"><a href="#cb33-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-83"><a href="#cb33-83" aria-hidden="true" tabindex="-1"></a>For binary outcomes, we have a few options.</span>
+<span id="cb33-84"><a href="#cb33-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-85"><a href="#cb33-85" aria-hidden="true" tabindex="-1"></a><span class="fu">### risk difference</span></span>
+<span id="cb33-86"><a href="#cb33-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-87"><a href="#cb33-87" aria-hidden="true" tabindex="-1"></a>The **risk difference** is calculated as <span class="in">`outcome proportion in the intervention group`</span> minus <span class="in">`outcome proportion in the control group`</span>.</span>
+<span id="cb33-88"><a href="#cb33-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-89"><a href="#cb33-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r riskdifference, echo = TRUE}</span></span>
+<span id="cb33-90"><a href="#cb33-90" aria-hidden="true" tabindex="-1"></a><span class="fl">0.405</span> <span class="sc">-</span> <span class="fl">0.252</span></span>
+<span id="cb33-91"><a href="#cb33-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-92"><a href="#cb33-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-93"><a href="#cb33-93" aria-hidden="true" tabindex="-1"></a>**risk difference**: Smoking mothers are 15% more likely to have a low birthweight baby than non-smoking mothers.</span>
+<span id="cb33-94"><a href="#cb33-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-95"><a href="#cb33-95" aria-hidden="true" tabindex="-1"></a><span class="fu">### risk ratio</span></span>
+<span id="cb33-96"><a href="#cb33-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-97"><a href="#cb33-97" aria-hidden="true" tabindex="-1"></a>The **risk ratio** is calculated as <span class="in">`outcome proportion in the intervention group`</span> divided by <span class="in">`outcome proportion in the control group`</span>.</span>
+<span id="cb33-98"><a href="#cb33-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-99"><a href="#cb33-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r riskratio, echo = TRUE}</span></span>
+<span id="cb33-100"><a href="#cb33-100" aria-hidden="true" tabindex="-1"></a><span class="fl">0.405</span> <span class="sc">/</span> <span class="fl">0.252</span></span>
+<span id="cb33-101"><a href="#cb33-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-102"><a href="#cb33-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-103"><a href="#cb33-103" aria-hidden="true" tabindex="-1"></a>**risk ratio**: Smoking mothers are 1.6 times more likely to have a low birthweight baby than non-smoking mothers.</span>
+<span id="cb33-104"><a href="#cb33-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-105"><a href="#cb33-105" aria-hidden="true" tabindex="-1"></a><span class="fu">### odds ratio</span></span>
+<span id="cb33-106"><a href="#cb33-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-107"><a href="#cb33-107" aria-hidden="true" tabindex="-1"></a>Finally, the **odds ratio** is calculated as <span class="in">`outcome odds in the intervention group`</span> divided by <span class="in">`outcome odds in the control group`</span>. But what is <span class="co">[</span><span class="ot">*odds*</span><span class="co">](https://en.wikipedia.org/wiki/Odds)</span>? Odds compare the probability that an event will happen to the probability that it will not happen. If the probability of an event is 75%, we say the odds of that event are 75%/25%, equal to "3 to 1" or just 3. For some other probabilities we get:</span>
+<span id="cb33-108"><a href="#cb33-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-109"><a href="#cb33-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{r odds}</span></span>
+<span id="cb33-110"><a href="#cb33-110" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb33-111"><a href="#cb33-111" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">p =</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.25</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.75</span>, <span class="fl">0.8</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb33-112"><a href="#cb33-112" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">1 - p</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> p,</span>
+<span id="cb33-113"><a href="#cb33-113" aria-hidden="true" tabindex="-1"></a>         <span class="at">odds =</span> p <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> p),</span>
+<span id="cb33-114"><a href="#cb33-114" aria-hidden="true" tabindex="-1"></a>         <span class="at">odds =</span> <span class="fu">round</span>(odds, <span class="dv">3</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb33-115"><a href="#cb33-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">odds (alternative)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"4 to 1"</span>, <span class="st">"3 to 1"</span>,</span>
+<span id="cb33-116"><a href="#cb33-116" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"7 to 3"</span>, <span class="st">"3 to 2"</span>, <span class="st">"1 to 1"</span>,</span>
+<span id="cb33-117"><a href="#cb33-117" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"2 to 3"</span>, <span class="st">"3 to 7"</span>, <span class="st">"1 to 3"</span>,</span>
+<span id="cb33-118"><a href="#cb33-118" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"1 to 4"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb33-119"><a href="#cb33-119" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"probabilities and odds"</span>)</span>
+<span id="cb33-120"><a href="#cb33-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-121"><a href="#cb33-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-122"><a href="#cb33-122" aria-hidden="true" tabindex="-1"></a>A probability of 40% (as we have for low birthweight babies of smoking mothers) indicates odds of 0.667. Similarly, a probability of 25% (for low birthweight babies of non-smoking mothers) corresponds to odds of 0.333. The odds ratio is therefore about 2.</span>
+<span id="cb33-123"><a href="#cb33-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-126"><a href="#cb33-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb33-127"><a href="#cb33-127" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.4</span> <span class="sc">/</span> <span class="fl">0.6</span>) <span class="sc">/</span> (<span class="fl">0.25</span> <span class="sc">/</span> <span class="fl">0.75</span>)</span>
+<span id="cb33-128"><a href="#cb33-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-129"><a href="#cb33-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-130"><a href="#cb33-130" aria-hidden="true" tabindex="-1"></a>**odds ratio**: Smoking mothers gave 2 times the odds to have a low birthweight baby than non-smoking mothers.</span>
+<span id="cb33-131"><a href="#cb33-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-132"><a href="#cb33-132" aria-hidden="true" tabindex="-1"></a><span class="fu">### Calculating the odds ratio</span></span>
+<span id="cb33-133"><a href="#cb33-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-134"><a href="#cb33-134" aria-hidden="true" tabindex="-1"></a>You may have noticed we weren't very precise about calculating the odds ratio just now. In this section, we'll show some basic calculations to get the correct odds ratio. The simplest way to summarize these kind of yes/no outcomes by group is the so-called 2x2 table (@oddsratio).</span>
+<span id="cb33-135"><a href="#cb33-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-136"><a href="#cb33-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r twoway}</span></span>
+<span id="cb33-137"><a href="#cb33-137" aria-hidden="true" tabindex="-1"></a>birthweight <span class="sc">|&gt;</span> </span>
+<span id="cb33-138"><a href="#cb33-138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_cross</span>(<span class="at">col =</span> smoke,  <span class="at">row =</span> low,</span>
+<span id="cb33-139"><a href="#cb33-139" aria-hidden="true" tabindex="-1"></a>            <span class="at">percent =</span> <span class="st">"column"</span>, <span class="at">digits =</span> <span class="dv">1</span>)</span>
+<span id="cb33-140"><a href="#cb33-140" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-141"><a href="#cb33-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-142"><a href="#cb33-142" aria-hidden="true" tabindex="-1"></a>For non-smokers, we see that the <span class="in">`29/115 = 0.252`</span> of non-smoking mothers had low birthweight babies, compared to <span class="in">`30/74 = 0.405`</span> of smoking mothers. To get odds, we calculate</span>
+<span id="cb33-143"><a href="#cb33-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-144"><a href="#cb33-144" aria-hidden="true" tabindex="-1"></a><span class="in">```{r odds_nonsmoker, echo = TRUE}</span></span>
+<span id="cb33-145"><a href="#cb33-145" aria-hidden="true" tabindex="-1"></a><span class="dv">29</span> <span class="sc">/</span> <span class="dv">86</span></span>
+<span id="cb33-146"><a href="#cb33-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-147"><a href="#cb33-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-148"><a href="#cb33-148" aria-hidden="true" tabindex="-1"></a>for non-smoking mothers, and</span>
+<span id="cb33-149"><a href="#cb33-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-150"><a href="#cb33-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r odds_smoker, echo = TRUE}</span></span>
+<span id="cb33-151"><a href="#cb33-151" aria-hidden="true" tabindex="-1"></a><span class="dv">30</span> <span class="sc">/</span> <span class="dv">44</span></span>
+<span id="cb33-152"><a href="#cb33-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-153"><a href="#cb33-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-154"><a href="#cb33-154" aria-hidden="true" tabindex="-1"></a>for smoking mothers. We do not need the column totals to calculate odds.</span>
+<span id="cb33-155"><a href="#cb33-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-156"><a href="#cb33-156" aria-hidden="true" tabindex="-1"></a>To get the odds ratio, we then calculate:</span>
+<span id="cb33-157"><a href="#cb33-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-158"><a href="#cb33-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r odds2x2}</span></span>
+<span id="cb33-159"><a href="#cb33-159" aria-hidden="true" tabindex="-1"></a>(<span class="dv">30</span> <span class="sc">/</span> <span class="dv">44</span>) <span class="sc">/</span> (<span class="dv">29</span> <span class="sc">/</span> <span class="dv">86</span>)</span>
+<span id="cb33-160"><a href="#cb33-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-161"><a href="#cb33-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-162"><a href="#cb33-162" aria-hidden="true" tabindex="-1"></a>That's a lot of division signs! But perhaps you remember from school that instead of dividing by the 2nd fraction, <span class="co">[</span><span class="ot">we can multiply by its reciprocal</span><span class="co">](https://en.wikipedia.org/wiki/Fraction#Division)</span>.</span>
+<span id="cb33-163"><a href="#cb33-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-164"><a href="#cb33-164" aria-hidden="true" tabindex="-1"></a>$$ \frac{30}{44} \Big/ \frac{29}{86}   = \frac{30}{44} \times \frac{86}{29} = \frac{86 \cdot 30}{29 \cdot 44} = 2.02$$ To remember this way of getting the odds ratio, you multiply the numbers on the diagonal, <span class="in">`86 * 30`</span>, and then divide by those not on the diagonal, <span class="in">`44 * 29`</span>.</span>
+<span id="cb33-165"><a href="#cb33-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-166"><a href="#cb33-166" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comparing binary outcomes</span></span>
+<span id="cb33-167"><a href="#cb33-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-168"><a href="#cb33-168" aria-hidden="true" tabindex="-1"></a>To compare these rates with a hypothesis test, we could use a chi-square test, <span class="in">`chisq.test()`</span>. In order to run this test in R, we first need to set up the 2x2 table. Additionally, since <span class="in">`chisq.test()`</span> only reports a p-value, we need to find another way to get the odds ratio, which we can do with the <span class="in">`epitools`</span> package.</span>
+<span id="cb33-169"><a href="#cb33-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-170"><a href="#cb33-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{r chisq, echo = TRUE}</span></span>
+<span id="cb33-171"><a href="#cb33-171" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(epitools)</span>
+<span id="cb33-172"><a href="#cb33-172" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">with</span>(birthweight, <span class="fu">table</span>(low, smoke))</span>
+<span id="cb33-173"><a href="#cb33-173" aria-hidden="true" tabindex="-1"></a>tab</span>
+<span id="cb33-174"><a href="#cb33-174" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(tab)</span>
+<span id="cb33-175"><a href="#cb33-175" aria-hidden="true" tabindex="-1"></a><span class="fu">oddsratio</span>(tab)</span>
+<span id="cb33-176"><a href="#cb33-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-177"><a href="#cb33-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-178"><a href="#cb33-178" aria-hidden="true" tabindex="-1"></a>There are small differences between the output of <span class="in">`chisq.test()`</span> and <span class="in">`oddsratio()`</span> here, but that's because one uses a "continuity correction" by default and the other does not.</span>
+<span id="cb33-179"><a href="#cb33-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-180"><a href="#cb33-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{r chisq2, echo = TRUE}</span></span>
+<span id="cb33-181"><a href="#cb33-181" aria-hidden="true" tabindex="-1"></a><span class="fu">oddsratio</span>(tab, <span class="at">correction =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-182"><a href="#cb33-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-183"><a href="#cb33-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-184"><a href="#cb33-184" aria-hidden="true" tabindex="-1"></a>This approach is admittedly a bit tedious. We could also use logistic regression, which can be done with the <span class="in">`glm()`</span> function, and the option <span class="in">`family = binomial`</span>. Also, when we look at the regression coefficients, we need to exponentiate them, $e^{\widehat{\beta}}$, to get odds ratios.</span>
+<span id="cb33-185"><a href="#cb33-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-186"><a href="#cb33-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r logistic, echo = TRUE}</span></span>
+<span id="cb33-187"><a href="#cb33-187" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(low <span class="sc">~</span> smoke, <span class="at">data =</span> birthweight, </span>
+<span id="cb33-188"><a href="#cb33-188" aria-hidden="true" tabindex="-1"></a>           <span class="at">family =</span> binomial)</span>
+<span id="cb33-189"><a href="#cb33-189" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-190"><a href="#cb33-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb33-191"><a href="#cb33-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-192"><a href="#cb33-192" aria-hidden="true" tabindex="-1"></a>Logistic regression also allows us to adjust for other factors, like mother's age or race.</span>
+<span id="cb33-193"><a href="#cb33-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-194"><a href="#cb33-194" aria-hidden="true" tabindex="-1"></a><span class="in">```{r logistic-age, echo = TRUE}</span></span>
+<span id="cb33-195"><a href="#cb33-195" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(low <span class="sc">~</span> smoke <span class="sc">+</span> age <span class="sc">+</span> race, <span class="at">data =</span> birthweight, <span class="at">family =</span> binomial)</span>
+<span id="cb33-196"><a href="#cb33-196" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-197"><a href="#cb33-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,2961 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>2&nbsp; Statistical Methods for Continuous Outcomes – Short Tutorial on R and Biostatistics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./significance.html" rel="next">
+<link href="./intro.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-36f2db2e0c24a8dfe38894d2c7306603.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./continuous.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistical Methods for Continuous Outcomes</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Short Tutorial on R and Biostatistics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">A note on setting up R and R studio</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./continuous.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistical Methods for Continuous Outcomes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./significance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clinically / practically relevant or statistical significant?</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./binary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Statistical Methods for Binary Outcomes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./choice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Choice of statistical test</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./firststepsR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">First steps in R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datachecking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data checking</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./datacleaning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data cleaning and Table 1</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualization using <code>ggplot2</code></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./testing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Comparing and testing outcomes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./import.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Back to the beginning: importing data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#the-didgeridoo-study" id="toc-the-didgeridoo-study" class="nav-link active" data-scroll-target="#the-didgeridoo-study"><span class="header-section-number">2.1</span> The Didgeridoo study</a></li>
+  <li><a href="#summarizing-continuous-outcomes" id="toc-summarizing-continuous-outcomes" class="nav-link" data-scroll-target="#summarizing-continuous-outcomes"><span class="header-section-number">2.2</span> Summarizing continuous outcomes</a></li>
+  <li><a href="#comparing-continuous-outcomes" id="toc-comparing-continuous-outcomes" class="nav-link" data-scroll-target="#comparing-continuous-outcomes"><span class="header-section-number">2.3</span> Comparing continuous outcomes</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">
+<span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistical Methods for Continuous Outcomes</span>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="the-didgeridoo-study" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="the-didgeridoo-study">
+<span class="header-section-number">2.1</span> The Didgeridoo study</h2>
+<p>To discuss statistical methods for continuous outcomes, we use data from the didgeridoo study (<span class="citation" data-cites="didgeridoo">Puhan et al. (<a href="references.html#ref-didgeridoo" role="doc-biblioref">2006</a>)</span>). In this RCT, participants with obstructive sleep apnea were randomized either to didgeridoo lessons with daily practice or to a waiting list for such lessons (control arm).</p>
+<p>The primary endpoint is the Epworth Sleepiness Scale (ESS), a measure of daytime sleepiness on a scale from 0 (not sleepy in any situation) to 24 (very likely to fall asleep in all situations). We have data on this outcome at baseline (<code>epworth1</code>) and at 4 months (<code>epworth2</code>). (The data have been simplified for this tutorial.)</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># didgeridoo &lt;- read_csv("data/alphorn.csv") |&gt; </span></span>
+<span><span class="co">#   mutate(trt = factor(group, 1:0, c("control", "didgeridoo"))) |&gt; </span></span>
+<span><span class="co">#   select(id, trt, age, gender, bmi, epworth1, epworth2)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">didgeridoo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">25</span>, </span>
+<span>                     trt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, </span>
+<span>                             <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>                     age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">41</span>, <span class="fl">41</span>, <span class="fl">39</span>, <span class="fl">33</span>, <span class="fl">55</span>, <span class="fl">50</span>, <span class="fl">65</span>, <span class="fl">43</span>, <span class="fl">59</span>, <span class="fl">53</span>, </span>
+<span>                             <span class="fl">54</span>, <span class="fl">49</span>, <span class="fl">43</span>, <span class="fl">56</span>, <span class="fl">41</span>, <span class="fl">53</span>, <span class="fl">46</span>, <span class="fl">39</span>, <span class="fl">43</span>, <span class="fl">50</span>, <span class="fl">57</span>, <span class="fl">53</span>, <span class="fl">57</span>, <span class="fl">51</span><span class="op">)</span>,</span>
+<span>                     gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, </span>
+<span>                                <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>                     bmi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">26.1</span>, <span class="fl">19</span>, <span class="fl">27.2</span>, <span class="fl">22.5</span>, <span class="fl">29.4</span>, <span class="fl">29.4</span>, <span class="fl">26.8</span>, <span class="fl">26.4</span>, <span class="fl">31</span>, </span>
+<span>                             <span class="fl">23.4</span>, <span class="fl">29.4</span>, <span class="fl">28.4</span>, <span class="fl">26.6</span>, <span class="fl">26.7</span>, <span class="fl">19.4</span>, <span class="fl">25.8</span>, <span class="fl">25.7</span>, <span class="fl">27.3</span>, </span>
+<span>                             <span class="fl">24.5</span>, <span class="fl">26</span>, <span class="fl">27.2</span>, <span class="fl">30</span>, <span class="fl">25.9</span>, <span class="fl">24.5</span>, <span class="fl">18.2</span><span class="op">)</span>,</span>
+<span>                     epworth1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">11</span>, <span class="fl">5</span>, <span class="fl">8</span>, <span class="fl">1</span>, <span class="fl">9</span>, <span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">7</span>, <span class="fl">9</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">11</span>, </span>
+<span>                                  <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">11</span>, <span class="fl">19</span>, <span class="fl">13</span>, <span class="fl">23</span>, <span class="fl">18</span>, <span class="fl">12</span>, <span class="fl">21</span>, <span class="fl">12</span>, <span class="fl">15</span><span class="op">)</span>,</span>
+<span>                     epworth2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">1</span>, <span class="fl">7</span>, <span class="fl">14</span>, <span class="fl">6</span>, <span class="fl">6</span>, <span class="fl">9</span>, <span class="fl">3</span>, <span class="fl">11</span>, <span class="fl">10</span>, <span class="fl">5</span>, </span>
+<span>                                  <span class="fl">8</span>, <span class="fl">3</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">18</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">21</span>, <span class="fl">8</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>trt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">trt</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="st">"didgeridoo"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">didgeridoo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 25 × 7
+      id trt          age gender   bmi epworth1 epworth2
+   &lt;int&gt; &lt;fct&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1     1 control       45      0  26.1       11       10
+ 2     2 didgeridoo    41      1  19         11        5
+ 3     3 control       41      0  27.2        5        4
+ 4     4 didgeridoo    39      0  22.5        8        8
+ 5     5 control       33      0  29.4        1        1
+ 6     6 didgeridoo    55      1  29.4        9        7
+ 7     7 control       50      1  26.8       10       14
+ 8     8 control       65      1  26.4       11        6
+ 9     9 didgeridoo    43      0  31          7        6
+10    10 didgeridoo    59      0  23.4        9        9
+# ℹ 15 more rows</code></pre>
+</div>
+</div>
+</section><section id="summarizing-continuous-outcomes" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="summarizing-continuous-outcomes">
+<span class="header-section-number">2.2</span> Summarizing continuous outcomes</h2>
+<p>A graph of ESS at 4 months, <code>epworth2</code>, by treatment could look something like this:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">trt</span>, <span class="va">epworth2</span>,</span>
+<span>           color <span class="op">=</span> <span class="va">trt</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">didgeridoo</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>height <span class="op">=</span> <span class="fl">0</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span>, outliers <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">24</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Epworth sleepiness scale at 4 months"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="continuous_files/figure-html/didgeridoo-graph-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It looks like the didgeridoo group has somewhat lower ESS, on average, than the control group. The next step is to quantify how much lower. A quick way is just to use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">didgeridoo</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">trt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">epworth2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  trt            m
+  &lt;fct&gt;      &lt;dbl&gt;
+1 control     9.64
+2 didgeridoo  7.36</code></pre>
+</div>
+</div>
+<p>Using <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary()</a></code> extends nicely to more than 1 endpoint:</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">didgeridoo</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">trt</span>, <span class="va">epworth2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">trt</span>, </span>
+<span>              statistic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"epworth2"</span> <span class="op">=</span> <span class="st">"{mean} ({sd})"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="srmhocddsx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#srmhocddsx table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#srmhocddsx thead, #srmhocddsx tbody, #srmhocddsx tfoot, #srmhocddsx tr, #srmhocddsx td, #srmhocddsx th {
+  border-style: none;
+}
+
+#srmhocddsx p {
+  margin: 0;
+  padding: 0;
+}
+
+#srmhocddsx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#srmhocddsx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#srmhocddsx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#srmhocddsx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#srmhocddsx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#srmhocddsx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#srmhocddsx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#srmhocddsx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#srmhocddsx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#srmhocddsx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#srmhocddsx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#srmhocddsx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#srmhocddsx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#srmhocddsx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#srmhocddsx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#srmhocddsx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#srmhocddsx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#srmhocddsx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#srmhocddsx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#srmhocddsx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#srmhocddsx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#srmhocddsx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#srmhocddsx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#srmhocddsx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#srmhocddsx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#srmhocddsx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#srmhocddsx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#srmhocddsx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#srmhocddsx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#srmhocddsx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#srmhocddsx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#srmhocddsx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#srmhocddsx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#srmhocddsx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#srmhocddsx .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#srmhocddsx .gt_left {
+  text-align: left;
+}
+
+#srmhocddsx .gt_center {
+  text-align: center;
+}
+
+#srmhocddsx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#srmhocddsx .gt_font_normal {
+  font-weight: normal;
+}
+
+#srmhocddsx .gt_font_bold {
+  font-weight: bold;
+}
+
+#srmhocddsx .gt_font_italic {
+  font-style: italic;
+}
+
+#srmhocddsx .gt_super {
+  font-size: 65%;
+}
+
+#srmhocddsx .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#srmhocddsx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#srmhocddsx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#srmhocddsx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#srmhocddsx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#srmhocddsx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#srmhocddsx .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#srmhocddsx .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#srmhocddsx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead><tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>control</strong><br>
+N = 11<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>didgeridoo</strong><br>
+N = 14<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+</tr></thead>
+<tbody class="gt_table_body"><tr class="odd">
+<td class="gt_row gt_left" headers="label">epworth2</td>
+<td class="gt_row gt_center" headers="stat_1">9.6 (6.0)</td>
+<td class="gt_row gt_center" headers="stat_2">7.4 (2.3)</td>
+</tr></tbody>
+<tfoot><tr class="gt_footnotes odd">
+<td colspan="3" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Mean (SD)</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>Either way, we get the same results: average / mean ESS in the didgeridoo group is 7.4 compared to 9.6 in the control group. The difference between the two groups is therefore -2.2, that is, participants taking didgeridoo lessons had on average a 2.2 point lower ESS than those not taking lessons.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">7.4</span> <span class="op">-</span> <span class="fl">9.6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.2</code></pre>
+</div>
+</div>
+</section><section id="comparing-continuous-outcomes" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="comparing-continuous-outcomes">
+<span class="header-section-number">2.3</span> Comparing continuous outcomes</h2>
+<p>Now we want to test for difference in ESS between the two arms in the didgeridoo study. One option for that is a two-sample t-test.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">epworth2</span> <span class="op">~</span> <span class="va">trt</span>, data <span class="op">=</span> <span class="va">didgeridoo</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  epworth2 by trt
+t = 1.187, df = 12.381, p-value = 0.2575
+alternative hypothesis: true difference in means between group control and group didgeridoo is not equal to 0
+95 percent confidence interval:
+ -1.890289  6.448731
+sample estimates:
+   mean in group control mean in group didgeridoo 
+                9.636364                 7.357143 </code></pre>
+</div>
+</div>
+<p>(Note: You may have learned in a statistics class that there are <a href="https://en.wikipedia.org/wiki/Student%27s_t-test#Independent_two-sample_t-test">several versions of the t-test</a>, depending on whether the variances and / or sample sizes are similar. As it is not recommended to test for equal variances first (<span class="citation" data-cites="zimmerman">Zimmerman (<a href="references.html#ref-zimmerman" role="doc-biblioref">2004</a>)</span>), <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> conducts the most general version, “Welch”, of the t-test by default (i.e., without the equal variance assumption, using the option <code>var.equal = FALSE</code>).)</p>
+<p>Previously, we had a treatment difference of <code>7.4 - 9.6 = -2.2</code>. Now we also get a 95% confidence interval from -1.89 to 6.45, and p = 0.26. Both indicate no difference between intervention and control.</p>
+<p>But wait, shouldn’t the treatment effect be inside the confidence interval. Do you see why that is not here?</p>
+<p>In R, as in Stata and other statistical programming languages, the <code>t.test</code> results compare the 2nd group to the 1st group, or in this case, <code>control - didgeridoo</code>. This is the opposite of what we calculated above <code>didgeridoo - control</code>, and makes the <code>t.test</code> output somewhat difficult to follow.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># mean difference from t.test()</span></span>
+<span><span class="fl">9.636</span> <span class="op">-</span> <span class="fl">7.357</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.279</code></pre>
+</div>
+</div>
+<p>We could also use linear regression, <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, to get the same results, and then <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression()</a></code> to show the coefficient table with confidence intervals.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">epworth2</span> <span class="op">~</span> <span class="va">trt</span>, data <span class="op">=</span> <span class="va">didgeridoo</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">mod</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="dphgkcwjll" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dphgkcwjll table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#dphgkcwjll thead, #dphgkcwjll tbody, #dphgkcwjll tfoot, #dphgkcwjll tr, #dphgkcwjll td, #dphgkcwjll th {
+  border-style: none;
+}
+
+#dphgkcwjll p {
+  margin: 0;
+  padding: 0;
+}
+
+#dphgkcwjll .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#dphgkcwjll .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#dphgkcwjll .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#dphgkcwjll .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#dphgkcwjll .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dphgkcwjll .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dphgkcwjll .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#dphgkcwjll .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#dphgkcwjll .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#dphgkcwjll .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#dphgkcwjll .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#dphgkcwjll .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#dphgkcwjll .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#dphgkcwjll .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#dphgkcwjll .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#dphgkcwjll .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#dphgkcwjll .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#dphgkcwjll .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#dphgkcwjll .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dphgkcwjll .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#dphgkcwjll .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#dphgkcwjll .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#dphgkcwjll .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dphgkcwjll .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#dphgkcwjll .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#dphgkcwjll .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dphgkcwjll .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dphgkcwjll .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#dphgkcwjll .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dphgkcwjll .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#dphgkcwjll .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#dphgkcwjll .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dphgkcwjll .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dphgkcwjll .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#dphgkcwjll .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#dphgkcwjll .gt_left {
+  text-align: left;
+}
+
+#dphgkcwjll .gt_center {
+  text-align: center;
+}
+
+#dphgkcwjll .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#dphgkcwjll .gt_font_normal {
+  font-weight: normal;
+}
+
+#dphgkcwjll .gt_font_bold {
+  font-weight: bold;
+}
+
+#dphgkcwjll .gt_font_italic {
+  font-style: italic;
+}
+
+#dphgkcwjll .gt_super {
+  font-size: 65%;
+}
+
+#dphgkcwjll .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#dphgkcwjll .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#dphgkcwjll .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#dphgkcwjll .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#dphgkcwjll .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#dphgkcwjll .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#dphgkcwjll .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#dphgkcwjll .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#dphgkcwjll div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">trt</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;control</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;didgeridoo</td>
+<td class="gt_row gt_center" headers="estimate">-2.3</td>
+<td class="gt_row gt_center" headers="conf.low">-5.9, 1.3</td>
+<td class="gt_row gt_center" headers="p.value">0.2</td>
+</tr>
+</tbody>
+<tfoot><tr class="gt_sourcenotes odd">
+<td colspan="4" class="gt_sourcenote">Abbreviation: CI = Confidence Interval</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>The results from linear regression may not be exactly the same as those from the t-test, but they are quite similar. Additionally, linear regression allows us to further adjust for other participant characteristics, e.g.&nbsp;baseline ESS.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">epworth2</span> <span class="op">~</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">epworth1</span>, data <span class="op">=</span> <span class="va">didgeridoo</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">mod</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="krxebgqqpa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#krxebgqqpa table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#krxebgqqpa thead, #krxebgqqpa tbody, #krxebgqqpa tfoot, #krxebgqqpa tr, #krxebgqqpa td, #krxebgqqpa th {
+  border-style: none;
+}
+
+#krxebgqqpa p {
+  margin: 0;
+  padding: 0;
+}
+
+#krxebgqqpa .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#krxebgqqpa .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#krxebgqqpa .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#krxebgqqpa .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#krxebgqqpa .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#krxebgqqpa .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#krxebgqqpa .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#krxebgqqpa .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#krxebgqqpa .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#krxebgqqpa .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#krxebgqqpa .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#krxebgqqpa .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#krxebgqqpa .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#krxebgqqpa .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#krxebgqqpa .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#krxebgqqpa .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#krxebgqqpa .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#krxebgqqpa .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#krxebgqqpa .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#krxebgqqpa .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#krxebgqqpa .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#krxebgqqpa .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#krxebgqqpa .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#krxebgqqpa .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#krxebgqqpa .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#krxebgqqpa .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#krxebgqqpa .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#krxebgqqpa .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#krxebgqqpa .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#krxebgqqpa .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#krxebgqqpa .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#krxebgqqpa .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#krxebgqqpa .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#krxebgqqpa .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#krxebgqqpa .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#krxebgqqpa .gt_left {
+  text-align: left;
+}
+
+#krxebgqqpa .gt_center {
+  text-align: center;
+}
+
+#krxebgqqpa .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#krxebgqqpa .gt_font_normal {
+  font-weight: normal;
+}
+
+#krxebgqqpa .gt_font_bold {
+  font-weight: bold;
+}
+
+#krxebgqqpa .gt_font_italic {
+  font-style: italic;
+}
+
+#krxebgqqpa .gt_super {
+  font-size: 65%;
+}
+
+#krxebgqqpa .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#krxebgqqpa .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#krxebgqqpa .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#krxebgqqpa .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#krxebgqqpa .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#krxebgqqpa .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#krxebgqqpa .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#krxebgqqpa .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#krxebgqqpa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">trt</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;control</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;didgeridoo</td>
+<td class="gt_row gt_center" headers="estimate">-2.7</td>
+<td class="gt_row gt_center" headers="conf.low">-5.1, -0.35</td>
+<td class="gt_row gt_center" headers="p.value">0.027</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">epworth1</td>
+<td class="gt_row gt_center" headers="estimate">0.67</td>
+<td class="gt_row gt_center" headers="conf.low">0.42, 0.92</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+</tbody>
+<tfoot><tr class="gt_sourcenotes odd">
+<td colspan="4" class="gt_sourcenote">Abbreviation: CI = Confidence Interval</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>After adjustment for baseline ESS, the observed treatment effect is -2.7 (95% CI -5.1 to -0.35, p = 0.027), showing a modest and statistically significant effect of didgeridoo playing on sleep apnea. These are essentially the results that <span class="citation" data-cites="didgeridoo">Puhan et al. (<a href="references.html#ref-didgeridoo" role="doc-biblioref">2006</a>)</span> reported, though they examined change scores.</p>
+<div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="op">(</span><span class="va">epworth2</span> <span class="op">-</span> <span class="va">epworth1</span><span class="op">)</span> <span class="op">~</span> <span class="va">trt</span>, data <span class="op">=</span> <span class="va">didgeridoo</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span>conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
+<div id="hdnhnqjhon" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hdnhnqjhon table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hdnhnqjhon thead, #hdnhnqjhon tbody, #hdnhnqjhon tfoot, #hdnhnqjhon tr, #hdnhnqjhon td, #hdnhnqjhon th {
+  border-style: none;
+}
+
+#hdnhnqjhon p {
+  margin: 0;
+  padding: 0;
+}
+
+#hdnhnqjhon .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hdnhnqjhon .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hdnhnqjhon .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hdnhnqjhon .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hdnhnqjhon .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hdnhnqjhon .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hdnhnqjhon .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hdnhnqjhon .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hdnhnqjhon .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hdnhnqjhon .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hdnhnqjhon .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hdnhnqjhon .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hdnhnqjhon .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hdnhnqjhon .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hdnhnqjhon .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hdnhnqjhon .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hdnhnqjhon .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hdnhnqjhon .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hdnhnqjhon .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hdnhnqjhon .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hdnhnqjhon .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hdnhnqjhon .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hdnhnqjhon .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hdnhnqjhon .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hdnhnqjhon .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hdnhnqjhon .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hdnhnqjhon .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hdnhnqjhon .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hdnhnqjhon .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hdnhnqjhon .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hdnhnqjhon .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hdnhnqjhon .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hdnhnqjhon .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hdnhnqjhon .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hdnhnqjhon .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hdnhnqjhon .gt_left {
+  text-align: left;
+}
+
+#hdnhnqjhon .gt_center {
+  text-align: center;
+}
+
+#hdnhnqjhon .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hdnhnqjhon .gt_font_normal {
+  font-weight: normal;
+}
+
+#hdnhnqjhon .gt_font_bold {
+  font-weight: bold;
+}
+
+#hdnhnqjhon .gt_font_italic {
+  font-style: italic;
+}
+
+#hdnhnqjhon .gt_super {
+  font-size: 65%;
+}
+
+#hdnhnqjhon .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hdnhnqjhon .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hdnhnqjhon .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hdnhnqjhon .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hdnhnqjhon .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hdnhnqjhon .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hdnhnqjhon .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hdnhnqjhon .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hdnhnqjhon div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead><tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
+</tr></thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">trt</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;control</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;didgeridoo</td>
+<td class="gt_row gt_center" headers="estimate">-3.0</td>
+<td class="gt_row gt_center" headers="conf.low">-5.7, -0.27</td>
+<td class="gt_row gt_center" headers="p.value">0.033</td>
+</tr>
+</tbody>
+<tfoot><tr class="gt_sourcenotes odd">
+<td colspan="4" class="gt_sourcenote">Abbreviation: CI = Confidence Interval</td>
+</tr></tfoot>
+</table>
+</div>
+</div>
+</div>
+
+
+<!-- -->
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-didgeridoo" class="csl-entry" role="listitem">
+Puhan, MA, C Suarez, C Lo Cascio, A Zahn, M Heitz, and O Braendli. 2006. <span>“Didgeridoo Playing as Alternative Treatment for Obstructive Sleep Apnoea Syndrome: Randomised Controlled Trial.”</span> <em>BMJ</em> 332 (7536): 7536. <a href="https://doi.org/10.1136/bmj.38705.470590.55">https://doi.org/10.1136/bmj.38705.470590.55</a>.
+</div>
+<div id="ref-zimmerman" class="csl-entry" role="listitem">
+Zimmerman, DW. 2004. <span>“A Note on Preliminary Tests of Equality of Variances.”</span> <em>British Journal of Mathematical and Statistical Psychology</em> 57: 173–81. https://doi.org/<a href="https://doi.org/10.1348/000711004849222">https://doi.org/10.1348/000711004849222</a>.
+</div>
+</div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const cellDetails = window.document.querySelectorAll(".cell details.code-fold");
+        for (let i=0; i<cellDetails.length; i++) {
+          const details = cellDetails[i];
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell div.sourceCode.cell-code");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./intro.html" class="pagination-link" aria-label="A note on setting up R and R studio">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">A note on setting up R and R studio</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./significance.html" class="pagination-link" aria-label="Clinically / practically relevant or statistical significant?">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clinically / practically relevant or statistical significant?</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Statistical Methods for Continuous Outcomes</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## The Didgeridoo study</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>To discuss statistical methods for continuous outcomes, we use data from the didgeridoo study (@didgeridoo). In this RCT, participants with obstructive sleep apnea were randomized either to didgeridoo lessons with daily practice or to a waiting list for such lessons (control arm).</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>The primary endpoint is the Epworth Sleepiness Scale (ESS), a measure of daytime sleepiness on a scale from 0 (not sleepy in any situation) to 24 (very likely to fall asleep in all situations). We have data on this outcome at baseline (<span class="in">`epworth1`</span>) and at 4 months (<span class="in">`epworth2`</span>). (The data have been simplified for this tutorial.)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r didgeridoo-clean, echo = TRUE, message = FALSE}</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>))</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># didgeridoo &lt;- read_csv("data/alphorn.csv") |&gt; </span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(trt = factor(group, 1:0, c("control", "didgeridoo"))) |&gt; </span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(id, trt, age, gender, bmi, epworth1, epworth2)</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r didgeridoo, echo = TRUE}</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>didgeridoo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, </span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>                     <span class="at">trt =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, </span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>                     <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">41</span>, <span class="dv">41</span>, <span class="dv">39</span>, <span class="dv">33</span>, <span class="dv">55</span>, <span class="dv">50</span>, <span class="dv">65</span>, <span class="dv">43</span>, <span class="dv">59</span>, <span class="dv">53</span>, </span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">54</span>, <span class="dv">49</span>, <span class="dv">43</span>, <span class="dv">56</span>, <span class="dv">41</span>, <span class="dv">53</span>, <span class="dv">46</span>, <span class="dv">39</span>, <span class="dv">43</span>, <span class="dv">50</span>, <span class="dv">57</span>, <span class="dv">53</span>, <span class="dv">57</span>, <span class="dv">51</span>),</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gender =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, </span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>                     <span class="at">bmi =</span> <span class="fu">c</span>(<span class="fl">26.1</span>, <span class="dv">19</span>, <span class="fl">27.2</span>, <span class="fl">22.5</span>, <span class="fl">29.4</span>, <span class="fl">29.4</span>, <span class="fl">26.8</span>, <span class="fl">26.4</span>, <span class="dv">31</span>, </span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>                             <span class="fl">23.4</span>, <span class="fl">29.4</span>, <span class="fl">28.4</span>, <span class="fl">26.6</span>, <span class="fl">26.7</span>, <span class="fl">19.4</span>, <span class="fl">25.8</span>, <span class="fl">25.7</span>, <span class="fl">27.3</span>, </span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>                             <span class="fl">24.5</span>, <span class="dv">26</span>, <span class="fl">27.2</span>, <span class="dv">30</span>, <span class="fl">25.9</span>, <span class="fl">24.5</span>, <span class="fl">18.2</span>),</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>                     <span class="at">epworth1 =</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">11</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">11</span>, </span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>                                  <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">19</span>, <span class="dv">13</span>, <span class="dv">23</span>, <span class="dv">18</span>, <span class="dv">12</span>, <span class="dv">21</span>, <span class="dv">12</span>, <span class="dv">15</span>),</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>                     <span class="at">epworth2 =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">14</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">5</span>, </span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>                                  <span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">18</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">21</span>, <span class="dv">8</span>, <span class="dv">8</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trt =</span> <span class="fu">factor</span>(trt, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"didgeridoo"</span>)))</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>didgeridoo</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="fu">## Summarizing continuous outcomes</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>A graph of ESS at 4 months, <span class="in">`epworth2`</span>, by treatment could look something like this:</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: didgeridoo-graph</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(trt, epworth2,</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> trt), <span class="at">data =</span> didgeridoo) <span class="sc">+</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">outliers =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">24</span>) <span class="sc">+</span></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Epworth sleepiness scale at 4 months"</span>)</span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>It looks like the didgeridoo group has somewhat lower ESS, on average, than the control group. The next step is to quantify how much lower. A quick way is just to use <span class="in">`group_by()`</span> and <span class="in">`summarize()`</span>.</span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>didgeridoo <span class="sc">|&gt;</span> </span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trt) <span class="sc">|&gt;</span> </span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(epworth2))</span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>Using <span class="in">`tbl_summary()`</span> extends nicely to more than 1 endpoint:</span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>didgeridoo <span class="sc">|&gt;</span> </span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(trt, epworth2) <span class="sc">|&gt;</span> </span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> trt, </span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>              <span class="at">statistic =</span> <span class="fu">list</span>(<span class="st">"epworth2"</span> <span class="ot">=</span> <span class="st">"{mean} ({sd})"</span>))</span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>Either way, we get the same results: average / mean ESS in the didgeridoo group is 7.4 compared to 9.6 in the control group. The difference between the two groups is therefore -2.2, that is, participants taking didgeridoo lessons had on average a 2.2 point lower ESS than those not taking lessons.</span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a><span class="fl">7.4</span> <span class="sc">-</span> <span class="fl">9.6</span></span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comparing continuous outcomes</span></span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>Now we want to test for difference in ESS between the two arms in the didgeridoo study. One option for that is a two-sample t-test.</span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ttest}</span></span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(epworth2 <span class="sc">~</span> trt, <span class="at">data =</span> didgeridoo)</span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a>(Note: You may have learned in a statistics class that there are <span class="co">[</span><span class="ot">several versions of the t-test</span><span class="co">](https://en.wikipedia.org/wiki/Student%27s_t-test#Independent_two-sample_t-test)</span>, depending on whether the variances and / or sample sizes are similar. As it is not recommended to test for equal variances first (@zimmerman), <span class="in">`t.test()`</span> conducts the most general version, "Welch", of the t-test by default (i.e., without the equal variance assumption, using the option <span class="in">`var.equal = FALSE`</span>).)</span>
+<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>Previously, we had a treatment difference of <span class="in">`7.4 - 9.6 = -2.2`</span>. Now we also get a 95% confidence interval from -1.89 to 6.45, and p = 0.26. Both indicate no difference between intervention and control.</span>
+<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a>But wait, shouldn't the treatment effect be inside the confidence interval. Do you see why that is not here?</span>
+<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a>In R, as in Stata and other statistical programming languages, the <span class="in">`t.test`</span> results compare the 2nd group to the 1st group, or in this case, <span class="in">`control - didgeridoo`</span>. This is the opposite of what we calculated above <span class="in">`didgeridoo - control`</span>, and makes the <span class="in">`t.test`</span> output somewhat difficult to follow.</span>
+<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = TRUE}</span></span>
+<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a><span class="co"># mean difference from t.test()</span></span>
+<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a><span class="fl">9.636</span> <span class="sc">-</span> <span class="fl">7.357</span></span>
+<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a>We could also use linear regression, <span class="in">`lm()`</span>, to get the same results, and then <span class="in">`tbl_regression()`</span> to show the coefficient table with confidence intervals.</span>
+<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{r linreg}</span></span>
+<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(epworth2 <span class="sc">~</span> trt, <span class="at">data =</span> didgeridoo)</span>
+<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a>The results from linear regression may not be exactly the same as those from the t-test, but they are quite similar. Additionally, linear regression allows us to further adjust for other participant characteristics, e.g. baseline ESS.</span>
+<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{r linregadj}</span></span>
+<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(epworth2 <span class="sc">~</span> trt <span class="sc">+</span> epworth1, <span class="at">data =</span> didgeridoo) </span>
+<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a>After adjustment for baseline ESS, the observed treatment effect is -2.7 (95% CI -5.1 to -0.35, p = 0.027), showing a modest and statistically significant effect of didgeridoo playing on sleep apnea. These are essentially the results that @didgeridoo reported, though they examined change scores.</span>
+<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r changescores}</span></span>
+<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>((epworth2 <span class="sc">-</span> epworth1) <span class="sc">~</span> trt, <span class="at">data =</span> didgeridoo) <span class="sc">|&gt;</span> </span>
+<span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>
