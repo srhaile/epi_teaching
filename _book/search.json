@@ -190,6 +190,16 @@
     ]
   },
   {
+    "objectID": "datacleaning.html#make-a-demographics-table",
+    "href": "datacleaning.html#make-a-demographics-table",
+    "title": "\n8  Data cleaning and Table 1\n",
+    "section": "",
+    "text": "Important\n\n\n\nAccording to both the CONSORT and STROBE guidelines, “significance testing of baseline differences is not recommended and should not be reported” and “p-values are not an appropriate criterion for selecting which confounders to adjust for in analysis”. Do not be tempted to add p-values, using add_p(), to these kinds of tables if they are used to compare baseline characteristics!",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Data cleaning and Table 1</span>"
+    ]
+  },
+  {
     "objectID": "visualization.html",
     "href": "visualization.html",
     "title": "\n9  Visualization using ggplot2\n",
@@ -222,9 +232,9 @@
   {
     "objectID": "summary.html",
     "href": "summary.html",
-    "title": "\n12  Summary\n",
+    "title": "12  Summary",
     "section": "",
-    "text": "In summary, this book has no content whatsoever.\n\nCode1 + 1\n\n[1] 2",
+    "text": "We have done a very quick overview of basic statistical methods and R programming.",
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Summary</span>"
     ]
@@ -237,16 +247,6 @@
     "text": "Bland, JM, and DG Altman. 2000. “Statistics Notes. The Odds\nRatio.” BMJ 320 (7247). https://doi.org/10.1136/bmj.320.7247.1468.\n\n\nBroman, KW, and KH Woo. 2018. “Data Organization in\nSpreadsheets.” The American Statistician 72 (1): 2–10.\nhttps://doi.org/10.1080/00031305.2017.1375989.\n\n\nGreenland, S, SJ Senn, KJ Rothman, et al. 2016. “Statistical\nTests, p Values, Confidence Intervals, and Power: A Guide to\nMisinterpretations.” Eur J Epidemiol 31 (4): 337–50. https://doi.org/10.1007/s10654-016-0149-3.\n\n\nGrolemund, G. 2014. Hands-on Programming with r. O’Reilly. https://rstudio-education.github.io/hopr/.\n\n\nHeld, L, K Rufibach, and B Seifert. 2013. Medizinische Statistik :\nKonzepte, Methoden, Anwendungen. Pearson.\n\n\nKirkwood, B, and JAC Sterne. 2003. Essential Medical\nStatistics. 2nd ed. Blackwell.\n\n\nMuff, S, EB Nilsen, RB O’Hara, and CR Nater. 2022. “Rewriting\nResults Sections in the Language of Evidence.” Trends Ecol\nEvol 37 (3): 203–10. https://doi.org/10.1016/j.tree.2021.10.009.\n\n\nPuhan, MA, C Suarez, C Lo Cascio, A Zahn, M Heitz, and O Braendli. 2006.\n“Didgeridoo Playing as Alternative Treatment for Obstructive Sleep\nApnoea Syndrome: Randomised Controlled Trial.” BMJ 332\n(7536): 7536. https://doi.org/10.1136/bmj.38705.470590.55.\n\n\nRadtke, T, V von Wyl, SR Haile, S Rohrmann, A Frei, and MA Puhan. 2024.\n“Evidence-Based Coaching of Core Competencies in Epidemiology,\nUsing the Framework of Randomized Controlled Trials: The Zurich\nApproach.” Int J Epidemiol. 53 (3): dyae075. https://doi.org/10.1093/ije/dyae075.\n\n\nRovettaa, A, MA Mansournia, SD Stovitz, WM Adams, and S Greenland. 2025.\n“Interpreting p Values and Interval Estimates Based on Practical\nRelevance: Guidance for the Sports Medicine Clinician.” Br J\nSports 59 (24): bjsports-2024-109357. https://doi.org/10.1136/bjsports-2024-109357.\n\n\nSenn, S. 2002. Cross‐over Trials in Clinical Research. Wiley.\n\n\nSenn, S. 2021. Statistical Issues in Drug Development. 3rd ed.\nWiley.\n\n\nWickham, H. 2021. Ggplot2: Elegant Graphics for Data Analysis.\n3e ed. Springer. https://r4ds.hadley.nz.\n\n\nWickham, H, M Cetinkaya-Rundel, and G Grolemund. 2023. R for Data\nScience. 2e ed. O’Reilly. https://r4ds.hadley.nz.\n\n\nZimmerman, DW. 2004. “A Note on Preliminary Tests of Equality of\nVariances.” British Journal of Mathematical and Statistical\nPsychology 57: 173–81. https://doi.org/https://doi.org/10.1348/000711004849222.",
     "crumbs": [
       "References"
-    ]
-  },
-  {
-    "objectID": "datacleaning.html#make-a-demographics-table",
-    "href": "datacleaning.html#make-a-demographics-table",
-    "title": "\n8  Data cleaning and Table 1\n",
-    "section": "",
-    "text": "Important\n\n\n\nAccording to both the CONSORT and STROBE guidelines, “significance testing of baseline differences is not recommended and should not be reported” and “p-values are not an appropriate criterion for selecting which confounders to adjust for in analysis”. Do not be tempted to add p-values, using add_p(), to these kinds of tables if they are used to compare baseline characteristics!",
-    "crumbs": [
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Data cleaning and Table 1</span>"
     ]
   }
 ]

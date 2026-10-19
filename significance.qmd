@@ -68,4 +68,4 @@ Power and sample size considerations are generally based on this simple decision
 
 Regardless of how we interpret p-values, they are measures of statistical significance only, and make no statement about the clinical relevance of the observed results. In very small studies, p-values will be mostly not significant, even if the results are practically meaningful. On the other hand, in very large studies, p-values will generally be significant, even if the observed effects are very small.
 
-For an overview of p-values and confidence intervals, find a good statistical methods textbook (e.g., @kirkwood or @held), or take a look at papers like @rovetta, @greenland or @muff.
+For an overview of p-values and confidence intervals, find a good statistical methods textbook (e.g., @kirkwood or @held), or take a look at papers like @rovetta, @greenland or @muff. 
