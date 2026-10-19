@@ -1,0 +1,32 @@
+{
+    "id": "25DE5D58",
+    "path": "~/Desktop/work2025/epi_teaching/datacleaning.qmd",
+    "project_path": "datacleaning.qmd",
+    "type": "quarto_markdown",
+    "hash": "4082209379",
+    "contents": "",
+    "dirty": false,
+    "created": 1792419718235.0,
+    "source_on_save": false,
+    "relative_order": 11,
+    "properties": {
+        "rmdVisualMode": "false",
+        "rmdVisualWrapConfigured": "true",
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "docOutlineVisible": "1",
+        "rmdVisualCollapsedChunks": "",
+        "cursorPosition": "8,28",
+        "scrollLine": "0",
+        "rmdVisualModeLocation": "2:0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1792419739,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1792419739379,
+    "read_only": false,
+    "read_only_alternatives": []
+}

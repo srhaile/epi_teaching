@@ -1,0 +1,56 @@
+# Data cleaning and Table 1
+
+```{r}
+#| message: false
+
+library(tidyverse)
+```
+
+{{< include _simdata.qmd >}}
+
+To make a smaller cleaned version of the data for analysis, we might consider doing the following:
+
+1.  Remove screening variables. Choosing variables to keep is done with `select()`, e.g. `select(var1, var2)`. If you just want to drop a few variables, try `select(-var1, -var2)`.
+2.  Rename study_id to id, randomization_group to trt, age_today to age. Renaming variables can be performed by typing using `rename()` , like `rename(newname = oldname)`.
+3.  Give labels to gender, trt and video_games. The command `mutate()` can be used to make various changes to variables. Specifically, in these cases, we need to also use `factor()`. If, for example, we have a 0/1 variable called `var` where 0 means "no" and 1 means "yes", we could write `mutate(var = factor(var, c(0, 1), c("no", "yes"))`. We can also put multiple changes to multiple variables inside `mutate()`.
+4.  Filter out participants that are not randomized and do not have the primary endpoint. For this, there are two options `filter()` or `filter_out()`. If you use `filter()`, write out conditions which should be met ("inclusion criteria"). Alternately, if you use `filter_out()`, write out conditions which should *not* be met ("exclusion criteria"). Multiple conditions can be separated by a comma, and will be combined with AND (`&`). If you want OR, you could write `|` instead of a comma. For example, to keep female participants aged 45 or older, we could write `filter(gender == 0, age_today >= 45)`.
+
+All of these functions are in the [dplyr](https://dplyr.tidyverse.org/articles/dplyr.html) package.
+
+```{r clean}
+sm <- dat |> 
+  rename(id = study_id,
+         trt = randomization_group,
+         age = age_today) |> 
+  mutate(gender = factor(gender, 0:2, c("F", "M", "O")),
+         trt = factor(trt, 0:1, c("control", "intervention")),
+         video_games = factor(video_games, 0:3, 
+                              c("<30 minutes per day", "30-60", "60-120", "120+"))) |> 
+  filter(!is.na(trt), !is.na(reverse_digit))
+```
+
+## Make a demographics table
+
+Now that we've cleaned the dataset, let's make a table of baseline characteristics. From the dataset we made in the last step, we probably want to include `age, gender, video_games` and report summary statistics by `trt`. Using the R package [`gtsummary`](https://www.danieldsjoberg.com/gtsummary/), we can do this with the function `tbl_summary()` (see also the [introduction](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html) on the `gtsummary` website).
+
+```{r table1}
+library(gtsummary)
+sm |> 
+  select(trt, age, gender, video_games) |> 
+  tbl_summary(by = trt)
+```
+
+To clean up or improve the table, try [customizing](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html#customize-output) it with options like `label`, `value`, `digit` or `statistic`. Use the [`forcats`](https://forcats.tidyverse.org) package gives us more ways to deal with factor variables, in this case, the `fct_recode()` function for change labels on the levels of the factor.
+
+```{r table1alt, echo = TRUE}
+library(forcats)
+sm |> 
+  select(trt, age, gender, video_games) |> 
+  mutate(video_games = fct_recode(video_games, "<30" = "<30 minutes per day")) |> 
+  tbl_summary(by = trt,
+              label = list(video_games = "video games (minutes / day)",
+                           gender ~ "gender (F)"),
+              value = list(gender ~ "F"), 
+              digits = list(age ~ 1),
+              statistic = list(age ~ "{mean} ± {sd}"))
+```
