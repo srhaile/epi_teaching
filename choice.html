@@ -61,7 +61,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -348,11 +367,16 @@ Important
 <p>Continuous outcomes usually need to be only approximately normally distributed!</p>
 </div>
 </div>
-<p>Selection of statistical methods is however usually more complicated than this! A competent statistician can help you determine the most appropriate methods for your study.</p>
+<p>Selection of statistical methods is however usually more complicated than this! For more information, see e.g.&nbsp;Chapter 34 in <span class="citation" data-cites="kirkwood">Kirkwood and Sterne (<a href="references.html#ref-kirkwood" role="doc-biblioref">2003</a>)</span>. A competent statistician can help you determine the most appropriate methods for your study.</p>
 
 
 <!-- -->
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-kirkwood" class="csl-entry" role="listitem">
+Kirkwood, B, and JAC Sterne. 2003. <em>Essential Medical Statistics</em>. 2nd ed. Blackwell.
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -840,7 +864,7 @@ Important
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Continuous outcomes usually need to be only approximately normally distributed! </span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>Selection of statistical methods is however usually more complicated than this! A competent statistician can help you determine the most appropriate methods for your study.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>Selection of statistical methods is however usually more complicated than this! For more information, see e.g. Chapter 34 in @kirkwood. A competent statistician can help you determine the most appropriate methods for your study.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
