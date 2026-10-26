@@ -50,6 +50,7 @@ jobs:
             any::knitr
             any::patchwork
             any::palmerpenguins
+            any::epitools
 
       - name: Render Quarto Book
         run: quarto render
