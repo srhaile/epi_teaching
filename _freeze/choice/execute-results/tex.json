@@ -1,0 +1,21 @@
+{
+  "hash": "6d198894dbd259504e7de36375ce406e",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Choice of statistical test\n\nIf you've been in a statistical methods course, you may remember that there were many methods presented. How do we know which one to pick?\n\nFor a relatively simple randomized clinical trial with\n\n- 2 treatment arms\n- Participants are independent\n- Primary endpoint at 1 timepoint, either (approximately) continuous or binary\n\nwe have the following options:\n\n| **type of outcome** | **effect estimate** | **not adjusted** | **adjusted** |\n|------------------|------------------|------------------|------------------|\n| **continuous** \\* | mean difference | $t$-test | linear regression |\n| **binary** (yes / no) | odds ratio | $\\chi$-square test | logistic regression |\n| ... | ... | ... | ... |\n\n::: {.callout-important}\nContinuous outcomes usually need to be only approximately normally distributed! Even where a method make \"assume normality\", as in say the t-test, \"it is not in fact necessary for the distribution of the observed data to be normal, but rather the sample values should be compatible with the population (which they represent) having a normal distribution\" [@normal]. A good example of an outcome which is most certainly not normally distributed is length of stay in the hospital\n:::\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"true\"}\nlibrary(tidyverse)\ntheme_set(theme_bw(base_size = 12))\nset.seed(20261026)\nex <- tibble(x = 1:200,\n             los = round(rexp(200, 1/10)))\n\nggplot(aes(los), data = ex) +\n  geom_histogram() +\n  xlab(\"length of stay in hospital (days)\") + ylab(\"number of observations\")\n```\n\n::: {.cell-output-display}\n![length of stay as a common example of an outcome that is definitely not normally distributed.](choice_files/figure-pdf/lengthofstay-1.pdf){fig-pos='H'}\n:::\n:::\n\n\n\nSelection of statistical methods is however usually more complicated than this! For example, we have not considered outcomes that are rates or survival times, more than 2 groups, clustered outcomes (either from cluster randomized trials or repeated measures from longitudinal studies), or crossover trials.\n\nFor more information on selection of statistical methods, see e.g. Chapter 34 in @kirkwood (especially Table 34.3). A competent statistician should be on your study team, and can help you determine the most appropriate design and methods for your study.\n\nIf you need help finding a statistician at UZH, contact the [Clinical Research Methods](https://www.ebpi.uzh.ch/en/research_methods/methodsexpertise.html) group at the EBPI, or see this list from the [UZH Math](https://www.math.uzh.ch/consulting/general) department.\n",
+    "supporting": [
+      "choice_files/figure-pdf"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": true
+  }
+}

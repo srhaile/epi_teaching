@@ -37,6 +37,8 @@ format:
     theme:
       - cosmo
       - brand
+  pdf:
+    documentclass: scrbook
 
 execute:
   freeze: auto
