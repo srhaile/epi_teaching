@@ -43,6 +43,11 @@ format:
       - brand
   pdf:
     documentclass: scrbook
+    toc: true
+    number-sections: true
+    colorlinks: true
+    geometry:
+      - margin=1in
 
 execute:
   freeze: auto
