@@ -8,8 +8,9 @@ license: "CC BY"
 book:
   title: "Short Tutorial on R and Biostatistics"
   subtitle: "Biostatistics Material for: Evidence-Based Coaching of Core Competencies in Epidemiology using the Framework of Randomized Controlled Trials"
+  image: coil.jpg
   search: true
-  page-navigation: false
+  page-navigation: true
   repo-url: https://github.com/srhaile/epi_teaching
   downloads: [pdf]
   chapters:
