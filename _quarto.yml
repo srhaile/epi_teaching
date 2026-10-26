@@ -6,6 +6,9 @@ book:
   subtitle: "Biostatistics Material for: Evidence-Based Coaching of Core Competencies in Epidemiology using the Framework of Randomized Controlled Trials"
   author: "Sarah Haile"
   date: today
+  search: true
+  repo-url: https://github.com/srhaile/epi_teaching
+  downloads: [pdf, epub]
   chapters:
     - index.qmd
     - intro.qmd
@@ -24,6 +27,7 @@ book:
         - testing.qmd
         - import.qmd
     - summary.qmd
+    - future.qmd
     - references.qmd
 
 bibliography: references.bib

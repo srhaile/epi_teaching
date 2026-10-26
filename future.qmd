@@ -1,0 +1,15 @@
+# Possible future topics
+
+We have focused thus far on analysis of straightforward two-sample parallel group randomized controlled trials with continuous or binary outcomes.
+
+In the future, we may consider adding topics such as:
+
+
+- crossover trials
+- case-control trials with matching
+- randomization
+- sample size calculations
+- handling of baseline measurements
+
+
+If you have suggestions for additional topics, please contact me.

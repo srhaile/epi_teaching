@@ -38,7 +38,7 @@ ggplot(aes(los), data = ex) +
 ```
 
 
-Selection of statistical methods is however usually more complicated than this! For example, we have not considered outcomes that are rates or survival times, clustered outcomes (either from cluster randomized trials or repeated measures from longitudinal studies), or crossover trials.
+Selection of statistical methods is however usually more complicated than this! For example, we have not considered outcomes that are rates or survival times, more than 2 groups, clustered outcomes (either from cluster randomized trials or repeated measures from longitudinal studies), or crossover trials.
 
 For more information on selection of statistical methods, see e.g. Chapter 34 in @kirkwood (especially Table 34.3). A competent statistician should be on your study team, and can help you determine the most appropriate design and methods for your study.
 

@@ -1,3 +1,21 @@
 # Summary
 
 We have done a very quick overview of basic statistical methods and R programming.
+
+In the section on statistical methods, we have discussed:
+
+- how to summarize and compare continuous outcomes in 2 group settings,
+- how to summarize and compare binary outcomes in 2 group settings,
+- what p-values and confidence intervals are, and 
+- how to select statistical methods for these simple cases.
+
+The section on analysis using R 
+
+- showed how to run basic checks of key features of a dataset, 
+- gave examples of data cleaning using functions from `dplyr`,
+- showed how to make a participant descriptive table using `tbl_summary`,
+- made some plots of outcomes by treatment using `ggplot2`, 
+- ran regression models and showed their coefficients using `tbl_regression`, and
+- showed key functions for importing data.
+
+All examples are accompanied by R code that can be used to try out these methods.
