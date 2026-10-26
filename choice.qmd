@@ -17,8 +17,26 @@ we have the following options:
 | ... | ... | ... | ... |
 
 ::: {.callout-important}
-Continuous outcomes usually need to be only approximately normally distributed! Even where a method make "assume normality", as in say the t-test, "it is not in fact necessary for the distribution of the observed data to be normal, but rather the sample values should be compatible with the population (which they represent) having a normal distribution" @normal 
+Continuous outcomes usually need to be only approximately normally distributed! Even where a method make "assume normality", as in say the t-test, "it is not in fact necessary for the distribution of the observed data to be normal, but rather the sample values should be compatible with the population (which they represent) having a normal distribution" [@normal]. A good example of an outcome which is most certainly not normally distributed is length of stay in the hospital
 :::
+
+```{r}
+#| label: lengthofstay
+#| message: false
+#| code-fold: true
+#| fig-cap: length of stay as a common example of an outcome that is definitely not normally distributed.
+
+library(tidyverse)
+theme_set(theme_bw(base_size = 12))
+set.seed(20261026)
+ex <- tibble(x = 1:200,
+             los = round(rexp(200, 1/10)))
+
+ggplot(aes(los), data = ex) +
+  geom_histogram() +
+  xlab("length of stay in hospital (days)") + ylab("number of observations")
+```
+
 
 Selection of statistical methods is however usually more complicated than this! For example, we have not considered outcomes that are rates or survival times, clustered outcomes (either from cluster randomized trials or repeated measures from longitudinal studies), or crossover trials.
 
