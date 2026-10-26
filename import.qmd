@@ -13,6 +13,7 @@ The core packages in the `tidyverse` are: `dplyr` (data cleaning),  `ggplot2` (v
 library(tidyverse)
 ```
 
+To import a `csv`, that is, a comma-separated variable file, use `read_csv()`.
 
 ```{r readr}
 #| eval: false
@@ -21,12 +22,40 @@ dat <- read_csv("somedata.csv")
 
 If you export the dataset with decimal points, `.`, you'll find that `read_csv()` should work just fine. If you exported it with decimal commas, `,`, or if you've saved data in Excel on your computer using, say, a Swiss locale, try `read_csv2()`. Find out more about `read_csv()` in [R4DS](https://r4ds.hadley.nz/data-import.html), and more about locales in [the `readr` documentation](https://readr.tidyverse.org/articles/locales.html).
 
+```{r}
+#| message: false
+#| code-fold: true
+
+file1 <- "x, y, z\n1, 2, 3\n4.1, 5.9, 6.8"
+write_csv(read_csv(I(file1)), file = "file1.csv")
+
+file2 <- gsub(",", ";", file1)
+file2 <- gsub("\\.", ",", file2)
+write_csv2(read_csv2(I(file2)), file = "file2.csv")
+
+```
+
+
+```{r}
+#| message: false
+
+file1
+read_csv("file1.csv")
+
+file2
+read_csv2("file2.csv")
+```
+
+If you're not sure which one you have, try either loading it in a text editor. If you see more commas, `read_csv()` is probably correct, or if you see more semicolons, you probably need `read_csv2()`.
+
 ::: {.callout-tip}
 Why not `read.csv()`?
+
+You've probably heard of the base R funtion `read.csv()` that doesn't require you to load the `readr` package. The [newer version, `read_csv()`](https://r4ds.had.co.nz/data-import.html#compared-to-base-r) is faster, doesn't use row names, and shouldn't mess up the column names.
 :::
 
 If you are not exporting data from redcap or another electronic data capture system, consider organizing your data to enable efficient data analysis @broman.
 
 If you're working with an Excel spreadsheet, `.xlsx`, the [`readxl`](https://readxl.tidyverse.org) package will help. 
 
-For formats from other statistical programs (for example from SPSS, SAS, or STATA), try the [`haven`](https://haven.tidyverse.org) package.
+For formats from other statistical programs (for example from SPSS, SAS, or STATA), try the [`haven`](https://haven.tidyverse.org) package.  
