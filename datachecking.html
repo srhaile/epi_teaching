@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.19">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
 <title>7&nbsp; Data checking – Short Tutorial on R and Biostatistics</title>
 <style>
 /* Default styles provided by pandoc.
@@ -60,6 +63,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -78,7 +82,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e3a0307bf87dea633ae254d873c6233f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e3a0307bf87dea633ae254d873c6233f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -105,11 +110,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+
+
 </head>
+
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -120,9 +130,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Short Tutorial on R and Biostatistics</a> 
     </div>
@@ -134,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
@@ -219,26 +233,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#take-a-first-look" id="toc-take-a-first-look" class="nav-link active" data-scroll-target="#take-a-first-look"><span class="header-section-number">7.0.1</span> Take a first look</a></li>
+  <li><a href="#take-a-first-look" id="toc-take-a-first-look" class="nav-link active" data-scroll-target="#take-a-first-look"><span class="header-section-number">7.0.1</span> Take a first look</a></li>
   <li><a href="#check-some-basic-numbers" id="toc-check-some-basic-numbers" class="nav-link" data-scroll-target="#check-some-basic-numbers"><span class="header-section-number">7.1</span> Check some basic numbers</a></li>
   <li><a href="#q-how-many-participants-are-in-the-data" id="toc-q-how-many-participants-are-in-the-data" class="nav-link" data-scroll-target="#q-how-many-participants-are-in-the-data"><span class="header-section-number">7.2</span> Q: How many participants are in the data?</a></li>
   <li><a href="#q-how-many-of-them-have-been-randomized" id="toc-q-how-many-of-them-have-been-randomized" class="nav-link" data-scroll-target="#q-how-many-of-them-have-been-randomized"><span class="header-section-number">7.3</span> Q: How many of them have been randomized?</a></li>
   <li><a href="#q-how-many-have-the-primary-endpoint-the-reverse-digit-span-test" id="toc-q-how-many-have-the-primary-endpoint-the-reverse-digit-span-test" class="nav-link" data-scroll-target="#q-how-many-have-the-primary-endpoint-the-reverse-digit-span-test"><span class="header-section-number">7.4</span> Q: How many have the primary endpoint, the reverse digit span test?</a></li>
   <li><a href="#q-how-does-age-look" id="toc-q-how-does-age-look" class="nav-link" data-scroll-target="#q-how-does-age-look"><span class="header-section-number">7.5</span> Q: How does age look?</a></li>
-  </ul></nav>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">
-<span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data checking</span>
-</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data checking</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
 </div>
 
 
@@ -252,20 +270,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</header>
+
+
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>Now, imagine we have just completed a randomized clinical trial.</p>
 <ul>
-<li>
-<strong>Population</strong>: students in this course</li>
-<li>
-<strong>Intervention</strong>: watching a concentration video for 5 minutes</li>
-<li>
-<strong>Control</strong>: watching a screensaver-type video for 5 minutes</li>
-<li>
-<strong>Outcome</strong>: reverse digit span test</li>
+<li><strong>Population</strong>: students in this course</li>
+<li><strong>Intervention</strong>: watching a concentration video for 5 minutes</li>
+<li><strong>Control</strong>: watching a screensaver-type video for 5 minutes</li>
+<li><strong>Outcome</strong>: reverse digit span test</li>
 </ul>
 <p>The primary outcome is the reverse digit span test, a computer-based test of memory (high number of digits is better). Secondary outcomes are the cold pressor test (number of seconds you can keep your hand in ice cold water), and a video challenge, that participants either complete or do not.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -282,48 +301,53 @@ Note
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20261019</span><span class="op">)</span></span>
-<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">60</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>,</span>
-<span>              first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">LETTERS</span>, <span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>              last <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">LETTERS</span>, <span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span>              inclusion_over17 <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>              inclusion2 <span class="op">=</span> <span class="fl">1</span>, inclusion3 <span class="op">=</span> <span class="fl">1</span>, inclusion4 <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>              exclusion1 <span class="op">=</span> <span class="fl">0</span>, exclusion2 <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>              screened <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>              informed_consent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
-<span>              endpoints <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
-<span>              age_today <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">25</span>, <span class="fl">45</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>              gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">2</span>, <span class="fl">0.250</span><span class="op">)</span>,</span>
-<span>              video_games <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">4</span>, <span class="fl">0.2</span><span class="op">)</span>,</span>
-<span>              randomization_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>reverse_digit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">3</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">randomization_group</span>, <span class="fl">1.5</span><span class="op">)</span>,</span>
-<span>         reverse_digit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">)</span>,</span>
-<span>         cold_pressor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">60</span> <span class="op">-</span> <span class="fl">10</span> <span class="op">*</span> <span class="va">randomization_group</span>, <span class="fl">20</span><span class="op">)</span>,</span>
-<span>         cold_pressor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">cold_pressor</span><span class="op">)</span>,</span>
-<span>         video_challenge <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.2</span> <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> <span class="va">randomization_group</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">age_today</span><span class="op">:</span><span class="va">video_challenge</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">informed_consent</span> <span class="op">==</span> <span class="fl">1</span>, <span class="va">.x</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">:</span><span class="va">video_challenge</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">endpoints</span> <span class="op">==</span> <span class="fl">1</span>, <span class="va">.x</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">endpoints</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="va">sm</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="op">(</span><span class="va">inclusion_over17</span><span class="op">:</span><span class="va">screened</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">study_id</span>,</span>
-<span>         trt <span class="op">=</span> <span class="va">randomization_group</span>,</span>
-<span>         age <span class="op">=</span> <span class="va">age_today</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">gender</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"O"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>         trt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">trt</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="st">"intervention"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>         video_games <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">video_games</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">3</span>, </span>
-<span>                              <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"&lt;30 minutes per day"</span>, <span class="st">"30-60"</span>, <span class="st">"60-120"</span>, <span class="st">"120+"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">trt</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20261019</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">60</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">study_id =</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span> <span class="sc">*</span> n),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">first =</span> <span class="fu">sample</span>(LETTERS, <span class="dv">2</span> <span class="sc">*</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">last =</span> <span class="fu">sample</span>(LETTERS, <span class="dv">2</span> <span class="sc">*</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">inclusion_over17 =</span> <span class="dv">1</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">inclusion2 =</span> <span class="dv">1</span>, <span class="at">inclusion3 =</span> <span class="dv">1</span>, <span class="at">inclusion4 =</span> <span class="dv">1</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">exclusion1 =</span> <span class="dv">0</span>, <span class="at">exclusion2 =</span> <span class="dv">0</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">screened =</span> <span class="dv">1</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">informed_consent =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">1</span>, <span class="fl">0.9</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">endpoints =</span>  <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">1</span>, <span class="fl">0.9</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">age_today =</span> <span class="fu">floor</span>(<span class="fu">runif</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">25</span>, <span class="dv">45</span>)),</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">gender =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">2</span>, <span class="fl">0.250</span>),</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">video_games =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">4</span>, <span class="fl">0.2</span>),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">randomization_group =</span> <span class="fu">rep</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, n)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">reverse_digit =</span> <span class="fu">rnorm</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> randomization_group, <span class="fl">1.5</span>),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">reverse_digit =</span> <span class="fu">round</span>(reverse_digit),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">cold_pressor =</span> <span class="fu">rnorm</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">60</span> <span class="sc">-</span> <span class="dv">10</span> <span class="sc">*</span> randomization_group, <span class="dv">20</span>),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">cold_pressor =</span> <span class="fu">round</span>(cold_pressor),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">video_challenge =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">1</span>, <span class="fl">0.2</span> <span class="sc">+</span> <span class="fl">0.3</span> <span class="sc">*</span> randomization_group)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(age_today<span class="sc">:</span>video_challenge, <span class="sc">~</span> <span class="fu">ifelse</span>(informed_consent <span class="sc">==</span> <span class="dv">1</span>, .x, <span class="cn">NA</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(reverse_digit<span class="sc">:</span>video_challenge, <span class="sc">~</span> <span class="fu">ifelse</span>(endpoints <span class="sc">==</span> <span class="dv">1</span>, .x, <span class="cn">NA</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>endpoints) </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>sm <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>(inclusion_over17<span class="sc">:</span>screened)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> study_id,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">trt =</span> randomization_group,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">age =</span> age_today) <span class="sc">|&gt;</span> </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"O"</span>)),</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>         <span class="at">trt =</span> <span class="fu">factor</span>(trt, <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"intervention"</span>)),</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>         <span class="at">video_games =</span> <span class="fu">factor</span>(video_games, <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, </span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">c</span>(<span class="st">"&lt;30 minutes per day"</span>, <span class="st">"30-60"</span>, <span class="st">"60-120"</span>, <span class="st">"120+"</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(trt), <span class="sc">!</span><span class="fu">is.na</span>(reverse_digit))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<section id="take-a-first-look" class="level3" data-number="7.0.1"><h3 data-number="7.0.1" class="anchored" data-anchor-id="take-a-first-look">
-<span class="header-section-number">7.0.1</span> Take a first look</h3>
-<p>We have exported the study data from redcap, imported it into R, and named it <code>dat</code>. Use the functions <code><a href="https://rdrr.io/r/utils/head.html">head()</a></code> or <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> to look at the data structure (or <code><a href="https://rdrr.io/r/utils/View.html">View()</a></code> if you’re coding along in RStudio), <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> to see what variables there are.</p>
+<section id="take-a-first-look" class="level3" data-number="7.0.1">
+<h3 data-number="7.0.1" class="anchored" data-anchor-id="take-a-first-look"><span class="header-section-number">7.0.1</span> Take a first look</h3>
+<p>We have exported the study data from redcap, imported it into R, and named it <code>dat</code>. Use the functions <code>head()</code> or <code>glimpse()</code> to look at the data structure (or <code>View()</code> if you’re coding along in RStudio), <code>names()</code> to see what variables there are.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>Rows: 120
 Columns: 18
 $ study_id            &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,…
@@ -345,9 +369,12 @@ $ reverse_digit       &lt;dbl&gt; 3, 2, NA, 3, 3, 4, 5, 6, 4, 5, NA, 5, 4, 4, 3,
 $ cold_pressor        &lt;dbl&gt; 75, 31, NA, 47, 46, 43, 78, 52, 54, 83, NA, 35, 76…
 $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0, 1, …</code></pre>
 </div>
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># View(dat)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View(dat)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code> [1] "study_id"            "first"               "last"               
  [4] "inclusion_over17"    "inclusion2"          "inclusion3"         
  [7] "inclusion4"          "exclusion1"          "exclusion2"         
@@ -363,11 +390,13 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 <col style="width: 40%">
 <col style="width: 31%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th>variable name</th>
 <th>description</th>
 <th>coding</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td><code>study_id</code></td>
@@ -375,9 +404,7 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 <td></td>
 </tr>
 <tr class="even">
-<td>
-<code>first</code> / <code>last</code>
-</td>
+<td><code>first</code> / <code>last</code></td>
 <td>first and last initials</td>
 <td></td>
 </tr>
@@ -437,37 +464,50 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 <td>1 = yes, 0 = no</td>
 </tr>
 </tbody>
-</table></section><section id="check-some-basic-numbers" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="check-some-basic-numbers">
-<span class="header-section-number">7.1</span> Check some basic numbers</h2>
+</table>
+</section>
+<section id="check-some-basic-numbers" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="check-some-basic-numbers"><span class="header-section-number">7.1</span> Check some basic numbers</h2>
 <p>Next, we run some basic checks to see how many participants have been included, how many have been randomized, and how many have complete the primary endpoint.</p>
-</section><section id="q-how-many-participants-are-in-the-data" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="q-how-many-participants-are-in-the-data">
-<span class="header-section-number">7.2</span> Q: How many participants are in the data?</h2>
-<p>Use <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code> to find out how many participants have been screened.</p>
+</section>
+<section id="q-how-many-participants-are-in-the-data" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="q-how-many-participants-are-in-the-data"><span class="header-section-number">7.2</span> Q: How many participants are in the data?</h2>
+<p>Use <code>nrow()</code> to find out how many participants have been screened.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(dat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code>[1] 120</code></pre>
 </div>
 </div>
-</section><section id="q-how-many-of-them-have-been-randomized" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="q-how-many-of-them-have-been-randomized">
-<span class="header-section-number">7.3</span> Q: How many of them have been randomized?</h2>
-<p>A common thing to check when you’re first looking at a dataset is how many of something there are. How many participants? How many participanted have been randomized? How many are at least 18 years old? For these tasks, we need <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code>. Using <code>dplyr</code> coding style, we write the name of the dataset, <code>dat</code>, write “then” using the so-called “pipe” <code>|&gt;</code> (or <code>%&gt;%</code>, either way it’s ctrl / cmd + M), and finally <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code>.</p>
+</section>
+<section id="q-how-many-of-them-have-been-randomized" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="q-how-many-of-them-have-been-randomized"><span class="header-section-number">7.3</span> Q: How many of them have been randomized?</h2>
+<p>A common thing to check when you’re first looking at a dataset is how many of something there are. How many participants? How many participanted have been randomized? How many are at least 18 years old? For these tasks, we need <code>count()</code>. Using <code>dplyr</code> coding style, we write the name of the dataset, <code>dat</code>, write “then” using the so-called “pipe” <code>|&gt;</code> (or <code>%&gt;%</code>, either way it’s ctrl / cmd + M), and finally <code>count()</code>.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
       n
   &lt;int&gt;
 1   120</code></pre>
 </div>
 </div>
-<p>This count should be the same as we got above with <code><a href="https://rdrr.io/r/base/nrow.html">nrow()</a></code>.</p>
-<p>We want to see how many participants are in each category of <code>randomization_group</code>, or where it is missing. So let’s <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> <code>randomization_group</code>.</p>
+<p>This count should be the same as we got above with <code>nrow()</code>.</p>
+<p>We want to see how many participants are in each category of <code>randomization_group</code>, or where it is missing. So let’s <code>count()</code> <code>randomization_group</code>.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">randomization_group</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(randomization_group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   randomization_group     n
                 &lt;int&gt; &lt;int&gt;
@@ -476,13 +516,17 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 3                  NA     8</code></pre>
 </div>
 </div>
-</section><section id="q-how-many-have-the-primary-endpoint-the-reverse-digit-span-test" class="level2" data-number="7.4"><h2 data-number="7.4" class="anchored" data-anchor-id="q-how-many-have-the-primary-endpoint-the-reverse-digit-span-test">
-<span class="header-section-number">7.4</span> Q: How many have the primary endpoint, the reverse digit span test?</h2>
-<p>The <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> function checks if a value is missing (<code>NA</code>). To check if it’s not missing, use <code>!is.na()</code> (<code>!</code> means “not”).</p>
+</section>
+<section id="q-how-many-have-the-primary-endpoint-the-reverse-digit-span-test" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="q-how-many-have-the-primary-endpoint-the-reverse-digit-span-test"><span class="header-section-number">7.4</span> Q: How many have the primary endpoint, the reverse digit span test?</h2>
+<p>The <code>is.na()</code> function checks if a value is missing (<code>NA</code>). To check if it’s not missing, use <code>!is.na()</code> (<code>!</code> means “not”).</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="sc">!</span><span class="fu">is.na</span>(reverse_digit))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   `!is.na(reverse_digit)`     n
   &lt;lgl&gt;                   &lt;int&gt;
@@ -490,13 +534,17 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 2 TRUE                      102</code></pre>
 </div>
 </div>
-</section><section id="q-how-does-age-look" class="level2" data-number="7.5"><h2 data-number="7.5" class="anchored" data-anchor-id="q-how-does-age-look">
-<span class="header-section-number">7.5</span> Q: How does age look?</h2>
-<p>For continuous (or mostly continuous) outcomes, such as age (<code>age_today</code>), it’s helpful to look at all individual reported values, not just mean or median values. We can also use <code><a href="https://dplyr.tidyverse.org/reference/count.html">count()</a></code> for this.</p>
+</section>
+<section id="q-how-does-age-look" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="q-how-does-age-look"><span class="header-section-number">7.5</span> Q: How does age look?</h2>
+<p>For continuous (or mostly continuous) outcomes, such as age (<code>age_today</code>), it’s helpful to look at all individual reported values, not just mean or median values. We can also use <code>count()</code> for this.</p>
 <div class="cell">
-<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dat</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">age_today</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details><div class="cell-output cell-output-stdout">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age_today)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 21 × 2
    age_today     n
        &lt;dbl&gt; &lt;int&gt;
@@ -523,7 +571,10 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 
 <!-- -->
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -973,7 +1024,9 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="./firststepsR.html" class="pagination-link" aria-label="First steps in R">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">First steps in R</span></span>
       </a>          
@@ -1091,6 +1144,7 @@ $ video_challenge     &lt;int&gt; 0, 1, NA, 1, 0, 1, 1, 1, 0, 1, NA, 0, 0, 1, 0,
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+
 
 
 
