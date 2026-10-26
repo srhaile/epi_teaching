@@ -9,16 +9,20 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - continuous.qmd
-    - significance.qmd
-    - binary.qmd
-    - choice.qmd
-    - firststepsR.qmd
-    - datachecking.qmd
-    - datacleaning.qmd
-    - visualization.qmd
-    - testing.qmd
-    - import.qmd
+    - part: "Statistical Methods"
+      chapters:
+        - continuous.qmd
+        - significance.qmd
+        - binary.qmd
+        - choice.qmd
+    - part: "Analysis in R"
+      chapters:
+        - firststepsR.qmd
+        - datachecking.qmd
+        - datacleaning.qmd
+        - visualization.qmd
+        - testing.qmd
+        - import.qmd
     - summary.qmd
     - references.qmd
 

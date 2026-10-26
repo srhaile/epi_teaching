@@ -17,7 +17,11 @@ we have the following options:
 | ... | ... | ... | ... |
 
 ::: {.callout-important}
-Continuous outcomes usually need to be only approximately normally distributed! 
+Continuous outcomes usually need to be only approximately normally distributed! Even where a method make "assume normality", as in say the t-test, "it is not in fact necessary for the distribution of the observed data to be normal, but rather the sample values should be compatible with the population (which they represent) having a normal distribution" @normal 
 :::
 
-Selection of statistical methods is however usually more complicated than this! For more information, see e.g. Chapter 34 in @kirkwood. A competent statistician can help you determine the most appropriate methods for your study.
+Selection of statistical methods is however usually more complicated than this! For example, we have not considered outcomes that are rates or survival times, clustered outcomes (either from cluster randomized trials or repeated measures from longitudinal studies), or crossover trials.
+
+For more information on selection of statistical methods, see e.g. Chapter 34 in @kirkwood (especially Table 34.3). A competent statistician should be on your study team, and can help you determine the most appropriate design and methods for your study.
+
+If you need help finding a statistician at UZH, contact the [Clinical Research Methods](https://www.ebpi.uzh.ch/en/research_methods/methodsexpertise.html) group at the EBPI, or see this list from the [UZH Math](https://www.math.uzh.ch/consulting/general) department.

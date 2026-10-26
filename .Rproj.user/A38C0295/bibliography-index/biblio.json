@@ -474,9 +474,37 @@
                     ]
                 ]
             },
-            "title": "Statistics notes. The odds ratio",
+            "title": "Statistics notes: The odds ratio",
+            "title-short": "Statistics notes",
             "type": "article-journal",
             "volume": "320"
+        },
+        {
+            "DOI": "10.1136/bmj.310.6975.298",
+            "author": [
+                {
+                    "family": "Altman",
+                    "given": "DG"
+                },
+                {
+                    "family": "Bland",
+                    "given": "JM"
+                }
+            ],
+            "container-title": "BMJ",
+            "id": "normal",
+            "issue": "298",
+            "issued": {
+                "date-parts": [
+                    [
+                        1995
+                    ]
+                ]
+            },
+            "title": "Statistics notes: The normal distribution",
+            "title-short": "Statistics notes",
+            "type": "article-journal",
+            "volume": "310"
         }
     ],
     "project_biblios": [
