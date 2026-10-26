@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.19">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>3&nbsp; Clinically / practically relevant or statistical significant? – Short Tutorial on R and Biostatistics</title>
 <style>
 /* Default styles provided by pandoc.
@@ -82,7 +79,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -101,8 +97,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e3a0307bf87dea633ae254d873c6233f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e3a0307bf87dea633ae254d873c6233f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -128,12 +123,7 @@ div.csl-indent {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script><script type="text/javascript">
 const typesetMath = (el) => {
   if (window.MathJax) {
     // MathJax Typeset
@@ -159,15 +149,11 @@ window.Quarto = {
   typesetMath
 };
 </script>
-
 </head>
-
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -178,13 +164,9 @@ window.Quarto = {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Short Tutorial on R and Biostatistics</a> 
     </div>
@@ -196,7 +178,7 @@ window.Quarto = {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
@@ -281,19 +263,17 @@ window.Quarto = {
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clinically / practically relevant or statistical significant?</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">
+<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Clinically / practically relevant or statistical significant?</span>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
 </div>
 
 
@@ -307,10 +287,7 @@ window.Quarto = {
   
 
 
-</header>
-
-
-<p>In our analysis of the didgeridoo study, we compared ESS as the average difference between the two groups. Such a comparison is often called an <strong>effect size</strong> or <strong>treatment effect</strong>. It quantifies the observed association between the treatment and outcome, and as such, gives us information about the clinical or practical relevance of the intervention of didgeridoo lessons on the outcome ESS.</p>
+</header><p>In our analysis of the didgeridoo study, we compared ESS as the average difference between the two groups. Such a comparison is often called an <strong>effect size</strong> or <strong>treatment effect</strong>. It quantifies the observed association between the treatment and outcome, and as such, gives us information about the clinical or practical relevance of the intervention of didgeridoo lessons on the outcome ESS.</p>
 <p>Now, if we conducted the didgeridoo study again, even in the same study center and with the same didgeridoo instructor, we would not get exactly the same result, would we? Perhaps it would be close, but it’s unlikely to be exactly the same. We might like to guess what other possible treatment effects would be plausible. For that, we need a <strong>confidence interval</strong> (CI), which describes a range of most plausible treatment effects given our observed data, describing clinical or practical relevance. If a treatment effect corresponding to no difference (e.g.&nbsp;mean difference of 0) is included in the range of the CI, we generally say that the study results are consistent with no difference between the treatment arms.</p>
 <p>You may have seen the phrase “95% confidence interval” before. Why can’t we just say “confidence interval”? The “95%” part quantifies <em>how</em> confident we want to be that our confidence interval contains the true population-level treatment effect. However, it’s not very often you will see anything except a 95% confidence interval.</p>
 <p>Suppose we conduct the same trial 20 times for an intervention that has a true effect of 8 points on the outcome of interest. The plot below shows the estimated treatment effects for each of those studies, as well as the corresponding 95% confidence intervals. From these 20 studies, almost all confidence intervals, that is 19/20 or 95%, contain the true population-level treatment effect, so we can be reasonably confident that the CI we observed from our single trial includes the true effect we would like to estimate.</p>
@@ -318,8 +295,7 @@ window.Quarto = {
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="significance_files/figure-html/ci-1.png" class="img-fluid figure-img" width="480"></p>
+<figure class="figure"><p><img src="significance_files/figure-html/ci-1.png" class="img-fluid figure-img" width="480"></p>
 </figure>
 </div>
 </div>
@@ -337,10 +313,8 @@ window.Quarto = {
 </ul>
 <p>Power and sample size considerations are generally based on this simple decision rule. In other situations, we do not need clear predefined rules for when the study results are considered “positive”. Then it may be more helpful to consider p-values as measures of evidence.</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/pvalue_evidence.jpg" class="img-fluid figure-img"></p>
-<figcaption>Instead of reporting a binary yes/no test outcome, the results sections of scientific papers should rather report the exact P-values and interpret that ‘there was no/weak/moderate/strong/very strong evidence’ for a certain finding or effect, depending on approximate ranges into which the actual P-value falls (Muff et al 2022)</figcaption>
-</figure>
+<figure class="figure"><p><img src="images/pvalue_evidence.jpg" class="img-fluid figure-img"></p>
+<figcaption>Instead of reporting a binary yes/no test outcome, the results sections of scientific papers should rather report the exact P-values and interpret that ‘there was no/weak/moderate/strong/very strong evidence’ for a certain finding or effect, depending on approximate ranges into which the actual P-value falls (Muff et al 2022)</figcaption></figure>
 </div>
 <p>Regardless of how we interpret p-values, they are measures of statistical significance only, and make no statement about the clinical relevance of the observed results. In very small studies, p-values will be mostly not significant, even if the results are practically meaningful. On the other hand, in very large studies, p-values will generally be significant, even if the observed effects are very small.</p>
 <p>For an overview of p-values and confidence intervals, find a good statistical methods textbook (e.g., <span class="citation" data-cites="kirkwood">Kirkwood and Sterne (<a href="references.html#ref-kirkwood" role="doc-biblioref">2003</a>)</span> or <span class="citation" data-cites="held">Held et al. (<a href="references.html#ref-held" role="doc-biblioref">2013</a>)</span>), or take a look at papers like <span class="citation" data-cites="rovetta">Rovettaa et al. (<a href="references.html#ref-rovetta" role="doc-biblioref">2025</a>)</span>, <span class="citation" data-cites="greenland">Greenland et al. (<a href="references.html#ref-greenland" role="doc-biblioref">2016</a>)</span> or <span class="citation" data-cites="muff">Muff et al. (<a href="references.html#ref-muff" role="doc-biblioref">2022</a>)</span>.</p>
@@ -366,8 +340,7 @@ Rovettaa, A, MA Mansournia, SD Stovitz, WM Adams, and S Greenland. 2025. <span>�
 </div>
 </div>
 
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -817,9 +790,7 @@ Rovettaa, A, MA Mansournia, SD Stovitz, WM Adams, and S Greenland. 2025. <span>�
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./continuous.html" class="pagination-link" aria-label="Statistical Methods for Continuous Outcomes">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistical Methods for Continuous Outcomes</span></span>
       </a>          
@@ -904,7 +875,6 @@ Rovettaa, A, MA Mansournia, SD Stovitz, WM Adams, and S Greenland. 2025. <span>�
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-
 
 
 
