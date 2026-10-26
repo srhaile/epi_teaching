@@ -1,12 +1,14 @@
 project:
   type: book
 
+
+title: "Short Tutorial on R and Biostatistics"
+subtitle: "Biostatistics Material for: Evidence-Based Coaching of Core Competencies in Epidemiology using the Framework of Randomized Controlled Trials"
+author: "Sarah Haile"
+date: today
+license: "CC BY"
+  
 book:
-  title: "Short Tutorial on R and Biostatistics"
-  subtitle: "Biostatistics Material for: Evidence-Based Coaching of Core Competencies in Epidemiology using the Framework of Randomized Controlled Trials"
-  author: "Sarah Haile"
-  date: today
-  license: "CC BY"
   search: true
   page-navigation: false
   repo-url: https://github.com/srhaile/epi_teaching
