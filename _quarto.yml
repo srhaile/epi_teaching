@@ -5,7 +5,7 @@ book:
   title: "Short Tutorial on R and Biostatistics"
   subtitle: "Biostatistics Material for: Evidence-Based Coaching of Core Competencies in Epidemiology using the Framework of Randomized Controlled Trials"
   author: "Sarah Haile"
-  date: "2026-10-19"
+  date: today
   chapters:
     - index.qmd
     - intro.qmd
