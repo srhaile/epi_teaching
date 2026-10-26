@@ -35,6 +35,9 @@ jobs:
       - name: Install R package dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
+          cache: true
+          cache-version: 1
+          pak: true
           extra-packages: |
             any::tidyverse
             any::downlit
