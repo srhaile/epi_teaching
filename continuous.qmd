@@ -85,7 +85,9 @@ Now we want to test for difference in ESS between the two arms in the didgeridoo
 t.test(epworth2 ~ trt, data = didgeridoo)
 ```
 
-(Note: You may have learned in a statistics class that there are [several versions of the t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Independent_two-sample_t-test), depending on whether the variances and / or sample sizes are similar. As it is not recommended to test for equal variances first (@zimmerman), `t.test()` conducts the most general version, "Welch", of the t-test by default (i.e., without the equal variance assumption, using the option `var.equal = FALSE`).)
+::: {.callout-note}
+You may have learned in a statistics class that there are [several versions of the t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Independent_two-sample_t-test), depending on whether the variances and / or sample sizes are similar. As it is not recommended to test for equal variances first (@zimmerman), the function `t.test()` conducts the most general version of the t-test by default (i.e., "Welch", in other words, without the equal variance assumption, using the default option `var.equal = FALSE`).
+:::
 
 Previously, we had a treatment difference of `7.4 - 9.6 = -2.2`. Now we also get a 95% confidence interval from -1.89 to 6.45, and p = 0.26. Both indicate no difference between intervention and control.
 
