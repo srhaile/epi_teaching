@@ -8,7 +8,7 @@ book:
   date: today
   search: true
   repo-url: https://github.com/srhaile/epi_teaching
-  downloads: [pdf, epub]
+  downloads: [pdf]
   chapters:
     - index.qmd
     - intro.qmd
