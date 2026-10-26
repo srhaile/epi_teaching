@@ -8,6 +8,7 @@ book:
   date: today
   license: "CC BY"
   search: true
+  page-navigation: false
   repo-url: https://github.com/srhaile/epi_teaching
   downloads: [pdf]
   chapters:
