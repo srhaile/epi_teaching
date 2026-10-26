@@ -134,7 +134,7 @@ You may have noticed we weren't very precise about calculating the odds ratio ju
 ```{r twoway}
 birthweight |> 
   tbl_cross(col = smoke,  row = low,
-            percent = "column", digits = 1)
+            percent = "column", digits = c(0, 1))
 ```
 
 For non-smokers, we see that the `29/115 = 0.252` of non-smoking mothers had low birthweight babies, compared to `30/74 = 0.405` of smoking mothers. To get odds, we calculate
@@ -163,9 +163,10 @@ $$ \frac{30}{44} \Big/ \frac{29}{86}   = \frac{30}{44} \times \frac{86}{29} = \f
 
 ## Comparing binary outcomes
 
-To compare these rates with a hypothesis test, we could use a chi-square test, `chisq.test()`. In order to run this test in R, we first need to set up the 2x2 table. Additionally, since `chisq.test()` only reports a p-value, we need to find another way to get the odds ratio, which we can do with the `epitools` package.
+To compare these rates with a hypothesis test, we could use a chi-square test, `chisq.test()`. In order to run this test in R, we first need to set up the 2x2 table. Additionally, since `chisq.test()` only reports a p-value, we need to find another way to get the odds ratio, which we can do with the [`epitools`](https://cran.r-project.org/package=epitools) package.
 
 ```{r chisq, echo = TRUE}
+# install.packages("epitools")
 library(epitools)
 tab <- with(birthweight, table(low, smoke))
 tab
