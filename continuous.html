@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.19">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>2&nbsp; Statistical Methods for Continuous Outcomes – Short Tutorial on R and Biostatistics</title>
 <style>
 /* Default styles provided by pandoc.
@@ -82,7 +79,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -101,8 +97,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e3a0307bf87dea633ae254d873c6233f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e3a0307bf87dea633ae254d873c6233f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -129,16 +124,11 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -149,13 +139,9 @@ div.csl-indent {
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Short Tutorial on R and Biostatistics</a> 
     </div>
@@ -167,7 +153,7 @@ div.csl-indent {
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
@@ -252,27 +238,23 @@ div.csl-indent {
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-didgeridoo-study" id="toc-the-didgeridoo-study" class="nav-link active" data-scroll-target="#the-didgeridoo-study"><span class="header-section-number">2.1</span> The Didgeridoo study</a></li>
+<li><a href="#the-didgeridoo-study" id="toc-the-didgeridoo-study" class="nav-link active" data-scroll-target="#the-didgeridoo-study"><span class="header-section-number">2.1</span> The Didgeridoo study</a></li>
   <li><a href="#summarizing-continuous-outcomes" id="toc-summarizing-continuous-outcomes" class="nav-link" data-scroll-target="#summarizing-continuous-outcomes"><span class="header-section-number">2.2</span> Summarizing continuous outcomes</a></li>
   <li><a href="#comparing-continuous-outcomes" id="toc-comparing-continuous-outcomes" class="nav-link" data-scroll-target="#comparing-continuous-outcomes"><span class="header-section-number">2.3</span> Comparing continuous outcomes</a></li>
-  </ul>
-</nav>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistical Methods for Continuous Outcomes</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">
+<span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Statistical Methods for Continuous Outcomes</span>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
 </div>
 
 
@@ -286,47 +268,39 @@ div.csl-indent {
   
 
 
-</header>
-
-
-<section id="the-didgeridoo-study" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="the-didgeridoo-study"><span class="header-section-number">2.1</span> The Didgeridoo study</h2>
+</header><section id="the-didgeridoo-study" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="the-didgeridoo-study">
+<span class="header-section-number">2.1</span> The Didgeridoo study</h2>
 <p>To discuss statistical methods for continuous outcomes, we use data from the didgeridoo study (<span class="citation" data-cites="didgeridoo">Puhan et al. (<a href="references.html#ref-didgeridoo" role="doc-biblioref">2006</a>)</span>). In this RCT, participants with obstructive sleep apnea were randomized either to didgeridoo lessons with daily practice or to a waiting list for such lessons (control arm).</p>
 <p>The primary endpoint is the Epworth Sleepiness Scale (ESS), a measure of daytime sleepiness on a scale from 0 (not sleepy in any situation) to 24 (very likely to fall asleep in all situations). We have data on this outcome at baseline (<code>epworth1</code>) and at 4 months (<code>epworth2</code>). (The data have been simplified for this tutorial.)</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">12</span>))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># didgeridoo &lt;- read_csv("data/alphorn.csv") |&gt; </span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(trt = factor(group, 1:0, c("control", "didgeridoo"))) |&gt; </span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(id, trt, age, gender, bmi, epworth1, epworth2)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># didgeridoo &lt;- read_csv("data/alphorn.csv") |&gt; </span></span>
+<span><span class="co">#   mutate(trt = factor(group, 1:0, c("control", "didgeridoo"))) |&gt; </span></span>
+<span><span class="co">#   select(id, trt, age, gender, bmi, epworth1, epworth2)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>didgeridoo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">trt =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">41</span>, <span class="dv">41</span>, <span class="dv">39</span>, <span class="dv">33</span>, <span class="dv">55</span>, <span class="dv">50</span>, <span class="dv">65</span>, <span class="dv">43</span>, <span class="dv">59</span>, <span class="dv">53</span>, </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">54</span>, <span class="dv">49</span>, <span class="dv">43</span>, <span class="dv">56</span>, <span class="dv">41</span>, <span class="dv">53</span>, <span class="dv">46</span>, <span class="dv">39</span>, <span class="dv">43</span>, <span class="dv">50</span>, <span class="dv">57</span>, <span class="dv">53</span>, <span class="dv">57</span>, <span class="dv">51</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">gender =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">bmi =</span> <span class="fu">c</span>(<span class="fl">26.1</span>, <span class="dv">19</span>, <span class="fl">27.2</span>, <span class="fl">22.5</span>, <span class="fl">29.4</span>, <span class="fl">29.4</span>, <span class="fl">26.8</span>, <span class="fl">26.4</span>, <span class="dv">31</span>, </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                             <span class="fl">23.4</span>, <span class="fl">29.4</span>, <span class="fl">28.4</span>, <span class="fl">26.6</span>, <span class="fl">26.7</span>, <span class="fl">19.4</span>, <span class="fl">25.8</span>, <span class="fl">25.7</span>, <span class="fl">27.3</span>, </span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                             <span class="fl">24.5</span>, <span class="dv">26</span>, <span class="fl">27.2</span>, <span class="dv">30</span>, <span class="fl">25.9</span>, <span class="fl">24.5</span>, <span class="fl">18.2</span>),</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">epworth1 =</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">11</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">11</span>, </span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                                  <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">11</span>, <span class="dv">19</span>, <span class="dv">13</span>, <span class="dv">23</span>, <span class="dv">18</span>, <span class="dv">12</span>, <span class="dv">21</span>, <span class="dv">12</span>, <span class="dv">15</span>),</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">epworth2 =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">14</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">11</span>, <span class="dv">10</span>, <span class="dv">5</span>, </span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                                  <span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">18</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">21</span>, <span class="dv">8</span>, <span class="dv">8</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trt =</span> <span class="fu">factor</span>(trt, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"didgeridoo"</span>)))</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>didgeridoo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">didgeridoo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">25</span>, </span>
+<span>                     trt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, </span>
+<span>                             <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>                     age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">45</span>, <span class="fl">41</span>, <span class="fl">41</span>, <span class="fl">39</span>, <span class="fl">33</span>, <span class="fl">55</span>, <span class="fl">50</span>, <span class="fl">65</span>, <span class="fl">43</span>, <span class="fl">59</span>, <span class="fl">53</span>, </span>
+<span>                             <span class="fl">54</span>, <span class="fl">49</span>, <span class="fl">43</span>, <span class="fl">56</span>, <span class="fl">41</span>, <span class="fl">53</span>, <span class="fl">46</span>, <span class="fl">39</span>, <span class="fl">43</span>, <span class="fl">50</span>, <span class="fl">57</span>, <span class="fl">53</span>, <span class="fl">57</span>, <span class="fl">51</span><span class="op">)</span>,</span>
+<span>                     gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, </span>
+<span>                                <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>                     bmi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">26.1</span>, <span class="fl">19</span>, <span class="fl">27.2</span>, <span class="fl">22.5</span>, <span class="fl">29.4</span>, <span class="fl">29.4</span>, <span class="fl">26.8</span>, <span class="fl">26.4</span>, <span class="fl">31</span>, </span>
+<span>                             <span class="fl">23.4</span>, <span class="fl">29.4</span>, <span class="fl">28.4</span>, <span class="fl">26.6</span>, <span class="fl">26.7</span>, <span class="fl">19.4</span>, <span class="fl">25.8</span>, <span class="fl">25.7</span>, <span class="fl">27.3</span>, </span>
+<span>                             <span class="fl">24.5</span>, <span class="fl">26</span>, <span class="fl">27.2</span>, <span class="fl">30</span>, <span class="fl">25.9</span>, <span class="fl">24.5</span>, <span class="fl">18.2</span><span class="op">)</span>,</span>
+<span>                     epworth1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>, <span class="fl">11</span>, <span class="fl">5</span>, <span class="fl">8</span>, <span class="fl">1</span>, <span class="fl">9</span>, <span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">7</span>, <span class="fl">9</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">11</span>, </span>
+<span>                                  <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">11</span>, <span class="fl">19</span>, <span class="fl">13</span>, <span class="fl">23</span>, <span class="fl">18</span>, <span class="fl">12</span>, <span class="fl">21</span>, <span class="fl">12</span>, <span class="fl">15</span><span class="op">)</span>,</span>
+<span>                     epworth2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">1</span>, <span class="fl">7</span>, <span class="fl">14</span>, <span class="fl">6</span>, <span class="fl">6</span>, <span class="fl">9</span>, <span class="fl">3</span>, <span class="fl">11</span>, <span class="fl">10</span>, <span class="fl">5</span>, </span>
+<span>                                  <span class="fl">8</span>, <span class="fl">3</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">18</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">21</span>, <span class="fl">8</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>trt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">trt</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="st">"didgeridoo"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">didgeridoo</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 25 × 7
       id trt          age gender   bmi epworth1 epworth2
    &lt;int&gt; &lt;fct&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -343,38 +317,30 @@ div.csl-indent {
 # ℹ 15 more rows</code></pre>
 </div>
 </div>
-</section>
-<section id="summarizing-continuous-outcomes" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="summarizing-continuous-outcomes"><span class="header-section-number">2.2</span> Summarizing continuous outcomes</h2>
+</section><section id="summarizing-continuous-outcomes" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="summarizing-continuous-outcomes">
+<span class="header-section-number">2.2</span> Summarizing continuous outcomes</h2>
 <p>A graph of ESS at 4 months, <code>epworth2</code>, by treatment could look something like this:</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(trt, epworth2,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> trt), <span class="at">data =</span> didgeridoo) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">height =</span> <span class="dv">0</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">outliers =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">24</span>) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Epworth sleepiness scale at 4 months"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">trt</span>, <span class="va">epworth2</span>,</span>
+<span>           color <span class="op">=</span> <span class="va">trt</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">didgeridoo</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>height <span class="op">=</span> <span class="fl">0</span>, width <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span>, outliers <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">24</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Epworth sleepiness scale at 4 months"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="continuous_files/figure-html/didgeridoo-graph-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="continuous_files/figure-html/didgeridoo-graph-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>It looks like the didgeridoo group has somewhat lower ESS, on average, than the control group. The next step is to quantify how much lower. A quick way is just to use <code>group_by()</code> and <code>summarize()</code>.</p>
+<p>It looks like the didgeridoo group has somewhat lower ESS, on average, than the control group. The next step is to quantify how much lower. A quick way is just to use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>.</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>didgeridoo <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trt) <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">m =</span> <span class="fu">mean</span>(epworth2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">didgeridoo</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">trt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>m <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">epworth2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   trt            m
   &lt;fct&gt;      &lt;dbl&gt;
@@ -382,16 +348,13 @@ div.csl-indent {
 2 didgeridoo  7.36</code></pre>
 </div>
 </div>
-<p>Using <code>tbl_summary()</code> extends nicely to more than 1 endpoint:</p>
+<p>Using <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary()</a></code> extends nicely to more than 1 endpoint:</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>didgeridoo <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(trt, epworth2) <span class="sc">|&gt;</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> trt, </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">statistic =</span> <span class="fu">list</span>(<span class="st">"epworth2"</span> <span class="ot">=</span> <span class="st">"{mean} ({sd})"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">didgeridoo</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">trt</span>, <span class="va">epworth2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">trt</span>, </span>
+<span>              statistic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"epworth2"</span> <span class="op">=</span> <span class="st">"{mean} ({sd})"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
 <div id="dzeezunkoe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#dzeezunkoe table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -841,59 +804,49 @@ div.csl-indent {
   height: 0px !important;
 }
 </style>
-
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
 <col style="width: 33%">
 </colgroup>
-<thead>
-<tr class="gt_col_headings header">
+<thead><tr class="gt_col_headings header">
 <th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
-<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>control</strong><br>
-N = 11<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>didgeridoo</strong><br>
-N = 14<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>control</strong><br>
+N = 11<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>didgeridoo</strong><br>
+N = 14<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+</tr></thead>
+<tbody class="gt_table_body"><tr class="odd">
 <td class="gt_row gt_left" headers="label">epworth2</td>
 <td class="gt_row gt_center" headers="stat_1">9.6 (6.0)</td>
 <td class="gt_row gt_center" headers="stat_2">7.4 (2.3)</td>
-</tr>
-</tbody><tfoot>
-<tr class="gt_footnotes odd">
-<td colspan="3" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Mean (SD)</td>
-</tr>
-</tfoot>
-
+</tr></tbody>
+<tfoot><tr class="gt_footnotes odd">
+<td colspan="3" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Mean (SD)</td>
+</tr></tfoot>
 </table>
-
 </div>
 </div>
 </div>
 <p>Either way, we get the same results: average / mean ESS in the didgeridoo group is 7.4 compared to 9.6 in the control group. The difference between the two groups is therefore -2.2, that is, participants taking didgeridoo lessons had on average a 2.2 point lower ESS than those not taking lessons.</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fl">7.4</span> <span class="sc">-</span> <span class="fl">9.6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">7.4</span> <span class="op">-</span> <span class="fl">9.6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>[1] -2.2</code></pre>
 </div>
 </div>
-</section>
-<section id="comparing-continuous-outcomes" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="comparing-continuous-outcomes"><span class="header-section-number">2.3</span> Comparing continuous outcomes</h2>
+</section><section id="comparing-continuous-outcomes" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="comparing-continuous-outcomes">
+<span class="header-section-number">2.3</span> Comparing continuous outcomes</h2>
 <p>Now we want to test for difference in ESS between the two arms in the didgeridoo study. One option for that is a two-sample t-test.</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(epworth2 <span class="sc">~</span> trt, <span class="at">data =</span> didgeridoo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">epworth2</span> <span class="op">~</span> <span class="va">trt</span>, data <span class="op">=</span> <span class="va">didgeridoo</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
 
@@ -907,28 +860,22 @@ sample estimates:
                 9.636364                 7.357143 </code></pre>
 </div>
 </div>
-<p>(Note: You may have learned in a statistics class that there are <a href="https://en.wikipedia.org/wiki/Student%27s_t-test#Independent_two-sample_t-test">several versions of the t-test</a>, depending on whether the variances and / or sample sizes are similar. As it is not recommended to test for equal variances first (<span class="citation" data-cites="zimmerman">Zimmerman (<a href="references.html#ref-zimmerman" role="doc-biblioref">2004</a>)</span>), <code>t.test()</code> conducts the most general version, “Welch”, of the t-test by default (i.e., without the equal variance assumption, using the option <code>var.equal = FALSE</code>).)</p>
+<p>(Note: You may have learned in a statistics class that there are <a href="https://en.wikipedia.org/wiki/Student%27s_t-test#Independent_two-sample_t-test">several versions of the t-test</a>, depending on whether the variances and / or sample sizes are similar. As it is not recommended to test for equal variances first (<span class="citation" data-cites="zimmerman">Zimmerman (<a href="references.html#ref-zimmerman" role="doc-biblioref">2004</a>)</span>), <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> conducts the most general version, “Welch”, of the t-test by default (i.e., without the equal variance assumption, using the option <code>var.equal = FALSE</code>).)</p>
 <p>Previously, we had a treatment difference of <code>7.4 - 9.6 = -2.2</code>. Now we also get a 95% confidence interval from -1.89 to 6.45, and p = 0.26. Both indicate no difference between intervention and control.</p>
 <p>But wait, shouldn’t the treatment effect be inside the confidence interval. Do you see why that is not here?</p>
 <p>In R, as in Stata and other statistical programming languages, the <code>t.test</code> results compare the 2nd group to the 1st group, or in this case, <code>control - didgeridoo</code>. This is the opposite of what we calculated above <code>didgeridoo - control</code>, and makes the <code>t.test</code> output somewhat difficult to follow.</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean difference from t.test()</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fl">9.636</span> <span class="sc">-</span> <span class="fl">7.357</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># mean difference from t.test()</span></span>
+<span><span class="fl">9.636</span> <span class="op">-</span> <span class="fl">7.357</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.279</code></pre>
 </div>
 </div>
-<p>We could also use linear regression, <code>lm()</code>, to get the same results, and then <code>tbl_regression()</code> to show the coefficient table with confidence intervals.</p>
+<p>We could also use linear regression, <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, to get the same results, and then <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression()</a></code> to show the coefficient table with confidence intervals.</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(epworth2 <span class="sc">~</span> trt, <span class="at">data =</span> didgeridoo)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">epworth2</span> <span class="op">~</span> <span class="va">trt</span>, data <span class="op">=</span> <span class="va">didgeridoo</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">mod</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
 <div id="dyduoxcnlf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#dyduoxcnlf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -1378,7 +1325,6 @@ sample estimates:
   height: 0px !important;
 }
 </style>
-
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 25%">
@@ -1386,30 +1332,24 @@ sample estimates:
 <col style="width: 25%">
 <col style="width: 25%">
 </colgroup>
-<thead>
-<tr class="gt_col_headings header">
+<thead><tr class="gt_col_headings header">
 <th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
 <th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
 <th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
 <th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
-</tr>
-</thead>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">trt</td>
-<td class="gt_row gt_center" headers="estimate"><br>
-</td>
-<td class="gt_row gt_center" headers="conf.low"><br>
-</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;control</td>
 <td class="gt_row gt_center" headers="estimate">—</td>
 <td class="gt_row gt_center" headers="conf.low">—</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;didgeridoo</td>
@@ -1417,25 +1357,19 @@ sample estimates:
 <td class="gt_row gt_center" headers="conf.low">-5.9, 1.3</td>
 <td class="gt_row gt_center" headers="p.value">0.2</td>
 </tr>
-</tbody><tfoot>
-<tr class="gt_sourcenotes odd">
+</tbody>
+<tfoot><tr class="gt_sourcenotes odd">
 <td colspan="4" class="gt_sourcenote">Abbreviation: CI = Confidence Interval</td>
-</tr>
-</tfoot>
-
+</tr></tfoot>
 </table>
-
 </div>
 </div>
 </div>
 <p>The results from linear regression may not be exactly the same as those from the t-test, but they are quite similar. Additionally, linear regression allows us to further adjust for other participant characteristics, e.g.&nbsp;baseline ESS.</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(epworth2 <span class="sc">~</span> trt <span class="sc">+</span> epworth1, <span class="at">data =</span> didgeridoo) </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(mod, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">epworth2</span> <span class="op">~</span> <span class="va">trt</span> <span class="op">+</span> <span class="va">epworth1</span>, data <span class="op">=</span> <span class="va">didgeridoo</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span><span class="va">mod</span>, conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
 <div id="lhswyrlpsg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#lhswyrlpsg table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -1885,7 +1819,6 @@ sample estimates:
   height: 0px !important;
 }
 </style>
-
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 25%">
@@ -1893,30 +1826,24 @@ sample estimates:
 <col style="width: 25%">
 <col style="width: 25%">
 </colgroup>
-<thead>
-<tr class="gt_col_headings header">
+<thead><tr class="gt_col_headings header">
 <th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
 <th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
 <th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
 <th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
-</tr>
-</thead>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">trt</td>
-<td class="gt_row gt_center" headers="estimate"><br>
-</td>
-<td class="gt_row gt_center" headers="conf.low"><br>
-</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;control</td>
 <td class="gt_row gt_center" headers="estimate">—</td>
 <td class="gt_row gt_center" headers="conf.low">—</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;didgeridoo</td>
@@ -1930,25 +1857,19 @@ sample estimates:
 <td class="gt_row gt_center" headers="conf.low">0.42, 0.92</td>
 <td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
 </tr>
-</tbody><tfoot>
-<tr class="gt_sourcenotes odd">
+</tbody>
+<tfoot><tr class="gt_sourcenotes odd">
 <td colspan="4" class="gt_sourcenote">Abbreviation: CI = Confidence Interval</td>
-</tr>
-</tfoot>
-
+</tr></tfoot>
 </table>
-
 </div>
 </div>
 </div>
 <p>After adjustment for baseline ESS, the observed treatment effect is -2.7 (95% CI -5.1 to -0.35, p = 0.027), showing a modest and statistically significant effect of didgeridoo playing on sleep apnea. These are essentially the results that <span class="citation" data-cites="didgeridoo">Puhan et al. (<a href="references.html#ref-didgeridoo" role="doc-biblioref">2006</a>)</span> reported, though they examined change scores.</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>((epworth2 <span class="sc">-</span> epworth1) <span class="sc">~</span> trt, <span class="at">data =</span> didgeridoo) <span class="sc">|&gt;</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_regression</span>(<span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="op">(</span><span class="va">epworth2</span> <span class="op">-</span> <span class="va">epworth1</span><span class="op">)</span> <span class="op">~</span> <span class="va">trt</span>, data <span class="op">=</span> <span class="va">didgeridoo</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html">tbl_regression</a></span><span class="op">(</span>conf.int <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
 <div id="hyvywodskz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#hyvywodskz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -2398,7 +2319,6 @@ sample estimates:
   height: 0px !important;
 }
 </style>
-
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 25%">
@@ -2406,30 +2326,24 @@ sample estimates:
 <col style="width: 25%">
 <col style="width: 25%">
 </colgroup>
-<thead>
-<tr class="gt_col_headings header">
+<thead><tr class="gt_col_headings header">
 <th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
 <th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
 <th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
 <th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
-</tr>
-</thead>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">trt</td>
-<td class="gt_row gt_center" headers="estimate"><br>
-</td>
-<td class="gt_row gt_center" headers="conf.low"><br>
-</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
+<td class="gt_row gt_center" headers="estimate"><br></td>
+<td class="gt_row gt_center" headers="conf.low"><br></td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;control</td>
 <td class="gt_row gt_center" headers="estimate">—</td>
 <td class="gt_row gt_center" headers="conf.low">—</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
+<td class="gt_row gt_center" headers="p.value"><br></td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;didgeridoo</td>
@@ -2437,14 +2351,11 @@ sample estimates:
 <td class="gt_row gt_center" headers="conf.low">-5.7, -0.27</td>
 <td class="gt_row gt_center" headers="p.value">0.033</td>
 </tr>
-</tbody><tfoot>
-<tr class="gt_sourcenotes odd">
+</tbody>
+<tfoot><tr class="gt_sourcenotes odd">
 <td colspan="4" class="gt_sourcenote">Abbreviation: CI = Confidence Interval</td>
-</tr>
-</tfoot>
-
+</tr></tfoot>
 </table>
-
 </div>
 </div>
 </div>
@@ -2460,10 +2371,7 @@ Puhan, MA, C Suarez, C Lo Cascio, A Zahn, M Heitz, and O Braendli. 2006. <span>�
 Zimmerman, DW. 2004. <span>“A Note on Preliminary Tests of Equality of Variances.”</span> <em>British Journal of Mathematical and Statistical Psychology</em> 57: 173–81. https://doi.org/<a href="https://doi.org/10.1348/000711004849222">https://doi.org/10.1348/000711004849222</a>.
 </div>
 </div>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -2913,9 +2821,7 @@ Zimmerman, DW. 2004. <span>“A Note on Preliminary Tests of Equality of Varianc
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./intro.html" class="pagination-link" aria-label="A note on setting up R and R studio">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">A note on setting up R and R studio</span></span>
       </a>          
@@ -3049,7 +2955,6 @@ Zimmerman, DW. 2004. <span>“A Note on Preliminary Tests of Equality of Varianc
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-
 
 
 

@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.10.19">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>8&nbsp; Data cleaning and Table 1 – Short Tutorial on R and Biostatistics</title>
 <style>
 /* Default styles provided by pandoc.
@@ -63,7 +60,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -82,8 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e3a0307bf87dea633ae254d873c6233f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-e3a0307bf87dea633ae254d873c6233f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -110,16 +105,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -130,13 +120,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Short Tutorial on R and Biostatistics</a> 
     </div>
@@ -148,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
@@ -233,25 +219,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#make-a-demographics-table" id="toc-make-a-demographics-table" class="nav-link active" data-scroll-target="#make-a-demographics-table"><span class="header-section-number">8.1</span> Make a demographics table</a></li>
-  </ul>
-</nav>
+<li><a href="#make-a-demographics-table" id="toc-make-a-demographics-table" class="nav-link active" data-scroll-target="#make-a-demographics-table"><span class="header-section-number">8.1</span> Make a demographics table</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data cleaning and Table 1</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">
+<span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data cleaning and Table 1</span>
+</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i></button></div></div>
 </div>
 
 
@@ -265,88 +247,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header>
-
-
-<div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</header><div class="cell">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20261019</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">60</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">study_id =</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span> <span class="sc">*</span> n),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">first =</span> <span class="fu">sample</span>(LETTERS, <span class="dv">2</span> <span class="sc">*</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">last =</span> <span class="fu">sample</span>(LETTERS, <span class="dv">2</span> <span class="sc">*</span> n, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">inclusion_over17 =</span> <span class="dv">1</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">inclusion2 =</span> <span class="dv">1</span>, <span class="at">inclusion3 =</span> <span class="dv">1</span>, <span class="at">inclusion4 =</span> <span class="dv">1</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">exclusion1 =</span> <span class="dv">0</span>, <span class="at">exclusion2 =</span> <span class="dv">0</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">screened =</span> <span class="dv">1</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">informed_consent =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">1</span>, <span class="fl">0.9</span>),</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>              <span class="at">endpoints =</span>  <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">1</span>, <span class="fl">0.9</span>),</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">age_today =</span> <span class="fu">floor</span>(<span class="fu">runif</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">25</span>, <span class="dv">45</span>)),</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">gender =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">2</span>, <span class="fl">0.250</span>),</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">video_games =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">4</span>, <span class="fl">0.2</span>),</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">randomization_group =</span> <span class="fu">rep</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, n)) <span class="sc">|&gt;</span> </span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">reverse_digit =</span> <span class="fu">rnorm</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> randomization_group, <span class="fl">1.5</span>),</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">reverse_digit =</span> <span class="fu">round</span>(reverse_digit),</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">cold_pressor =</span> <span class="fu">rnorm</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">60</span> <span class="sc">-</span> <span class="dv">10</span> <span class="sc">*</span> randomization_group, <span class="dv">20</span>),</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">cold_pressor =</span> <span class="fu">round</span>(cold_pressor),</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">video_challenge =</span> <span class="fu">rbinom</span>(<span class="dv">2</span> <span class="sc">*</span> n, <span class="dv">1</span>, <span class="fl">0.2</span> <span class="sc">+</span> <span class="fl">0.3</span> <span class="sc">*</span> randomization_group)) <span class="sc">|&gt;</span> </span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(age_today<span class="sc">:</span>video_challenge, <span class="sc">~</span> <span class="fu">ifelse</span>(informed_consent <span class="sc">==</span> <span class="dv">1</span>, .x, <span class="cn">NA</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(reverse_digit<span class="sc">:</span>video_challenge, <span class="sc">~</span> <span class="fu">ifelse</span>(endpoints <span class="sc">==</span> <span class="dv">1</span>, .x, <span class="cn">NA</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>endpoints) </span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>sm <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> </span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>(inclusion_over17<span class="sc">:</span>screened)) <span class="sc">|&gt;</span> </span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> study_id,</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">trt =</span> randomization_group,</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">age =</span> age_today) <span class="sc">|&gt;</span> </span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"O"</span>)),</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>         <span class="at">trt =</span> <span class="fu">factor</span>(trt, <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"intervention"</span>)),</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>         <span class="at">video_games =</span> <span class="fu">factor</span>(video_games, <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, </span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">c</span>(<span class="st">"&lt;30 minutes per day"</span>, <span class="st">"30-60"</span>, <span class="st">"60-120"</span>, <span class="st">"120+"</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(trt), <span class="sc">!</span><span class="fu">is.na</span>(reverse_digit))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20261019</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">60</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>study_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span>,</span>
+<span>              first <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">LETTERS</span>, <span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>              last <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">LETTERS</span>, <span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>              inclusion_over17 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>              inclusion2 <span class="op">=</span> <span class="fl">1</span>, inclusion3 <span class="op">=</span> <span class="fl">1</span>, inclusion4 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>              exclusion1 <span class="op">=</span> <span class="fl">0</span>, exclusion2 <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>              screened <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>              informed_consent <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span>              endpoints <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span>              age_today <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">25</span>, <span class="fl">45</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>              gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">2</span>, <span class="fl">0.250</span><span class="op">)</span>,</span>
+<span>              video_games <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">4</span>, <span class="fl">0.2</span><span class="op">)</span>,</span>
+<span>              randomization_group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>reverse_digit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">3</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">randomization_group</span>, <span class="fl">1.5</span><span class="op">)</span>,</span>
+<span>         reverse_digit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">)</span>,</span>
+<span>         cold_pressor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">60</span> <span class="op">-</span> <span class="fl">10</span> <span class="op">*</span> <span class="va">randomization_group</span>, <span class="fl">20</span><span class="op">)</span>,</span>
+<span>         cold_pressor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">cold_pressor</span><span class="op">)</span>,</span>
+<span>         video_challenge <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">n</span>, <span class="fl">1</span>, <span class="fl">0.2</span> <span class="op">+</span> <span class="fl">0.3</span> <span class="op">*</span> <span class="va">randomization_group</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">age_today</span><span class="op">:</span><span class="va">video_challenge</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">informed_consent</span> <span class="op">==</span> <span class="fl">1</span>, <span class="va">.x</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">:</span><span class="va">video_challenge</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">endpoints</span> <span class="op">==</span> <span class="fl">1</span>, <span class="va">.x</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">endpoints</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">sm</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="op">(</span><span class="va">inclusion_over17</span><span class="op">:</span><span class="va">screened</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">study_id</span>,</span>
+<span>         trt <span class="op">=</span> <span class="va">randomization_group</span>,</span>
+<span>         age <span class="op">=</span> <span class="va">age_today</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">gender</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"O"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         trt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">trt</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="st">"intervention"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         video_games <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">video_games</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">3</span>, </span>
+<span>                              <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"&lt;30 minutes per day"</span>, <span class="st">"30-60"</span>, <span class="st">"60-120"</span>, <span class="st">"120+"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">trt</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>To make a smaller cleaned version of the data for analysis, we might consider doing the following:</p>
 <ol type="1">
-<li>Remove screening variables. Choosing variables to keep is done with <code>select()</code>, e.g.&nbsp;<code>select(var1, var2)</code>. If you just want to drop a few variables, try <code>select(-var1, -var2)</code>.</li>
-<li>Rename study_id to id, randomization_group to trt, age_today to age. Renaming variables can be performed by typing using <code>rename()</code> , like <code>rename(newname = oldname)</code>.</li>
-<li>Give labels to gender, trt and video_games. The command <code>mutate()</code> can be used to make various changes to variables. Specifically, in these cases, we need to also use <code>factor()</code>. If, for example, we have a 0/1 variable called <code>var</code> where 0 means “no” and 1 means “yes”, we could write <code>mutate(var = factor(var, c(0, 1), c("no", "yes"))</code>. We can also put multiple changes to multiple variables inside <code>mutate()</code>.</li>
-<li>Filter out participants that are not randomized and do not have the primary endpoint. For this, there are two options <code>filter()</code> or <code>filter_out()</code>. If you use <code>filter()</code>, write out conditions which should be met (“inclusion criteria”). Alternately, if you use <code>filter_out()</code>, write out conditions which should <em>not</em> be met (“exclusion criteria”). Multiple conditions can be separated by a comma, and will be combined with AND (<code>&amp;</code>). If you want OR, you could write <code>|</code> instead of a comma. For example, to keep female participants aged 45 or older, we could write <code>filter(gender == 0, age_today &gt;= 45)</code>.</li>
+<li>Remove screening variables. Choosing variables to keep is done with <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>, e.g.&nbsp;<code>select(var1, var2)</code>. If you just want to drop a few variables, try <code>select(-var1, -var2)</code>.</li>
+<li>Rename study_id to id, randomization_group to trt, age_today to age. Renaming variables can be performed by typing using <code><a href="https://dplyr.tidyverse.org/reference/rename.html">rename()</a></code> , like <code>rename(newname = oldname)</code>.</li>
+<li>Give labels to gender, trt and video_games. The command <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> can be used to make various changes to variables. Specifically, in these cases, we need to also use <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>. If, for example, we have a 0/1 variable called <code>var</code> where 0 means “no” and 1 means “yes”, we could write <code>mutate(var = factor(var, c(0, 1), c("no", "yes"))</code>. We can also put multiple changes to multiple variables inside <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>.</li>
+<li>Filter out participants that are not randomized and do not have the primary endpoint. For this, there are two options <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter_out()</a></code>. If you use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, write out conditions which should be met (“inclusion criteria”). Alternately, if you use <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter_out()</a></code>, write out conditions which should <em>not</em> be met (“exclusion criteria”). Multiple conditions can be separated by a comma, and will be combined with AND (<code>&amp;</code>). If you want OR, you could write <code>|</code> instead of a comma. For example, to keep female participants aged 45 or older, we could write <code>filter(gender == 0, age_today &gt;= 45)</code>.</li>
 </ol>
 <p>All of these functions are in the <a href="https://dplyr.tidyverse.org/articles/dplyr.html">dplyr</a> package.</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sm <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> study_id,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">trt =</span> randomization_group,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">age =</span> age_today) <span class="sc">|&gt;</span> </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"O"</span>)),</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">trt =</span> <span class="fu">factor</span>(trt, <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"intervention"</span>)),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">video_games =</span> <span class="fu">factor</span>(video_games, <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">c</span>(<span class="st">"&lt;30 minutes per day"</span>, <span class="st">"30-60"</span>, <span class="st">"60-120"</span>, <span class="st">"120+"</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(trt), <span class="sc">!</span><span class="fu">is.na</span>(reverse_digit))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sm</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">study_id</span>,</span>
+<span>         trt <span class="op">=</span> <span class="va">randomization_group</span>,</span>
+<span>         age <span class="op">=</span> <span class="va">age_today</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">gender</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"O"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         trt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">trt</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"control"</span>, <span class="st">"intervention"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>         video_games <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">video_games</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">3</span>, </span>
+<span>                              <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"&lt;30 minutes per day"</span>, <span class="st">"30-60"</span>, <span class="st">"60-120"</span>, <span class="st">"120+"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">trt</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">reverse_digit</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<section id="make-a-demographics-table" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="make-a-demographics-table"><span class="header-section-number">8.1</span> Make a demographics table</h2>
-<p>Now that we’ve cleaned the dataset, let’s make a table of baseline characteristics. From the dataset we made in the last step, we probably want to include <code>age, gender, video_games</code> and report summary statistics by <code>trt</code>. Using the R package <a href="https://www.danieldsjoberg.com/gtsummary/"><code>gtsummary</code></a>, we can do this with the function <code>tbl_summary()</code> (see also the <a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html">introduction</a> on the <code>gtsummary</code> website).</p>
+<section id="make-a-demographics-table" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="make-a-demographics-table">
+<span class="header-section-number">8.1</span> Make a demographics table</h2>
+<p>Now that we’ve cleaned the dataset, let’s make a table of baseline characteristics. From the dataset we made in the last step, we probably want to include <code>age, gender, video_games</code> and report summary statistics by <code>trt</code>. Using the R package <a href="https://www.danieldsjoberg.com/gtsummary/"><code>gtsummary</code></a>, we can do this with the function <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary()</a></code> (see also the <a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html">introduction</a> on the <code>gtsummary</code> website).</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sm <span class="sc">|&gt;</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(trt, age, gender, video_games) <span class="sc">|&gt;</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> trt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ddsjoberg/gtsummary">gtsummary</a></span><span class="op">)</span></span>
+<span><span class="va">sm</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">trt</span>, <span class="va">age</span>, <span class="va">gender</span>, <span class="va">video_games</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">trt</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
 <div id="gkxwpspuyy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#gkxwpspuyy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -796,22 +766,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   height: 0px !important;
 }
 </style>
-
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
 <col style="width: 33%">
 </colgroup>
-<thead>
-<tr class="gt_col_headings header">
+<thead><tr class="gt_col_headings header">
 <th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
-<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>control</strong><br>
-N = 49<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>intervention</strong><br>
-N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-</tr>
-</thead>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>control</strong><br>
+N = 49<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>intervention</strong><br>
+N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">age</td>
@@ -820,10 +791,8 @@ N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">gender</td>
-<td class="gt_row gt_center" headers="stat_1"><br>
-</td>
-<td class="gt_row gt_center" headers="stat_2"><br>
-</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;F</td>
@@ -842,10 +811,8 @@ N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">video_games</td>
-<td class="gt_row gt_center" headers="stat_1"><br>
-</td>
-<td class="gt_row gt_center" headers="stat_2"><br>
-</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&lt;30 minutes per day</td>
@@ -867,14 +834,12 @@ N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 <td class="gt_row gt_center" headers="stat_1">2 (4.1%)</td>
 <td class="gt_row gt_center" headers="stat_2">1 (1.9%)</td>
 </tr>
-</tbody><tfoot>
-<tr class="gt_footnotes odd">
-<td colspan="3" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Median (Q1, Q3); n (%)</td>
-</tr>
-</tfoot>
-
+</tbody>
+<tfoot><tr class="gt_footnotes odd">
+<td colspan="3" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Median (Q1, Q3); n (%)</td>
+</tr></tfoot>
 </table>
-
 </div>
 </div>
 </div>
@@ -888,25 +853,22 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>According to both the <a href="https://www.consort-spirit.org/item25-baselinedata">CONSORT</a> and <a href="https://www.strobe-statement.org/strobe-publications/">STROBE</a> guidelines, “significance testing of baseline differences is not recommended and should not be reported” and “p-values are not an appropriate criterion for selecting which confounders to adjust for in analysis”. Do not be tempted to add p-values, using <code>add_p()</code>, to these kinds of tables if they are used to compare baseline characteristics!</p>
+<p>According to both the <a href="https://www.consort-spirit.org/item25-baselinedata">CONSORT</a> and <a href="https://www.strobe-statement.org/strobe-publications/">STROBE</a> guidelines, “significance testing of baseline differences is not recommended and should not be reported” and “p-values are not an appropriate criterion for selecting which confounders to adjust for in analysis”. Do not be tempted to add p-values, using <code><a href="https://www.danieldsjoberg.com/gtsummary/reference/add_p.html">add_p()</a></code>, to these kinds of tables if they are used to compare baseline characteristics!</p>
 </div>
 </div>
-<p>To clean up or improve the table, try <a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html#customize-output">customizing</a> it with options like <code>label</code>, <code>value</code>, <code>digit</code> or <code>statistic</code>. Use the <a href="https://forcats.tidyverse.org"><code>forcats</code></a> package gives us more ways to deal with factor variables, in this case, the <code>fct_recode()</code> function for change labels on the levels of the factor.</p>
+<p>To clean up or improve the table, try <a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html#customize-output">customizing</a> it with options like <code>label</code>, <code>value</code>, <code>digit</code> or <code>statistic</code>. Use the <a href="https://forcats.tidyverse.org"><code>forcats</code></a> package gives us more ways to deal with factor variables, in this case, the <code><a href="https://forcats.tidyverse.org/reference/fct_recode.html">fct_recode()</a></code> function for change labels on the levels of the factor.</p>
 <div class="cell">
-<details open="" class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sm <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(trt, age, gender, video_games) <span class="sc">|&gt;</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">video_games =</span> <span class="fu">fct_recode</span>(video_games, <span class="st">"&lt;30"</span> <span class="ot">=</span> <span class="st">"&lt;30 minutes per day"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tbl_summary</span>(<span class="at">by =</span> trt,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="fu">list</span>(<span class="at">video_games =</span> <span class="st">"video games (minutes / day)"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                           gender <span class="sc">~</span> <span class="st">"gender (F)"</span>),</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">value =</span> <span class="fu">list</span>(gender <span class="sc">~</span> <span class="st">"F"</span>), </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">digits =</span> <span class="fu">list</span>(age <span class="sc">~</span> <span class="dv">1</span>),</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">statistic =</span> <span class="fu">list</span>(age <span class="sc">~</span> <span class="st">"{mean} ± {sd}"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
+<details open="" class="code-fold"><summary>Code</summary><div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://forcats.tidyverse.org/">forcats</a></span><span class="op">)</span></span>
+<span><span class="va">sm</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">trt</span>, <span class="va">age</span>, <span class="va">gender</span>, <span class="va">video_games</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>video_games <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_recode.html">fct_recode</a></span><span class="op">(</span><span class="va">video_games</span>, <span class="st">"&lt;30"</span> <span class="op">=</span> <span class="st">"&lt;30 minutes per day"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="va">trt</span>,</span>
+<span>              label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>video_games <span class="op">=</span> <span class="st">"video games (minutes / day)"</span>,</span>
+<span>                           <span class="va">gender</span> <span class="op">~</span> <span class="st">"gender (F)"</span><span class="op">)</span>,</span>
+<span>              value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">~</span> <span class="st">"F"</span><span class="op">)</span>, </span>
+<span>              digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">age</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>              statistic <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">age</span> <span class="op">~</span> <span class="st">"{mean} ± {sd}"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details><div class="cell-output-display">
 <div id="bwokcidvgc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#bwokcidvgc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -1356,22 +1318,23 @@ Important
   height: 0px !important;
 }
 </style>
-
 <table class="gt_table caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
 <col style="width: 33%">
 </colgroup>
-<thead>
-<tr class="gt_col_headings header">
+<thead><tr class="gt_col_headings header">
 <th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
-<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>control</strong><br>
-N = 49<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>intervention</strong><br>
-N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-</tr>
-</thead>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>control</strong><br>
+N = 49<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">
+<strong>intervention</strong><br>
+N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span>
+</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">age</td>
@@ -1385,10 +1348,8 @@ N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">video games (minutes / day)</td>
-<td class="gt_row gt_center" headers="stat_1"><br>
-</td>
-<td class="gt_row gt_center" headers="stat_2"><br>
-</td>
+<td class="gt_row gt_center" headers="stat_1"><br></td>
+<td class="gt_row gt_center" headers="stat_2"><br></td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&lt;30</td>
@@ -1410,14 +1371,12 @@ N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 <td class="gt_row gt_center" headers="stat_1">2 (4.1%)</td>
 <td class="gt_row gt_center" headers="stat_2">1 (1.9%)</td>
 </tr>
-</tbody><tfoot>
-<tr class="gt_footnotes odd">
-<td colspan="3" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Mean ± SD; n (%)</td>
-</tr>
-</tfoot>
-
+</tbody>
+<tfoot><tr class="gt_footnotes odd">
+<td colspan="3" class="gt_footnote">
+<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Mean ± SD; n (%)</td>
+</tr></tfoot>
 </table>
-
 </div>
 </div>
 </div>
@@ -1425,10 +1384,7 @@ N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 
 <!-- -->
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -1878,9 +1834,7 @@ N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
       }
     }
   });
-  </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./datachecking.html" class="pagination-link" aria-label="Data checking">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data checking</span></span>
       </a>          
@@ -1955,7 +1909,6 @@ N = 53<span class="gt_footnote_marks" style="white-space:nowrap;font-style:itali
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-
 
 
 
