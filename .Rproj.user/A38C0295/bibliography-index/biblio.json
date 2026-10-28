@@ -453,6 +453,43 @@
             "volume": "57"
         },
         {
+            "URL": "https://www.ema.europa.eu/en/scientific-guidelines/adjustment-baseline-covariates-clinical-trials",
+            "author": [
+                {
+                    "literal": "European Medicines Agency"
+                }
+            ],
+            "id": "covariatesEMA",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015
+                    ]
+                ]
+            },
+            "note": "EMA/CHMP/295050/2013",
+            "title": "Guideline on adjustment for baseline covariates in clinical trials",
+            "type": ""
+        },
+        {
+            "URL": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/adjusting-covariates-randomized-clinical-trials-drugs-and-biological-products",
+            "author": [
+                {
+                    "literal": "Food and Drug Administration"
+                }
+            ],
+            "id": "covariatesFDA",
+            "issued": {
+                "date-parts": [
+                    [
+                        2023
+                    ]
+                ]
+            },
+            "title": "Adjusting for covariates in randomized clinical trials for drugs and biological products",
+            "type": ""
+        },
+        {
             "DOI": "10.1136/bmj.320.7247.1468",
             "author": [
                 {
@@ -505,6 +542,209 @@
             "title-short": "Statistics notes",
             "type": "article-journal",
             "volume": "310"
+        },
+        {
+            "DOI": "10.1093/aje/kws412",
+            "author": [
+                {
+                    "family": "Westreich",
+                    "given": "D"
+                },
+                {
+                    "family": "Greenland",
+                    "given": "S"
+                }
+            ],
+            "container-title": "Am J Epidemiol",
+            "id": "table2fallacy",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2013
+                    ]
+                ]
+            },
+            "title": "The table 2 fallacy: Presenting and interpreting confounder and modifier coefficients",
+            "title-short": "The table 2 fallacy",
+            "type": "article-journal",
+            "volume": "177"
+        },
+        {
+            "DOI": "10.1136/bmj-2024-081123",
+            "URL": "https://www.consort-spirit.org",
+            "author": [
+                {
+                    "family": "Hopewell",
+                    "given": "Sally"
+                },
+                {
+                    "family": "Chan",
+                    "given": "An-Wen"
+                },
+                {
+                    "family": "Collins",
+                    "given": "Gary S"
+                },
+                {
+                    "family": "Hróbjartsson",
+                    "given": "Asbjørn"
+                },
+                {
+                    "family": "Moher",
+                    "given": "David"
+                },
+                {
+                    "family": "Schulz",
+                    "given": "Kenneth F"
+                },
+                {
+                    "family": "Tunn",
+                    "given": "Ruth"
+                },
+                {
+                    "family": "Aggarwal",
+                    "given": "Rakesh"
+                },
+                {
+                    "family": "Berkwits",
+                    "given": "Michael"
+                },
+                {
+                    "family": "Berlin",
+                    "given": "Jesse A"
+                },
+                {
+                    "family": "Bhandari",
+                    "given": "Nita"
+                },
+                {
+                    "family": "Butcher",
+                    "given": "Nancy J"
+                },
+                {
+                    "family": "Campbell",
+                    "given": "Marion K"
+                },
+                {
+                    "family": "Chidebe",
+                    "given": "Runcie C W"
+                },
+                {
+                    "family": "Elbourne",
+                    "given": "Diana"
+                },
+                {
+                    "family": "Farmer",
+                    "given": "Andrew"
+                },
+                {
+                    "family": "Fergusson",
+                    "given": "Dean A"
+                },
+                {
+                    "family": "Golub",
+                    "given": "Robert M"
+                },
+                {
+                    "family": "Goodman",
+                    "given": "Steven N"
+                },
+                {
+                    "family": "Hoffmann",
+                    "given": "Tammy C"
+                },
+                {
+                    "family": "Ioannidis",
+                    "given": "John P A"
+                },
+                {
+                    "family": "Kahan",
+                    "given": "Brennan C"
+                },
+                {
+                    "family": "Knowles",
+                    "given": "Rachel L"
+                },
+                {
+                    "family": "Lamb",
+                    "given": "Sarah E"
+                },
+                {
+                    "family": "Lewis",
+                    "given": "Steff"
+                },
+                {
+                    "family": "Loder",
+                    "given": "Elizabeth"
+                },
+                {
+                    "family": "Offringa",
+                    "given": "Martin"
+                },
+                {
+                    "family": "Ravaud",
+                    "given": "Philippe"
+                },
+                {
+                    "family": "Richards",
+                    "given": "Dawn P"
+                },
+                {
+                    "family": "Rockhold",
+                    "given": "Frank W"
+                },
+                {
+                    "family": "Schriger",
+                    "given": "David L"
+                },
+                {
+                    "family": "Siegfried",
+                    "given": "Nandi L"
+                },
+                {
+                    "family": "Staniszewska",
+                    "given": "Sophie"
+                },
+                {
+                    "family": "Taylor",
+                    "given": "Rod S"
+                },
+                {
+                    "family": "Thabane",
+                    "given": "Lehana"
+                },
+                {
+                    "family": "Torgerson",
+                    "given": "David"
+                },
+                {
+                    "family": "Vohra",
+                    "given": "Sunita"
+                },
+                {
+                    "family": "White",
+                    "given": "Ian R"
+                },
+                {
+                    "family": "Boutron",
+                    "given": "Isabelle"
+                }
+            ],
+            "container-title": "BMJ",
+            "id": "consort",
+            "issued": {
+                "date-parts": [
+                    [
+                        2025
+                    ]
+                ]
+            },
+            "publisher": "BMJ Publishing Group Ltd",
+            "title": "CONSORT 2025 statement: Updated guideline for reporting randomised trials",
+            "title-short": "CONSORT 2025 statement",
+            "type": "article-journal",
+            "volume": "389"
         }
     ],
     "project_biblios": [

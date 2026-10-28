@@ -1,0 +1,95 @@
+# Covariate adjustment and baseline information
+
+How should we decide which covariates to adjust for? Even in RCTs, this is not necessarily a straightforward decision. Fortunately, the EMA (European Medicines Agency) and FDA (US Food and Drug Administration) both have guidelines relating to this topic [@covariatesEMA; @covariatesFDA].
+
+## Covariates to include
+
+The EMA document proposes the following criteria for including a covariate in the analysis of an RCT:
+
+- A covariate should be included if there is evidence in the literature of a **moderate to strong association between the covariate and primary outcome.**
+- If the randomization has been stratified, the **stratification factors** should be included in the primary analysis. This also includes **center, country or region**, if these factors have been used as stratification factors.
+
+They also explictly note that observing a baseline imbalance after data collection is **not** a reason to include this covariate in the primary analysis. Further, covariates affected by treatment, such as treatment duration or compliance, should also **not** be included in the analysis. Therefore, do not adjust for any factors occuring after treatment initiation.
+
+How do we determine which variables might have an association with the primary outcome? 
+
+1. Look in the literature for **prognostic factors** of the primary outcome, as well as potential **confounders** seen in previous studies.
+2. Imagine making a **Table 1**. Which of these should be equally distributed between treatment arms?
+
+It is not appropriate to use p-values from univariate testing to decide whether a variable should be included in the statistical approach [see e.g. [CONSORT, item 21a](https://www.consort-spirit.org/item21a-primaryandsecondaryoutcomes), @consort].
+
+Generally speaking, any covariates including in the main analysis of the primary outcome must be specified in the study protocol. As such, variable selection methods should be avoided (e.g. "stepwise" regression approaches). Further, though there is no hard limit, only a few covariates should be included in the primary analysis.
+
+It should be noted that we do not in fact need to report all coefficients from all models [@table2fallacy], and reporting the treatment estimate along with its confidence interval and perhaps p-value is generally sufficient. 
+
+## How to handle baseline information
+
+Sometimes in addition the primary outcome assessed at some timepoint after the treatment, we also have it measured at baseline. The EMA guidelines suggest adjusting for this baseline assessment in the primary analysis [@@covariatesEMA]. 
+
+Here, we compare 4 different approaches to handling baseline assessments in the analysis:
+
+1. Ignoring baseline information
+2. Change scores
+3. Adjusting for baseline information
+4. Change scores adjusting for baseline information
+
+Of those, only the last two adjust for baseline assessments as suggested by the EMA. Further, since both of those options give the same estimated treatment effect, the choice between them only depends on the desired interpretation. I would argue that it is generally easier to compare the average outcome in the treatment arms, rather than comparing the average change from baseline in one arm versus in the other. Additionally, it has been argued that simply adjusting for baseline information is the [most reliable approach](https://errorstatistics.com/2020/03/16/stephen-senn-being-just-about-adjustment-guest-post/).
+
+```{r}
+#| label: simdata
+#| code-fold: true
+#| message: false
+
+library(tidyverse)
+theme_set(theme_bw(base_size = 12))
+
+set.seed(2026155779)
+n <- 100; N <- 2 * n
+dat1 <- tibble(id = 1:N,
+               z1 = rnorm(N),
+               z2 = rnorm(N),
+               trt = rep(0:1, each = n),
+               baseline = z1,
+               followup = 0.4 * baseline + sqrt(1 - 0.4 ^2) * z2) |> 
+  mutate(baseline = baseline * 16 + 50,
+         followup = followup * 16 + 50 + 8 * (trt == 1),
+         trt = factor(trt, 0:1, c("control", "intervention"))) 
+
+ggplot(aes(baseline, followup, color = trt, shape = trt), data = dat1) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ x) +
+  xlim(0, 100) + ylim(0, 100)
+```
+
+
+```{r}
+library(gtsummary)
+
+# baseline differences
+mod0 <- lm(baseline ~ trt, data = dat1)
+tbl_regression(mod0)
+
+# # ignoring baseline assessments
+# mod1 <- lm(followup ~ trt, data = dat1)
+# tbl_regression(mod1)
+# 
+# # change scores
+# mod2 <- lm((followup - baseline) ~ trt, data = dat1)
+# tbl_regression(mod2)
+
+# adjusting for baseline assessments
+mod3 <- lm(followup ~ trt + baseline, data = dat1)
+tbl_regression(mod3)
+
+# change scores + adjusting for baseline assessments
+mod4 <- lm((followup - baseline) ~ trt + baseline, data = dat1)
+tbl_regression(mod4)
+
+```
+
+In this case, we have a relatively large baseline difference (on average. `r inline_text(tbl_regression(mod0), variable = trt, level = "intervention")` higher on intervention). Both models give exactly the same estimated treatment effect (`r inline_text(tbl_regression(mod3), variable = trt, level = "intervention")`), but adjustment only option is easiest to conceptualize and program.
+
+
+
+
+
