@@ -12,6 +12,8 @@ Even without any data loaded, we can use R like a calculator. If we type `2 + 2`
 Look for the "Console" in RStudio. By default it's in the pane on the bottom left. You can move it, by going to `View > Panes > Console on Right`.
 :::
 
+## Getting started using R
+
 Some other mathematical operators you probably recognize are: 
 
 - `-` (for subtraction or negative numbers), 
@@ -83,4 +85,41 @@ mydata <- tibble(id = c(1, 2, 3),
   mutate(bmi = wt / ((ht / 100)^2))
 mydata
 ```
+
+## Some R basics
+
+R is a case sensitive programming language. The saved objects `n` and `N`, for example are not the same! On the same note, typing `Mean()` will not get you the `mean()` function.
+
+```{r}
+n <- 30
+N <- 100
+n / N
+```
+
+You cannot use a `,` the middle of an object's [name](https://r4ds.hadley.nz/workflow-basics.html#sec-whats-in-a-name), however `_` (underscore) is fine. Try to make names you do not mind typing out.
+
+```{r}
+#| eval: false
+one_name
+anotherName
+and.another.name
+```
+
+
+You may see `#` in R code (pound symbol, hash mark). This is generally used to [comment](https://r4ds.hadley.nz/workflow-basics.html#comments) whole or partial lines. It can also be used to comment out
+
+```{r}
+# this is a commment
+2 + 2 # this is also a comment
+# 3 + 3 this whole line is commented out and does not run
+```
+
+## Finding help with R
+
+There are a lot of functions to keep track of that you might want to use. How do you find them? 
+
+- In the bottom right, there's usually a "help" pane. You can try searching there for what you need. This is often the best way to find a function and figure out how to use it.
+- If you start typing the beginning of a function in the "console", it probably tries to autocomplete it for you. For example, typing `mean` in the console brings up a list of functions starting with the letters `mean`.
+- The help menu in RStudio has various useful links, including to "cheat sheets".
+- A web or AI search usually does a pretty good job of finding code in `tidyverse` packages or, say, in `gtsummary`. That's because these packages have all their documentation in a package website, including "articles", such as a [`tbl_summary()` tutorial](https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html).
 

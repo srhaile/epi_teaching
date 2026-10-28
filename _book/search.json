@@ -120,12 +120,12 @@
   {
     "objectID": "firststepsR.html",
     "href": "firststepsR.html",
-    "title": "\n6  First steps in R\n",
+    "title": "\n7  First steps in R\n",
     "section": "",
-    "text": "Even without any data loaded, we can use R like a calculator. If we type 2 + 2 and “Run Code” (in R Studio: Ctrl / CMD + Enter), it calculates the answer:\n\nCode2 + 2\n\n[1] 4\n\n\n\n\n\n\n\n\nTipWhere do I type this?\n\n\n\nLook for the “Console” in RStudio. By default it’s in the pane on the bottom left. You can move it, by going to View &gt; Panes &gt; Console on Right.\n\n\nSome other mathematical operators you probably recognize are:\n\n\n- (for subtraction or negative numbers),\n\n* (multiplication),\n\n/ (division), and\n\n^ (power, as in \\(3^2\\) = 3^2).\n\nThere are also functions for\n\nsquare root (sqrt()),\nrounding to say 1 digit (round(..., digits = 1)),\nlogarithm (log(), or base 10, log10()),\nexponential (exp()).\n\nCombining these operators, along with some parentheses, allows us to calculate many things. For example, calculate BMI (body mass index) for a person who is 180cm tall and weighs 85 kg.\n\nCode85 / (1.8^2)\n\n[1] 26.23457\n\n\nWe can also save these height and weight values with an arrow, &lt;-, and use them later for the calculation.\n\nCodewt &lt;- 85\nht &lt;- 180\nwt / ((ht / 100) ^2)\n\n[1] 26.23457\n\n\nBut what if we had height and weight for, say 3 people?\n\nPerson 1: weight 85, height 180\nPerson 2: weight 90, height 190\nPerson 3: weight 95, height 200\n\nIt would be annoying, not to mention error-prone, to have to calculate each BMI separately. To save all 3 heights or weights at once, we use a vector, by putting all 3 values inside c(), separated by commas: c(85, 90, 95).\n\nCodewt &lt;- c(85, 91, 95)\nht &lt;- c(180, 190, 200)\nwt / ((ht / 100)^2)\n\n[1] 26.23457 25.20776 23.75000\n\n\nNow that we’re working with more than one observation, we might also need functions like:\n\nmean (mean()),\nstandard deviation (sd()),\nmedian (median()),\nsum (sum()), or\nminimum and maximum (min(), max()).\n\n\nCodewt &lt;- c(85, 90, 95)\nht &lt;- c(180, 190, 200)\nbmi &lt;- wt / ((ht / 100)^2)\nmean(bmi)\n\n[1] 24.97177\n\n\nCombining this information in a dataset, and then performing the calculation is more efficient. We’ll talk more about that in the next two sections.\n\nCodelibrary(tidyverse)\n\n\n\nCodemydata &lt;- tibble(id = c(1, 2, 3),\n                 wt = c(85, 90, 95),\n                 ht = c(180, 190, 200)) |&gt; \n  mutate(bmi = wt / ((ht / 100)^2))\nmydata\n\n# A tibble: 3 × 4\n     id    wt    ht   bmi\n  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     1    85   180  26.2\n2     2    90   190  24.9\n3     3    95   200  23.8",
+    "text": "7.1 Getting started using R\nEven without any data loaded, we can use R like a calculator. If we type 2 + 2 and “Run Code” (in R Studio: Ctrl / CMD + Enter), it calculates the answer:\nSome other mathematical operators you probably recognize are:\nThere are also functions for\nCombining these operators, along with some parentheses, allows us to calculate many things. For example, calculate BMI (body mass index) for a person who is 180cm tall and weighs 85 kg.\nCode85 / (1.8^2)\n\n[1] 26.23457\nWe can also save these height and weight values with an arrow, &lt;-, and use them later for the calculation.\nCodewt &lt;- 85\nht &lt;- 180\nwt / ((ht / 100) ^2)\n\n[1] 26.23457\nBut what if we had height and weight for, say 3 people?\nIt would be annoying, not to mention error-prone, to have to calculate each BMI separately. To save all 3 heights or weights at once, we use a vector, by putting all 3 values inside c(), separated by commas: c(85, 90, 95).\nCodewt &lt;- c(85, 91, 95)\nht &lt;- c(180, 190, 200)\nwt / ((ht / 100)^2)\n\n[1] 26.23457 25.20776 23.75000\nNow that we’re working with more than one observation, we might also need functions like:\nCodewt &lt;- c(85, 90, 95)\nht &lt;- c(180, 190, 200)\nbmi &lt;- wt / ((ht / 100)^2)\nmean(bmi)\n\n[1] 24.97177\nCombining this information in a dataset, and then performing the calculation is more efficient. We’ll talk more about that in the next two sections.\nCodelibrary(tidyverse)\nCodemydata &lt;- tibble(id = c(1, 2, 3),\n                 wt = c(85, 90, 95),\n                 ht = c(180, 190, 200)) |&gt; \n  mutate(bmi = wt / ((ht / 100)^2))\nmydata\n\n# A tibble: 3 × 4\n     id    wt    ht   bmi\n  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1     1    85   180  26.2\n2     2    90   190  24.9\n3     3    95   200  23.8",
     "crumbs": [
       "Analysis in R",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>First steps in R</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>First steps in R</span>"
     ]
   },
   {
@@ -310,6 +310,50 @@
     "crumbs": [
       "Statistical Methods",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Covariate adjustment and baseline information</span>"
+    ]
+  },
+  {
+    "objectID": "firststepsR.html#getting-started-using-r",
+    "href": "firststepsR.html#getting-started-using-r",
+    "title": "\n7  First steps in R\n",
+    "section": "",
+    "text": "- (for subtraction or negative numbers),\n\n* (multiplication),\n\n/ (division), and\n\n^ (power, as in \\(3^2\\) = 3^2).\n\n\n\nsquare root (sqrt()),\nrounding to say 1 digit (round(..., digits = 1)),\nlogarithm (log(), or base 10, log10()),\nexponential (exp()).\n\n\n\n\n\n\n\nPerson 1: weight 85, height 180\nPerson 2: weight 90, height 190\nPerson 3: weight 95, height 200\n\n\n\n\n\nmean (mean()),\nstandard deviation (sd()),\nmedian (median()),\nsum (sum()), or\nminimum and maximum (min(), max()).",
+    "crumbs": [
+      "Analysis in R",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>First steps in R</span>"
+    ]
+  },
+  {
+    "objectID": "firststepsR.html#some-r-tips",
+    "href": "firststepsR.html#some-r-tips",
+    "title": "\n7  First steps in R\n",
+    "section": "\n7.2 Some R tips",
+    "text": "7.2 Some R tips\nR is a case sensitive programming language. The saved objects n and N, for example are not the same!\n\nCoden &lt;- 30\nN &lt;- 100\nn / N\n\n[1] 0.3\n\n\nYou cannot use a . or , the middle of an object’s name, however _ (underscore) is fine.\nYou may see # in R code (pound symbol, hash mark). This is generally used to comment whole or partial lines. It can also be used to comment out\n\nCode# this is a commment\n2 + 2 # this is also a comment\n\n[1] 4\n\nCode# 3 + 3",
+    "crumbs": [
+      "Analysis in R",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>First steps in R</span>"
+    ]
+  },
+  {
+    "objectID": "firststepsR.html#some-r-basics",
+    "href": "firststepsR.html#some-r-basics",
+    "title": "\n7  First steps in R\n",
+    "section": "\n7.2 Some R basics",
+    "text": "7.2 Some R basics\nR is a case sensitive programming language. The saved objects n and N, for example are not the same!\n\nCoden &lt;- 30\nN &lt;- 100\nn / N\n\n[1] 0.3\n\n\nYou cannot use a , the middle of an object’s name, however _ (underscore) is fine. Try to make names you do not mind typing out.\n\nCodeone_name\nanotherName\nand.another.name\n\n\nYou may see # in R code (pound symbol, hash mark). This is generally used to comment whole or partial lines. It can also be used to comment out\n\nCode# this is a commment\n2 + 2 # this is also a comment\n\n[1] 4\n\nCode# 3 + 3 this whole line is commented out",
+    "crumbs": [
+      "Analysis in R",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>First steps in R</span>"
+    ]
+  },
+  {
+    "objectID": "firststepsR.html#finding-help-with-r",
+    "href": "firststepsR.html#finding-help-with-r",
+    "title": "\n7  First steps in R\n",
+    "section": "\n7.3 Finding help with R",
+    "text": "7.3 Finding help with R\nThere are a lot of functions to keep track of that you might want to use. How do you find them?\n\nIn the bottom right, there’s usually a “help” pane. You can try searching there for what you need. This is often the best way to find a function and figure out how to use it.\nIf you start typing the beginning of a function in the “console”, it probably tries to autocomplete it for you. For example, typing mean in the console brings up a list of functions starting with the letters mean.\nThe help menu in RStudio has various useful links, including to “cheat sheets”.\nA web or AI search usually does a pretty good job of finding code in tidyverse packages or, say, in gtsummary. That’s because these packages have all their documentation in a package website, including “articles”, such as a tbl_summary() tutorial.",
+    "crumbs": [
+      "Analysis in R",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>First steps in R</span>"
     ]
   }
 ]
